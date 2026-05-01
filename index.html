@@ -1,0 +1,669 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>双语大师 | Bilingual English & Chinese Sentence Master</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f0e7 0%, #e8e9f3 100%);
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      padding: 20px;
+      min-height: 100vh;
+      color: #1e2a3e;
+    }
+
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: rgba(255, 255, 245, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      padding: 1.8rem 2rem 2.2rem;
+      transition: all 0.2s;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #B22234, #1E3A5F, #DE2910);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .lang-toggle {
+      background: #ffffffdd;
+      border-radius: 3rem;
+      padding: 0.3rem;
+      display: flex;
+      gap: 0.5rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .lang-btn {
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      background: transparent;
+      color: #3a5a6e;
+    }
+
+    .lang-btn.active {
+      background: #1F6E8C;
+      color: white;
+      box-shadow: 0 2px 8px rgba(31,110,140,0.3);
+    }
+
+    .sub {
+      color: #2c5f6e;
+      border-left: 4px solid #DE2910;
+      padding-left: 1rem;
+      margin: 0.3rem 0 1.5rem 0;
+      font-weight: 500;
+    }
+
+    .master-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 0.8rem;
+    }
+
+    .left-panel {
+      flex: 1.2;
+      min-width: 280px;
+    }
+
+    .right-panel {
+      flex: 0.9;
+      min-width: 280px;
+      background: #ffffffeb;
+      border-radius: 2rem;
+      padding: 1.2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .sentence-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.6rem;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .bilingual-row {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed #cddce4;
+      padding-bottom: 1rem;
+    }
+
+    .target-lang-sentence {
+      font-size: 1.8rem;
+      font-weight: 650;
+      line-height: 1.4;
+      color: #0b3b44;
+      background: #fef9e6;
+      padding: 1rem;
+      border-radius: 1.5rem;
+      word-break: break-word;
+    }
+
+    .translation-sentence {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #4a6272;
+      margin-top: 0.6rem;
+      padding: 0.5rem 1rem;
+      background: #f4f9fc;
+      border-radius: 1rem;
+    }
+
+    .clickable-word {
+      display: inline-block;
+      cursor: pointer;
+      border-bottom: 2px dotted #c0392b;
+      background: rgba(192, 57, 43, 0.08);
+      border-radius: 12px;
+      padding: 0 4px;
+      margin: 0 2px;
+      transition: 0.1s;
+    }
+    .clickable-word:hover {
+      background: #fadbd8;
+      transform: scale(1.01);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1rem;
+    }
+
+    .btn {
+      border: none;
+      background: #eef2f7;
+      padding: 0.7rem 1.4rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: #1F6E8C;
+      color: white;
+      box-shadow: 0 4px 8px rgba(31,110,140,0.2);
+    }
+    .btn-primary:hover { background: #0e5a74; transform: translateY(-2px);}
+    .btn-outline {
+      border: 1.5px solid #1F6E8C;
+      background: white;
+      color: #1F6E8C;
+    }
+    .btn-outline:hover { background: #d4eef3;}
+
+    .speak-area {
+      background: #eef3f0;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .mic-feedback {
+      background: white;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      margin: 0.7rem 0;
+      font-size: 0.9rem;
+    }
+
+    .scene-image-box {
+      background: #fef3e2;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .desc-img {
+      width: 100%;
+      max-height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+    .pic-caption {
+      padding: 0.6rem;
+      font-style: italic;
+      background: #fbebc6;
+      font-size: 0.85rem;
+    }
+
+    .word-definition {
+      background: #fffff2;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      border-left: 6px solid #c0392b;
+    }
+    .def-word {
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+    .def-meaning {
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+    .def-image img {
+      max-width: 100%;
+      border-radius: 1rem;
+      max-height: 140px;
+      object-fit: cover;
+      margin-top: 0.7rem;
+    }
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #5c6e7a;
+    }
+    @media (max-width: 780px) {
+      .target-lang-sentence { font-size: 1.3rem; }
+      .translation-sentence { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="header">
+    <h1>🌏 英中双核 | ENGLISH · 中文 Sentence Architect</h1>
+    <div class="lang-toggle">
+      <button id="modeEngBtn" class="lang-btn active">🇬🇧 English First</button>
+      <button id="modeChnBtn" class="lang-btn">🇨🇳 中文优先</button>
+    </div>
+  </div>
+  <div class="sub">🎯 完整句子结构 · 点按查词释义 · 听说并进 | Complete sentence patterns · Tap any word · Speak & compare</div>
+
+  <div class="master-layout">
+    <div class="left-panel">
+      <div class="sentence-card">
+        <!-- dynamic bilingual display: active language (target to learn) + translation hint -->
+        <div id="activeLangBlock" class="bilingual-row">
+          <div id="targetSentenceDisplay" class="target-lang-sentence">加载中...</div>
+          <div id="translationHintDisplay" class="translation-sentence">📖 对照翻译 | Translation</div>
+        </div>
+        
+        <div class="action-buttons">
+          <button id="speakTargetBtn" class="btn btn-primary">🔊 朗读主句 / Speak</button>
+          <button id="nextSentenceBtn" class="btn btn-outline">⏩ 下一句 / Next</button>
+          <button id="speakTranslationBtn" class="btn btn-outline">🔄 读翻译 / Read Translation</button>
+        </div>
+        
+        <!-- speaking practice area -->
+        <div class="speak-area">
+          <div class="listen-hint" style="font-size:0.85rem;">🎙️ 模仿主句发音 | Imitate the main sentence</div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0;">
+            <button id="startRecordBtn" class="btn" style="background:#2c5f6e; color:white;">🎤 开始录音</button>
+            <button id="stopRecordBtn" class="btn" style="background:#aaadaf;" disabled>⏹️ 停止</button>
+          </div>
+          <div id="recordingStatus" class="mic-feedback">⚡ 准备就绪。点击录音，说出当前高亮句子。</div>
+          <div id="comparisonResult" class="mic-feedback" style="background:#eef1f5;"></div>
+        </div>
+      </div>
+      
+      <!-- image + description -->
+      <div class="scene-image-box">
+        <img id="contextImage" class="desc-img" src="https://picsum.photos/id/104/600/200" alt="context visual">
+        <div class="pic-caption" id="imageCaption">🎨 图片辅助情景记忆 | Visual context</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: definition panel -->
+    <div class="right-panel">
+      <div style="font-weight: 700; margin-bottom: 12px;">📖 点按生词 · 图文发音 | Tap any word → definition + image + audio</div>
+      <div id="definitionPanel" class="word-definition">
+        <div class="def-word">✨ 词语探索器</div>
+        <div class="def-meaning">点击句子中的彩色词语，查看双语释义、图片并朗读单词。</div>
+        <div class="def-image" id="defImageArea"></div>
+        <button id="speakWordBtn" class="btn" style="margin-top:12px; background:#d9e9ef;">🔊 发音 / Pronounce</button>
+      </div>
+      <div class="audio-wave" style="border-top:1px solid #ddd; margin-top: 12px; padding-top: 10px; font-size:0.8rem; text-align:center;">
+        💡 完整句子结构训练 | 英⇄中文对照 | 点击单词深度理解
+      </div>
+    </div>
+  </div>
+  <footer>✔️ 掌握英语&中文句型结构 · 支持语音识别评测 · 点击任何下划线单词获得详解</footer>
+</div>
+
+<script>
+  // ----- BILINGUAL SENTENCE DATABASE (English + Chinese, full structures)
+  const bilingualSentences = [
+    {
+      english: "The curious student asked the professor an insightful question about ancient philosophy.",
+      chinese: "这位好奇的学生向教授提出了一个关于古代哲学的深刻问题。",
+      image: "https://picsum.photos/id/20/600/200",
+      caption: "🏛️ 师生探讨哲学 | Student & professor discussing deep ideas",
+      wordsMap: {
+        "curious": { enMeaning: "Eager to learn or know something.", chMeaning: "好奇的，求知欲强的", image: "https://picsum.photos/id/81/150/150" },
+        "insightful": { enMeaning: "Having deep understanding; perceptive.", chMeaning: "富有洞察力的，深刻的", image: "https://picsum.photos/id/26/150/150" },
+        "ancient": { enMeaning: "Belonging to the very distant past.", chMeaning: "古代的，古老的", image: "https://picsum.photos/id/96/150/150" },
+        "philosophy": { enMeaning: "Study of fundamental nature of knowledge, reality.", chMeaning: "哲学", image: "https://picsum.photos/id/38/150/150" }
+      }
+    },
+    {
+      english: "Despite the challenging circumstances, the team successfully completed the project ahead of schedule.",
+      chinese: "尽管环境充满挑战，团队还是提前成功完成了项目。",
+      image: "https://picsum.photos/id/0/600/200",
+      caption: "📅 团队协作成功 | Team success overcoming challenges",
+      wordsMap: {
+        "challenging": { enMeaning: "Difficult in an interesting or testing way.", chMeaning: "具有挑战性的", image: "https://picsum.photos/id/91/150/150" },
+        "circumstances": { enMeaning: "Facts or conditions affecting a situation.", chMeaning: "环境，情况", image: "https://picsum.photos/id/15/150/150" },
+        "successfully": { enMeaning: "In a way that achieves desired outcome.", chMeaning: "成功地", image: "https://picsum.photos/id/48/150/150" },
+        "schedule": { enMeaning: "A plan for carrying out a process.", chMeaning: "时间表，日程", image: "https://picsum.photos/id/36/150/150" }
+      }
+    },
+    {
+      english: "Before making a final decision, the manager carefully evaluated every possible risk and benefit.",
+      chinese: "在做出最终决定之前，经理仔细评估了每一个可能的风险和收益。",
+      image: "https://picsum.photos/id/1/600/200",
+      caption: "📊 商业决策分析 | Business risk analysis",
+      wordsMap: {
+        "evaluated": { enMeaning: "Assessed or judged the value of something.", chMeaning: "评估，评价", image: "https://picsum.photos/id/24/150/150" },
+        "possible": { enMeaning: "Able to be done or achieved.", chMeaning: "可能的", image: "https://picsum.photos/id/29/150/150" },
+        "benefit": { enMeaning: "An advantage or profit gained.", chMeaning: "利益，好处", image: "https://picsum.photos/id/42/150/150" }
+      }
+    },
+    {
+      english: "The magnificent sunset painted the entire sky with vibrant orange and pink hues.",
+      chinese: "壮丽的日落用鲜艳的橙粉色调染遍了整片天空。",
+      image: "https://picsum.photos/id/15/600/200",
+      caption: "🌅 日落美景 | Sunset painting the sky",
+      wordsMap: {
+        "magnificent": { enMeaning: "Extremely beautiful and impressive.", chMeaning: "壮丽的，宏伟的", image: "https://picsum.photos/id/96/150/150" },
+        "vibrant": { enMeaning: "Full of energy and brightness.", chMeaning: "充满活力的，鲜艳的", image: "https://picsum.photos/id/29/150/150" },
+        "hues": { enMeaning: "Colors or shades.", chMeaning: "色调，色彩", image: "https://picsum.photos/id/10/150/150" }
+      }
+    },
+    {
+      english: "Whenever you feel nervous before a presentation, try taking deep breaths and focusing on your opening line.",
+      chinese: "每当你演讲前感到紧张时，试着深呼吸并专注于你的开场白。",
+      image: "https://picsum.photos/id/155/600/200",
+      caption: "🎤 演讲技巧 | Public speaking confidence",
+      wordsMap: {
+        "nervous": { enMeaning: "Anxious or apprehensive.", chMeaning: "紧张的，焦虑的", image: "https://picsum.photos/id/125/150/150" },
+        "presentation": { enMeaning: "A speech or talk to an audience.", chMeaning: "演讲，展示", image: "https://picsum.photos/id/169/150/150" },
+        "opening": { enMeaning: "The beginning or first part.", chMeaning: "开头，开场", image: "https://picsum.photos/id/88/150/150" }
+      }
+    }
+  ];
+
+  // mode: 'eng' = primary target english, chinese shown as translation ; 'chi' = primary target chinese
+  let currentMode = 'eng';   // 'eng' or 'chi'
+  let currentIndex = 0;
+  let currentSentenceData = null;
+  let currentSelectedWordObj = null; // store word key for pronunciation & def
+
+  // DOM elements
+  const targetSentenceDisplay = document.getElementById('targetSentenceDisplay');
+  const translationHintDisplay = document.getElementById('translationHintDisplay');
+  const nextBtn = document.getElementById('nextSentenceBtn');
+  const speakTargetBtn = document.getElementById('speakTargetBtn');
+  const speakTranslationBtn = document.getElementById('speakTranslationBtn');
+  const contextImage = document.getElementById('contextImage');
+  const imageCaption = document.getElementById('imageCaption');
+  const defWordEl = document.querySelector('#definitionPanel .def-word');
+  const defMeaningEl = document.querySelector('#definitionPanel .def-meaning');
+  const defImageArea = document.getElementById('defImageArea');
+  const speakWordBtn = document.getElementById('speakWordBtn');
+  const modeEngBtn = document.getElementById('modeEngBtn');
+  const modeChnBtn = document.getElementById('modeChnBtn');
+  
+  // Speech rec elements
+  let recognition = null;
+  let isRecording = false;
+  const startRecordBtn = document.getElementById('startRecordBtn');
+  const stopRecordBtn = document.getElementById('stopRecordBtn');
+  const recordingStatusDiv = document.getElementById('recordingStatus');
+  const comparisonResultDiv = document.getElementById('comparisonResult');
+
+  // Helper: render clickable spans for a given sentence (string) and wordMap from current data.
+  function makeClickableHtml(sentenceText, wordMap) {
+    if (!wordMap) return sentenceText;
+    const words = sentenceText.split(/(\s+|\b)/g).filter(part => part !== undefined);
+    const result = [];
+    for (let token of words) {
+      if (token.trim().length === 0) {
+        result.push(token);
+        continue;
+      }
+      const rawWord = token.replace(/[^\w\u4e00-\u9fa5]/g, ''); // support chinese chars too
+      let foundKey = null;
+      // For Chinese or English match -> check if rawWord exists in map keys (case-insensitive for english)
+      if (wordMap[rawWord]) foundKey = rawWord;
+      else {
+        const lowerEng = rawWord.toLowerCase();
+        for (let key in wordMap) {
+          if (key.toLowerCase() === lowerEng) { foundKey = key; break; }
+          if (key === rawWord) { foundKey = key; break; }
+        }
+      }
+      if (foundKey) {
+        result.push(`<span class="clickable-word" data-word-key="${foundKey}" data-word-original="${token}">${token}</span>`);
+      } else {
+        result.push(token);
+      }
+    }
+    return result.join('');
+  }
+
+  // update UI based on mode and current sentence
+  function refreshUI() {
+    if (!currentSentenceData) return;
+    const engText = currentSentenceData.english;
+    const chiText = currentSentenceData.chinese;
+    let mainSentence = '';
+    let secondarySentence = '';
+    if (currentMode === 'eng') {
+      mainSentence = engText;
+      secondarySentence = `🇨🇳 中文对照: ${chiText}`;
+    } else {
+      mainSentence = chiText;
+      secondarySentence = `🇬🇧 English reference: ${engText}`;
+    }
+    // build clickable spans using the current wordMap (always same)
+    const wordMap = currentSentenceData.wordsMap || {};
+    const mainHtml = makeClickableHtml(mainSentence, wordMap);
+    targetSentenceDisplay.innerHTML = mainHtml;
+    translationHintDisplay.innerText = secondarySentence;
+    
+    // attach click listeners to clickable-word spans after rendering
+    attachWordClickListeners();
+    
+    // update image
+    contextImage.src = currentSentenceData.image;
+    imageCaption.innerText = currentSentenceData.caption;
+    // reset definition panel
+    defWordEl.innerHTML = "✨  Tap a word";
+    defMeaningEl.innerHTML = currentMode === 'eng' ? "点击任意彩色词语，查看中英文释义及图片。" : "点击任意词，显示详细解释和图片。";
+    defImageArea.innerHTML = "";
+    currentSelectedWordObj = null;
+  }
+  
+  function attachWordClickListeners() {
+    document.querySelectorAll('.clickable-word').forEach(el => {
+      el.removeEventListener('click', wordClickHandler);
+      el.addEventListener('click', wordClickHandler);
+    });
+  }
+  
+  function wordClickHandler(e) {
+    const wordKey = e.currentTarget.getAttribute('data-word-key');
+    if (wordKey && currentSentenceData.wordsMap[wordKey]) {
+      const wordData = currentSentenceData.wordsMap[wordKey];
+      const displayWord = wordKey;
+      const meaningText = currentMode === 'eng' 
+        ? `📖 ${wordData.enMeaning}  | 中文: ${wordData.chMeaning}`
+        : `🇨🇳 释义: ${wordData.chMeaning}  | English: ${wordData.enMeaning}`;
+      defWordEl.innerHTML = `🔍 ${displayWord}`;
+      defMeaningEl.innerHTML = meaningText;
+      defImageArea.innerHTML = `<img src="${wordData.image}" alt="${displayWord}" onerror="this.src='https://picsum.photos/id/1/150/150'">`;
+      currentSelectedWordObj = { word: displayWord, langHint: currentMode };
+    } else {
+      const rawWord = e.currentTarget.getAttribute('data-word-original') || wordKey;
+      defWordEl.innerHTML = `📘 ${rawWord}`;
+      defMeaningEl.innerHTML = `“${rawWord}” — 常用词汇，尝试在完整句子中使用它。 | Common word, practice building full sentences.`;
+      defImageArea.innerHTML = `<img src="https://picsum.photos/id/26/150/150" alt="word">`;
+      currentSelectedWordObj = { word: rawWord };
+    }
+  }
+  
+  // load sentence by index
+  function loadSentence(index) {
+    currentSentenceData = bilingualSentences[index % bilingualSentences.length];
+    refreshUI();
+    // reset speech comparisons
+    comparisonResultDiv.innerHTML = "";
+    recordingStatusDiv.innerHTML = currentMode === 'eng' ? "🎙️ 点击录音，说出英文句子" : "🎙️ 开始录音，说出中文句子";
+  }
+  
+  function nextSentence() {
+    currentIndex = (currentIndex + 1) % bilingualSentences.length;
+    loadSentence(currentIndex);
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+  
+  // speak text with language detection
+  function speakText(text, lang = 'auto') {
+    if (!window.speechSynthesis) return alert("Speech not supported");
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    if (currentMode === 'eng' && /[a-zA-Z]/g.test(text)) utterance.lang = 'en-US';
+    else if (currentMode === 'chi' || /[\u4e00-\u9fa5]/.test(text)) utterance.lang = 'zh-CN';
+    else utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  }
+  
+  function speakTarget() {
+    let content = '';
+    if (currentMode === 'eng') content = currentSentenceData.english;
+    else content = currentSentenceData.chinese;
+    speakText(content);
+  }
+  
+  function speakTranslation() {
+    if (currentMode === 'eng') speakText(currentSentenceData.chinese, 'zh-CN');
+    else speakText(currentSentenceData.english, 'en-US');
+  }
+  
+  function speakCurrentWord() {
+    if (currentSelectedWordObj) {
+      speakText(currentSelectedWordObj.word);
+    } else {
+      recordingStatusDiv.innerHTML = "⚠️ 请先点击句子中的单词! | Tap a word first!";
+      setTimeout(() => { if(recordingStatusDiv.innerHTML.includes("Tap a word")) recordingStatusDiv.innerHTML = "⚡ Ready"; }, 1500);
+    }
+  }
+  
+  // Speech Recognition for speaking practice
+  function initRecognition() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      recordingStatusDiv.innerHTML = "❌ 浏览器不支持语音识别，请用Chrome/Edge";
+      return null;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recog = new SpeechRecognition();
+    recog.continuous = false;
+    recog.interimResults = false;
+    recog.lang = currentMode === 'eng' ? 'en-US' : 'zh-CN';
+    return recog;
+  }
+  
+  function startRecording() {
+    if (recognition) try { recognition.abort(); } catch(e) {}
+    recognition = initRecognition();
+    if (!recognition) return;
+    recognition.onstart = () => {
+      isRecording = true;
+      recordingStatusDiv.innerHTML = "🔴 录音中... 请朗读主句内容 | Speaking now...";
+      startRecordBtn.disabled = true;
+      stopRecordBtn.disabled = false;
+    };
+    recognition.onerror = (event) => {
+      recordingStatusDiv.innerHTML = `❌ 错误: ${event.error}`;
+      resetButtons();
+      isRecording = false;
+    };
+    recognition.onend = () => {
+      if (isRecording) resetButtons();
+      isRecording = false;
+    };
+    recognition.onresult = (event) => {
+      const spoken = event.results[0][0].transcript.trim();
+      recordingStatusDiv.innerHTML = `📝 你说: "${spoken}"`;
+      let targetText = (currentMode === 'eng') ? currentSentenceData.english : currentSentenceData.chinese;
+      // simple evaluation: compare similarity
+      const normalize = (s) => s.toLowerCase().replace(/[^\w\u4e00-\u9fa5]/g, '');
+      const spokenNorm = normalize(spoken);
+      const targetNorm = normalize(targetText);
+      const isSimilar = spokenNorm === targetNorm || targetNorm.includes(spokenNorm) || spokenNorm.includes(targetNorm);
+      let feedback = "";
+      if (isSimilar) {
+        feedback = "✅ 优秀！句子结构准确！ Excellent sentence structure!";
+      } else {
+        let matchCount = 0;
+        const targetWords = targetNorm.split('');
+        for (let ch of spokenNorm) if (targetWords.includes(ch)) matchCount++;
+        const percent = (matchCount / Math.max(targetNorm.length,1))*100;
+        if (percent > 60) feedback = `👍 不错，相似度 ${Math.round(percent)}%。再听一遍标准发音。`;
+        else feedback = `🎯 再试试！正确句子: "${targetText}"。关注完整结构。`;
+      }
+      comparisonResultDiv.innerHTML = `<strong>🗣️ 评测结果:</strong><br>🎤 "${spoken}"<br>📌 ${feedback}`;
+      resetButtons();
+    };
+    recognition.start();
+  }
+  
+  function stopRecording() {
+    if (recognition && isRecording) {
+      recognition.stop();
+      isRecording = false;
+      resetButtons();
+      recordingStatusDiv.innerHTML = "⏹️ 已停止，分析中...";
+    } else resetButtons();
+  }
+  
+  function resetButtons() {
+    startRecordBtn.disabled = false;
+    stopRecordBtn.disabled = true;
+  }
+  
+  // Switch mode between English first and Chinese first
+  function setMode(mode) {
+    currentMode = mode;
+    if (mode === 'eng') {
+      modeEngBtn.classList.add('active');
+      modeChnBtn.classList.remove('active');
+    } else {
+      modeChnBtn.classList.add('active');
+      modeEngBtn.classList.remove('active');
+    }
+    refreshUI();
+    // Reset speech recognition language on next record
+    if (recognition) recognition.lang = currentMode === 'eng' ? 'en-US' : 'zh-CN';
+    recordingStatusDiv.innerHTML = currentMode === 'eng' ? "🇬🇧 英文模式: 朗读英文句子" : "🇨🇳 中文模式: 朗读中文句子";
+    comparisonResultDiv.innerHTML = "";
+  }
+  
+  // event binding
+  nextBtn.addEventListener('click', nextSentence);
+  speakTargetBtn.addEventListener('click', speakTarget);
+  speakTranslationBtn.addEventListener('click', speakTranslation);
+  speakWordBtn.addEventListener('click', speakCurrentWord);
+  startRecordBtn.addEventListener('click', startRecording);
+  stopRecordBtn.addEventListener('click', stopRecording);
+  modeEngBtn.addEventListener('click', () => setMode('eng'));
+  modeChnBtn.addEventListener('click', () => setMode('chi'));
+  
+  // initialize
+  currentIndex = 0;
+  currentMode = 'eng';
+  loadSentence(0);
+  modeEngBtn.classList.add('active');
+  modeChnBtn.classList.remove('active');
+  
+  window.addEventListener('beforeunload', () => {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    if (recognition) recognition.abort();
+  });
+</script>
+</body>
+</html>
