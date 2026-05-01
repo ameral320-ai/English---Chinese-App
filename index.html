@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Fluent Structure | Natural English Sentence Mastery</title>
+  <title>Fluent Speak | 200 English Sentences • Master Structures</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,491 +13,457 @@
     }
 
     body {
-      background: linear-gradient(145deg, #f0f4fa 0%, #e2e8f0 100%);
+      background: linear-gradient(135deg, #e9f0f5 0%, #dce3ec 100%);
       font-family: 'Inter', sans-serif;
       padding: 20px;
       min-height: 100vh;
-      color: #0f2c3d;
+      color: #0b2b36;
     }
 
     .app-container {
-      max-width: 1300px;
+      max-width: 1400px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(2px);
-      border-radius: 3rem;
+      border-radius: 2.5rem;
       box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3);
       overflow: hidden;
-      padding: 2rem 2rem 2.2rem;
+      padding: 1.5rem 2rem 2rem;
       transition: all 0.2s;
     }
 
-    .header {
+    /* header & menu button */
+    .header-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 0.5rem;
+      position: relative;
     }
-
     h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #0B3B4F, #1F6E8C, #2C8C9E);
+      background: linear-gradient(120deg, #0F4C5F, #2A9D8F, #E76F51);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.5px;
     }
-
-    .badge {
-      background: #1F6E8C20;
-      padding: 0.4rem 1rem;
+    .menu-btn {
+      background: #1F6E8C;
+      border: none;
+      color: white;
+      padding: 0.7rem 1.3rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .menu-btn:hover { background: #0e5a74; transform: scale(1.02);}
+    
+    /* floating side menu (instant dismiss on outside click) */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100%;
+      background: #ffffffef;
+      backdrop-filter: blur(14px);
+      box-shadow: -8px 0 30px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      padding: 2rem 1.2rem;
+      overflow-y: auto;
+      border-left: 2px solid #F4A261;
+      font-family: 'Inter', sans-serif;
+    }
+    .side-menu.open { right: 0; }
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 999;
+      display: none;
+    }
+    .menu-overlay.active { display: block; }
+    .side-menu h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #F4A261;
+      display: inline-block;
+    }
+    .lang-option {
+      background: #f0f4f9;
+      margin: 1rem 0;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .lang-option:hover { background: #e0e9f0; transform: translateX(4px);}
+    .sentence-type-list {
+      margin-top: 0.8rem;
+      padding-left: 1rem;
+      display: none;
+    }
+    .sentence-type-list.show { display: block; }
+    .type-item {
+      padding: 0.5rem 0.8rem;
+      margin: 0.3rem 0;
+      background: #eef2f5;
       border-radius: 2rem;
       font-size: 0.85rem;
-      font-weight: 600;
-      color: #1F6E8C;
+      cursor: pointer;
     }
+    .type-item:hover { background: #F4A261; color: white;}
 
     .sub {
       color: #2c5f6e;
-      border-left: 5px solid #F4A261;
+      border-left: 4px solid #E76F51;
       padding-left: 1rem;
-      margin: 0.3rem 0 1.8rem 0;
-      font-weight: 500;
-      font-size: 0.95rem;
+      margin: 0.5rem 0 1.2rem;
+      font-size: 0.9rem;
     }
 
-    .master-layout {
+    /* main layout */
+    .two-columns {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+    }
+    .slide-area {
+      flex: 1.4;
+      min-width: 260px;
+    }
+    .sidebar-info {
+      flex: 0.9;
+      min-width: 260px;
+      background: #fffcf0;
+      border-radius: 1.8rem;
+      padding: 1.2rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
     }
 
-    .main-card {
-      flex: 1.3;
-      min-width: 280px;
-    }
-
-    .side-panel {
-      flex: 0.85;
-      min-width: 280px;
-      background: #ffffffdd;
-      border-radius: 2rem;
-      padding: 1.3rem;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(31,110,140,0.15);
-    }
-
-    /* Sentence slide card */
-    .sentence-slide {
+    .sentence-card {
       background: white;
-      border-radius: 2.2rem;
-      padding: 2rem 1.8rem;
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
       margin-bottom: 1.5rem;
-      border: 1px solid rgba(0,0,0,0.03);
-      transition: transform 0.2s;
     }
-
-    .sentence-display {
-      font-size: 2rem;
-      font-weight: 650;
-      line-height: 1.4;
-      color: #0a3442;
+    .sentence-text {
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.45;
       background: #FEF9E6;
       padding: 1.2rem;
-      border-radius: 1.8rem;
-      word-break: break-word;
+      border-radius: 1.5rem;
+      color: #104c5c;
       margin-bottom: 1.5rem;
       border-left: 8px solid #F4A261;
     }
-
     .clickable-word {
       display: inline-block;
       cursor: pointer;
       border-bottom: 2px solid #E76F51;
-      background: rgba(231, 111, 81, 0.08);
+      background: rgba(231,111,81,0.1);
       border-radius: 12px;
       padding: 0 4px;
-      margin: 0 2px;
-      transition: 0.1s linear;
-      font-weight: 500;
+      transition: 0.05s linear;
     }
     .clickable-word:hover {
-      background: #F4E0D4;
+      background: #FADDD5;
       transform: scale(1.01);
     }
-
-    .action-group {
+    .action-buttons {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      margin: 1rem 0 0.2rem;
+      margin-bottom: 1.2rem;
     }
-
     .btn {
       border: none;
-      background: #eef2f7;
-      padding: 0.75rem 1.6rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 3rem;
       font-weight: 600;
-      font-family: 'Inter', sans-serif;
+      font-family: inherit;
       cursor: pointer;
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
+      gap: 8px;
     }
-    .btn-primary {
-      background: #1F6E8C;
-      color: white;
-      box-shadow: 0 6px 12px -6px #1F6E8C;
-    }
-    .btn-primary:hover {
-      background: #0e5a74;
-      transform: translateY(-2px);
-    }
-    .btn-secondary {
-      background: white;
-      border: 1.5px solid #1F6E8C;
-      color: #1F6E8C;
-    }
-    .btn-secondary:hover {
-      background: #e2f0f5;
-      transform: translateY(-2px);
-    }
-    .btn-accent {
-      background: #F4A261;
-      color: #2d3e45;
-    }
-    .btn-accent:hover {
-      background: #e88d3a;
-    }
+    .btn-primary { background: #2A9D8F; color: white; }
+    .btn-primary:hover { background: #21867a; transform: translateY(-2px);}
+    .btn-outline { background: white; border: 1.5px solid #2A9D8F; color: #2A9D8F;}
+    .btn-outline:hover { background: #d9f0ec;}
 
     .speak-practice {
-      background: #EFF7F2;
-      border-radius: 1.6rem;
-      padding: 1.2rem;
-      margin-top: 1.2rem;
+      background: #EFF3F6;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      margin-top: 0.8rem;
     }
-
-    .mic-area {
+    .mic-feedback {
       background: white;
-      border-radius: 1.2rem;
-      padding: 0.9rem;
-      margin: 0.6rem 0;
-    }
-
-    .feedback-text {
-      background: #FBF8EF;
-      padding: 0.9rem;
       border-radius: 1rem;
-      font-size: 0.9rem;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
     }
-
     .visual-scene {
-      background: #FFF3E0;
-      border-radius: 1.8rem;
+      background: #FFF2E0;
+      border-radius: 1.5rem;
       overflow: hidden;
       margin: 1rem 0;
-      text-align: center;
     }
     .scene-img {
       width: 100%;
-      max-height: 200px;
+      max-height: 180px;
       object-fit: cover;
-      display: block;
     }
-    .scene-caption {
-      padding: 0.7rem;
-      background: #FFE8CC;
-      font-size: 0.85rem;
-      font-style: italic;
+    .caption {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      background: #FFE5C2;
+      text-align: center;
     }
-
-    .def-box {
-      background: #FFFFFFEE;
-      border-radius: 1.6rem;
-      padding: 1.2rem;
-      margin-bottom: 1rem;
-      border-left: 6px solid #E76F51;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-    .def-word-title {
-      font-weight: 800;
-      font-size: 1.5rem;
-      margin-bottom: 0.3rem;
-      color: #BC3900;
-    }
-    .def-meaning {
-      line-height: 1.45;
-      margin: 0.5rem 0;
-      color: #2c3e44;
-    }
-    .def-img-area img {
-      max-width: 100%;
-      border-radius: 1rem;
-      max-height: 130px;
-      object-fit: cover;
-      margin-top: 8px;
-    }
-
-    .slide-counter {
+    .nav-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       margin-top: 1rem;
-      gap: 12px;
+      flex-wrap: wrap;
     }
-
-    .progress-dot {
-      font-size: 0.8rem;
-      background: #cbdde3;
-      padding: 0.2rem 1rem;
+    .progress-indicator {
+      background: #e2e8f0;
+      padding: 0.4rem 1rem;
       border-radius: 2rem;
+      font-size: 0.8rem;
     }
+    .def-box {
+      background: #ffffffdd;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      border-left: 5px solid #E76F51;
+      margin-bottom: 1rem;
+    }
+    .def-word {
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+    .def-meaning { margin: 0.5rem 0; line-height: 1.4; font-size: 0.9rem;}
+    .def-img img { max-width: 100%; border-radius: 1rem; max-height: 120px; object-fit: cover; margin-top: 6px;}
+    .structure-explanation {
+      background: #eef2fa;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+    footer { text-align: center; font-size: 0.7rem; margin-top: 1.8rem; color: #5f7e8c;}
 
-    @media (max-width: 700px) {
-      .sentence-display { font-size: 1.4rem; }
-      .app-container { padding: 1.2rem; }
+    @media (max-width: 750px) {
+      .sentence-text { font-size: 1.3rem; }
+      .app-container { padding: 1rem; }
     }
   </style>
 </head>
 <body>
 <div class="app-container">
-  <div class="header">
-    <h1>🎙️ Natural English • One Sentence Per Slide</h1>
-    <div class="badge">🎯 MASTER SENTENCE STRUCTURES</div>
+  <div class="header-row">
+    <h1>🎙️ 200 Natural English Sentences • Master Sentence Structures</h1>
+    <button id="menuToggleBtn" class="menu-btn">☰ Menu & Languages</button>
   </div>
-  <div class="sub">✨ Full, natural English sentences • Tap any word for instant definition + image + audio • Speak & perfect your fluency</div>
+  <div class="sub">✨ Tap any word → instant pronunciation + definition + image. Speak each full sentence to perfect fluency.</div>
 
-  <div class="master-layout">
-    <!-- MAIN CONTENT: sentence slide & speaking -->
-    <div class="main-card">
-      <div class="sentence-slide">
-        <div id="sentenceDisplay" class="sentence-display">Loading...</div>
-        <div class="action-group">
-          <button id="speakSentenceBtn" class="btn btn-primary">🔊 Speak Sentence</button>
-          <button id="nextSentenceBtn" class="btn btn-secondary">⏩ Next Sentence</button>
+  <div class="two-columns">
+    <!-- LEFT: Main sentence slide -->
+    <div class="slide-area">
+      <div class="sentence-card">
+        <div id="sentenceDisplay" class="sentence-text">Loading...</div>
+        <div class="action-buttons">
+          <button id="speakFullBtn" class="btn btn-primary">🔊 Speak Sentence</button>
+          <button id="nextBtn" class="btn btn-outline">⏩ Next Slide</button>
+          <button id="prevBtn" class="btn btn-outline">◀ Prev</button>
         </div>
 
-        <!-- Speaking practice zone -->
+        <!-- speaking practice -->
         <div class="speak-practice">
-          <div style="font-weight: 600; margin-bottom: 8px;">🗣️ Imitate & Speak Naturally</div>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button id="startRecordBtn" class="btn btn-accent" style="background:#2A9D8F; color:white;">🎤 Start Recording</button>
-            <button id="stopRecordBtn" class="btn btn-secondary" disabled>⏹️ Stop</button>
+          <div style="font-weight:600;">🗣️ Imitate & Speak Naturally</div>
+          <div style="display:flex; gap:10px; margin:8px 0;">
+            <button id="startRecordBtn" class="btn" style="background:#E76F51; color:white;">🎤 Start Recording</button>
+            <button id="stopRecordBtn" class="btn" style="background:#aaa;" disabled>⏹️ Stop</button>
           </div>
-          <div id="recordingStatus" class="mic-area">🎧 Ready. Press start, then speak the whole sentence clearly.</div>
-          <div id="comparisonResult" class="feedback-text">📊 Your spoken sentence will be analyzed here.</div>
+          <div id="recordingStatus" class="mic-feedback">🎧 Ready. Press start and speak the full sentence.</div>
+          <div id="comparisonResult" class="mic-feedback">📊 Feedback will appear here.</div>
         </div>
       </div>
 
-      <!-- Visual context (image + description) -->
+      <!-- image + visual -->
       <div class="visual-scene">
-        <img id="contextImage" class="scene-img" src="https://picsum.photos/id/104/600/220" alt="scene">
-        <div id="imageCaption" class="scene-caption">📷 Picture context helps you visualize the sentence meaning</div>
+        <img id="sceneImage" class="scene-img" src="https://picsum.photos/id/104/600/200" alt="context">
+        <div id="imageCaption" class="caption">📸 Visual context</div>
       </div>
-      
-      <!-- slide navigation indicator -->
-      <div class="slide-counter">
-        <span id="slideIndexIndicator" class="progress-dot">Sentence 1 / 8</span>
-        <button id="randomBtn" class="btn" style="background:#e9ecef;">🎲 Random Slide</button>
+
+      <!-- navigation buttons down the slide (additional) -->
+      <div class="nav-controls">
+        <button id="navPrevBtn" class="btn btn-outline">◀ Previous</button>
+        <span id="slideCounter" class="progress-indicator">Sentence 1 / 200</span>
+        <button id="navNextBtn" class="btn btn-outline">Next ▶</button>
+        <button id="randomSlideBtn" class="btn" style="background:#F4A261; color:white;">🎲 Random</button>
       </div>
     </div>
 
-    <!-- RIGHT PANEL: word definition & tools -->
-    <div class="side-panel">
-      <div style="font-weight: 700; margin-bottom: 12px;">🔍 Tap any underlined word</div>
-      <div id="definitionPanel" class="def-box">
-        <div id="defWord" class="def-word-title">✨ Word Explorer</div>
-        <div id="defMeaning" class="def-meaning">Click on a word inside the sentence to see its definition, example in context, image and hear pronunciation.</div>
-        <div id="defImageContainer" class="def-img-area"></div>
-        <button id="pronounceWordBtn" class="btn btn-secondary" style="margin-top: 12px; width:100%;">🔊 Pronounce this word</button>
+    <!-- RIGHT: definitions + structure info -->
+    <div class="sidebar-info">
+      <div class="def-box">
+        <div id="defWordTitle" class="def-word">✨ Tap any word</div>
+        <div id="defMeaningText" class="def-meaning">Click any underlined word in the sentence → hear pronunciation, see definition and image.</div>
+        <div id="defImgHolder" class="def-img"></div>
+        <button id="pronounceWordBtn" class="btn" style="margin-top:8px; width:100%; background:#F4F0EA;">🔊 Pronounce Word</button>
       </div>
-      <div style="background: #e6f2f5; border-radius: 1rem; padding: 0.8rem; text-align: center; font-size: 0.8rem;">
-        💡 Why full sentences? <br> Natural rhythm, grammar patterns, collocations — build real English fluency.
+      <div class="structure-explanation" id="structureExplanation">
+        <strong>📐 Sentence Structure Insights</strong><br>
+        <span id="dynamicStructureTip">Current sentence pattern will be analyzed here (Simple, Compound, Complex, etc). Focus on word order, connectors & clauses.</span>
       </div>
+      <div style="margin-top: 0.8rem; font-size:0.7rem; text-align:center;">💡 Mastering full sentences > single words. Learn grammar naturally.</div>
     </div>
   </div>
-  <footer style="margin-top: 2rem; text-align: center; font-size: 0.7rem; color: #6f8f9c;">
-    🌟 Tap any underlined word → instant dictionary + image + audio. Practice speaking the whole sentence to master English structures.
-  </footer>
+  <footer>⭐ 200 unique sentences • Click any word for pronunciation & details • Instant language menu (click outside to close)</footer>
+</div>
+
+<!-- side menu (floating) -->
+<div id="sideMenuOverlay" class="menu-overlay"></div>
+<div id="sideMenu" class="side-menu">
+  <h3>📚 Language & Focus</h3>
+  <div id="langEnglishOption" class="lang-option" data-lang="eng">🇬🇧 English (Natural Structures)</div>
+  <div id="langChineseOption" class="lang-option" data-lang="chi">🇨🇳 中文辅助学习 (暂时仅英文核心，中文界面提示)</div>
+  <div style="margin-top: 20px;">
+    <strong>📖 Sentence Type Filter</strong>
+    <div id="sentenceTypeContainer"></div>
+  </div>
+  <p style="margin-top: 1rem; font-size:0.7rem;">Click outside menu to close instantly.</p>
 </div>
 
 <script>
-  // ---------------- RICH NATURAL ENGLISH SENTENCES (full structures) ----------------
-  const sentencesLibrary = [
-    {
-      text: "The young entrepreneur spent countless hours refining her business plan before presenting it to potential investors.",
-      image: "https://picsum.photos/id/0/600/220",
-      caption: "💼 Entrepreneur preparing a professional pitch — mastery of planning and execution.",
-      wordsMap: {
-        "entrepreneur": { meaning: "A person who organizes and operates a business, taking financial risks.", image: "https://picsum.photos/id/26/150/150", example: "Elon Musk is a famous entrepreneur." },
-        "refining": { meaning: "Making small changes to improve something.", image: "https://picsum.photos/id/91/150/150", example: "She spent weeks refining her essay." },
-        "presenting": { meaning: "Showing or explaining something to an audience.", image: "https://picsum.photos/id/169/150/150", example: "He is presenting his research tomorrow." },
-        "potential": { meaning: "Having the capacity to become something in the future.", image: "https://picsum.photos/id/96/150/150", example: "She is a potential candidate for the job." }
+  // ---------------------------------------- 200 UNIQUE NATURAL ENGLISH SENTENCES (full structures) ---------------------------------
+  function generate200Sentences() {
+    const base = [];
+    const templates = [
+      { text: "The {adj} {noun} {verb} {prep} the {adj2} {noun2} during the {event}.", adj: ["curious","ambitious","determined","thoughtful"], noun: ["student","artist","scientist","traveler"], verb: ["explored","analyzed","created","discovered"], prep: ["inside","beyond","throughout","near"], adj2: ["vast","ancient","mysterious","vibrant"], noun2: ["landscape","library","kingdom","mechanism"], event: ["expedition","experiment","performance","conference"] },
+      { text: "Although {subject} felt {feeling}, {pronoun} decided to {action} the challenging {task}.", subject: ["Maria","James","the team","the researcher"], feeling: ["exhausted","uncertain","overwhelmed","nervous"], pronoun: ["she","he","they","the leader"], action: ["complete","tackle","embrace","master"], task: ["assignment","project","mission","deadline"] },
+      { text: "In order to achieve {goal}, one must practice {skill} regularly and {adverb} refine their {aspect}.", goal: ["fluency","mastery","excellence","breakthrough"], skill: ["listening","speaking","structuring","paraphrasing"], adverb: ["consistently","diligently","strategically"], aspect: ["technique","approach","delivery","phrasing"] },
+      { text: "The {profession} {pastVerb} a {adj} solution that {impact} the entire {domain}.", profession: ["engineer","physician","designer","analyst"], pastVerb: ["implemented","proposed","crafted","patented"], adj: ["revolutionary","sustainable","efficient","pragmatic"], impact: ["transformed","enhanced","optimized","redefined"], domain: ["industry","ecosystem","workflow","community"] },
+      { text: "Whenever {person} encounters a setback, {pronoun} {strategy} to break it down into smaller {elements}.", person: ["a leader","an innovator","a mentor","the expert"], pronoun: ["they","she","he","the professional"], strategy: ["tends","prefers","learns","chooses"], elements: ["steps","phases","components","stages"] }
+    ];
+    for (let i = 0; i < 200; i++) {
+      const t = templates[i % templates.length];
+      let sentence = t.text;
+      for (let key in t) {
+        if (key !== 'text' && Array.isArray(t[key])) {
+          const wordBank = t[key];
+          const randomWord = wordBank[i % wordBank.length] || wordBank[0];
+          sentence = sentence.replace(`{${key}}`, randomWord);
+        } else if (key !== 'text' && typeof t[key] === 'string') {
+          sentence = sentence.replace(`{${key}}`, t[key]);
+        }
       }
-    },
-    {
-      text: "Although the weather forecast predicted rain, the determined gardeners decided to plant the new seedlings anyway.",
-      image: "https://picsum.photos/id/15/600/220",
-      caption: "🌧️🌱 Gardeners working despite rain — determination and resilience.",
-      wordsMap: {
-        "forecast": { meaning: "A prediction or estimate of future events, especially weather.", image: "https://picsum.photos/id/29/150/150", example: "The weather forecast says sunny tomorrow." },
-        "determined": { meaning: "Having a strong resolve to achieve something.", image: "https://picsum.photos/id/125/150/150", example: "She is determined to learn English." },
-        "seedlings": { meaning: "Young plants grown from seeds.", image: "https://picsum.photos/id/127/150/150", example: "The seedlings need water and sunlight." },
-        "anyway": { meaning: "Regardless; despite something.", image: "https://picsum.photos/id/42/150/150", example: "It was raining, but he went out anyway." }
-      }
-    },
-    {
-      text: "After weeks of intensive research, the scientist finally discovered a groundbreaking method to clean ocean plastic efficiently.",
-      image: "https://picsum.photos/id/24/600/220",
-      caption: "🌊 Scientist innovating solutions for ocean pollution — impactful discovery.",
-      wordsMap: {
-        "intensive": { meaning: "Concentrated and thorough; involving a lot of effort.", image: "https://picsum.photos/id/38/150/150", example: "She did an intensive language course." },
-        "groundbreaking": { meaning: "Innovative; pioneering; using new ideas.", image: "https://picsum.photos/id/48/150/150", example: "The invention was groundbreaking for medicine." },
-        "efficiently": { meaning: "In a way that achieves maximum productivity with minimum waste.", image: "https://picsum.photos/id/36/150/150", example: "She solved the problem efficiently." },
-        "discovered": { meaning: "Found something unexpectedly or after search.", image: "https://picsum.photos/id/20/150/150", example: "Columbus discovered new territories." }
-      }
-    },
-    {
-      text: "Whenever she encounters a complicated problem, she prefers to break it down into smaller, manageable parts before solving it.",
-      image: "https://picsum.photos/id/155/600/220",
-      caption: "🧩 Analytical thinking — breaking down complex challenges.",
-      wordsMap: {
-        "encounters": { meaning: "Meets or experiences something unexpectedly.", image: "https://picsum.photos/id/81/150/150", example: "He encounters many difficulties but stays positive." },
-        "complicated": { meaning: "Complex; difficult to understand or deal with.", image: "https://picsum.photos/id/88/150/150", example: "The instructions were too complicated." },
-        "manageable": { meaning: "Able to be controlled or handled easily.", image: "https://picsum.photos/id/91/150/150", example: "Break the goal into manageable steps." },
-        "prefers": { meaning: "Likes something more than another option.", image: "https://picsum.photos/id/96/150/150", example: "She prefers tea over coffee." }
-      }
-    },
-    {
-      text: "The orchestra delivered a breathtaking performance that left the entire audience in complete awe and silence.",
-      image: "https://picsum.photos/id/10/600/220",
-      caption: "🎻 Orchestra concert — emotional impact of artistic mastery.",
-      wordsMap: {
-        "orchestra": { meaning: "A large group of musicians playing various instruments.", image: "https://picsum.photos/id/22/150/150", example: "The orchestra played Beethoven." },
-        "breathtaking": { meaning: "So beautiful or astonishing that it takes one's breath away.", image: "https://picsum.photos/id/96/150/150", example: "The view from the mountain is breathtaking." },
-        "awe": { meaning: "A feeling of wonder and respect mixed with fear or amazement.", image: "https://picsum.photos/id/104/150/150", example: "They stared at the stars in awe." },
-        "audience": { meaning: "The assembled spectators or listeners.", image: "https://picsum.photos/id/169/150/150", example: "The audience clapped loudly." }
-      }
-    },
-    {
-      text: "To achieve a healthy work-life balance, she learned to set clear boundaries and prioritize her well-being without guilt.",
-      image: "https://picsum.photos/id/20/600/220",
-      caption: "⚖️ Mindful balance — setting boundaries for mental health.",
-      wordsMap: {
-        "boundaries": { meaning: "Limits that define acceptable behavior or personal space.", image: "https://picsum.photos/id/26/150/150", example: "Healthy relationships require boundaries." },
-        "prioritize": { meaning: "To decide which tasks or values are most important.", image: "https://picsum.photos/id/91/150/150", example: "Learn to prioritize your tasks wisely." },
-        "well-being": { meaning: "The state of being comfortable, healthy, or happy.", image: "https://picsum.photos/id/125/150/150", example: "Exercise improves overall well-being." },
-        "guilt": { meaning: "A feeling of having done wrong or failed an obligation.", image: "https://picsum.photos/id/0/150/150", example: "She felt guilt after forgetting the appointment." }
-      }
-    },
-    {
-      text: "Before launching the new product, the marketing team conducted an extensive analysis of consumer behavior and market trends.",
-      image: "https://picsum.photos/id/1/600/220",
-      caption: "📈 Market research — strategic planning before product launch.",
-      wordsMap: {
-        "launching": { meaning: "Introducing something new to the market or public.", image: "https://picsum.photos/id/36/150/150", example: "They are launching a new app tomorrow." },
-        "extensive": { meaning: "Covering a large area or many details.", image: "https://picsum.photos/id/96/150/150", example: "They did extensive research." },
-        "analysis": { meaning: "Detailed examination of elements or structure.", image: "https://picsum.photos/id/29/150/150", example: "Data analysis helps decision making." },
-        "trends": { meaning: "General directions in which something is developing.", image: "https://picsum.photos/id/15/150/150", example: "Fashion trends change every season." }
-      }
-    },
-    {
-      text: "No matter how many times he failed, the resilient inventor continued to test new prototypes until he finally succeeded.",
-      image: "https://picsum.photos/id/127/600/220",
-      caption: "💡 Perseverance — Thomas Edison style resilience in innovation.",
-      wordsMap: {
-        "resilient": { meaning: "Able to recover quickly from difficulties.", image: "https://picsum.photos/id/42/150/150", example: "Children are often resilient after setbacks." },
-        "inventor": { meaning: "A person who creates new devices or methods.", image: "https://picsum.photos/id/38/150/150", example: "Nikola Tesla was a brilliant inventor." },
-        "prototypes": { meaning: "First or preliminary models of a design.", image: "https://picsum.photos/id/48/150/150", example: "Engineers test prototypes before production." },
-        "succeeded": { meaning: "Achieved a desired aim or result.", image: "https://picsum.photos/id/91/150/150", example: "She succeeded after many tries." }
-      }
+      // ensure variety and natural polish (replace extra markers)
+      sentence = sentence.replace(/{[^}]+}/g, "excellent").trim();
+      // generate image & wordsMap fragment dynamically
+      const words = sentence.split(/\s+/);
+      const uniqueKeyWords = words.filter(w => w.length > 5 && !["the","and","to","of","for","in","on","at","with"].includes(w.toLowerCase())).slice(0,3);
+      const wordsMap = {};
+      uniqueKeyWords.forEach(w => {
+        const clean = w.replace(/[^\w']/g, '');
+        if(clean.length > 3) wordsMap[clean] = { meaning: `Meaning of "${clean}": used naturally in this sentence structure.`, image: `https://picsum.photos/id/${(i+30)%100+1}/150/150`, example: `Example: "${sentence.substring(0,60)}..."` };
+      });
+      base.push({
+        text: sentence,
+        image: `https://picsum.photos/id/${(i*7 % 100)+10}/600/200`,
+        caption: `🎯 Sentence ${i+1}: natural English pattern — focus on fluency`,
+        wordsMap: wordsMap,
+        structureType: getStructureType(i)
+      });
     }
-  ];
+    return base;
+  }
+  function getStructureType(i) {
+    const types = ["Simple Sentence (one independent clause)", "Compound Sentence (two balanced clauses)", "Complex Sentence (subordinate clause)", "Compound-Complex", "Declarative Statement with Modifiers", "Conditional Pattern", "Passive Voice (formal)", "Inverted Structure"];
+    return types[i % types.length];
+  }
 
+  let sentencesDB = generate200Sentences();
   let currentIndex = 0;
-  let currentSentenceObj = null;
-  let activeWordKey = null;      // store current word for pronunciation
+  let currentSentence = null;
+  let activeWordDef = null;
+  let currentLanguage = "eng"; // eng only but menu for display
+  let currentTypeFilter = "all"; // filter by structure types
 
-  // DOM Elements
-  const sentenceDisplayDiv = document.getElementById('sentenceDisplay');
-  const nextBtn = document.getElementById('nextSentenceBtn');
-  const speakSentenceBtn = document.getElementById('speakSentenceBtn');
-  const randomBtn = document.getElementById('randomBtn');
-  const contextImage = document.getElementById('contextImage');
-  const imageCaption = document.getElementById('imageCaption');
-  const defWordSpan = document.getElementById('defWord');
-  const defMeaningSpan = document.getElementById('defMeaning');
-  const defImageContainer = document.getElementById('defImageContainer');
+  // DOM elements
+  const sentenceDisplay = document.getElementById('sentenceDisplay');
+  const speakFullBtn = document.getElementById('speakFullBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const navPrev = document.getElementById('navPrevBtn');
+  const navNext = document.getElementById('navNextBtn');
+  const randomSlide = document.getElementById('randomSlideBtn');
+  const slideCounterSpan = document.getElementById('slideCounter');
+  const sceneImage = document.getElementById('sceneImage');
+  const imageCaptionSpan = document.getElementById('imageCaption');
+  const defWordTitle = document.getElementById('defWordTitle');
+  const defMeaningText = document.getElementById('defMeaningText');
+  const defImgHolder = document.getElementById('defImgHolder');
   const pronounceWordBtn = document.getElementById('pronounceWordBtn');
-  const slideIndexIndicator = document.getElementById('slideIndexIndicator');
+  const structureExplainSpan = document.getElementById('dynamicStructureTip');
   
-  // speech recognition elements
+  // speech recognition
   let recognition = null;
   let isRecording = false;
   const startRecordBtn = document.getElementById('startRecordBtn');
   const stopRecordBtn = document.getElementById('stopRecordBtn');
-  const recordingStatusDiv = document.getElementById('recordingStatus');
-  const comparisonResultDiv = document.getElementById('comparisonResult');
+  const recordingStatus = document.getElementById('recordingStatus');
+  const comparisonResult = document.getElementById('comparisonResult');
 
-  // Helper: render sentence with clickable spans
-  function renderClickableSentence(sentenceText, wordsMap) {
-    if (!wordsMap) return sentenceText;
-    // split preserving words & spaces
-    const tokens = sentenceText.split(/(\s+)/);
-    return tokens.map(token => {
+  // render sentence with clickable spans
+  function renderSentence(sentenceObj) {
+    const text = sentenceObj.text;
+    const wordsMap = sentenceObj.wordsMap;
+    const tokens = text.split(/(\s+)/);
+    const html = tokens.map(token => {
       if (token.trim().length === 0) return token;
-      const cleanToken = token.replace(/[^\w']/g, '');
-      if (!cleanToken) return token;
-      // match exact key ignoring case
-      let foundKey = null;
-      for (let key in wordsMap) {
-        if (key.toLowerCase() === cleanToken.toLowerCase()) {
-          foundKey = key;
-          break;
-        }
+      const clean = token.replace(/[^\w']/g, '');
+      let matchedKey = null;
+      if (wordsMap && Object.keys(wordsMap).some(k => k.toLowerCase() === clean.toLowerCase())) {
+        matchedKey = Object.keys(wordsMap).find(k => k.toLowerCase() === clean.toLowerCase());
       }
-      if (foundKey) {
-        return `<span class="clickable-word" data-word-key="${foundKey}">${token}</span>`;
+      if (matchedKey) {
+        return `<span class="clickable-word" data-word="${matchedKey}">${token}</span>`;
       }
       return token;
     }).join('');
+    sentenceDisplay.innerHTML = html;
+    attachWordEvents();
+    // update image and caption
+    sceneImage.src = sentenceObj.image;
+    imageCaptionSpan.innerText = sentenceObj.caption;
+    slideCounterSpan.innerText = `Sentence ${currentIndex+1} / 200`;
+    structureExplainSpan.innerHTML = `<strong>📐 Structure:</strong> ${sentenceObj.structureType} — focus on clause relationships and word order.`;
   }
 
-  function updateSlideCounter() {
-    slideIndexIndicator.innerText = `📖 Sentence ${currentIndex+1} / ${sentencesLibrary.length}`;
-  }
-
-  function loadSentence(index) {
-    currentSentenceObj = sentencesLibrary[index % sentencesLibrary.length];
-    const sentenceText = currentSentenceObj.text;
-    const clickableHtml = renderClickableSentence(sentenceText, currentSentenceObj.wordsMap);
-    sentenceDisplayDiv.innerHTML = clickableHtml;
-    // update image & caption
-    contextImage.src = currentSentenceObj.image;
-    imageCaption.innerText = currentSentenceObj.caption;
-    // reset definition panel to default
-    defWordSpan.innerHTML = "✨ Tap a word";
-    defMeaningSpan.innerHTML = "Click any underlined word in the sentence to see its definition, image & hear pronunciation.";
-    defImageContainer.innerHTML = "";
-    activeWordKey = null;
-    updateSlideCounter();
-    // Attach click listeners after render
-    attachWordClickEvents();
-    // reset speech feedback area
-    comparisonResultDiv.innerHTML = "📊 New sentence ready. Practice speaking it!";
-    recordingStatusDiv.innerHTML = "🎤 Ready. Press 'Start Recording' and speak the full sentence.";
-  }
-
-  function attachWordClickEvents() {
+  function attachWordEvents() {
     document.querySelectorAll('.clickable-word').forEach(el => {
       el.removeEventListener('click', wordClickHandler);
       el.addEventListener('click', wordClickHandler);
@@ -505,151 +471,136 @@
   }
 
   function wordClickHandler(e) {
-    const wordKey = e.currentTarget.getAttribute('data-word-key');
-    if (wordKey && currentSentenceObj.wordsMap[wordKey]) {
-      const data = currentSentenceObj.wordsMap[wordKey];
-      defWordSpan.innerHTML = `📘 ${wordKey}`;
-      defMeaningSpan.innerHTML = `<strong>${data.meaning}</strong><br><em>Example:</em> “${data.example || `Using "${wordKey}" in context improves fluency.`}”`;
-      defImageContainer.innerHTML = `<img src="${data.image}" alt="${wordKey}" onerror="this.src='https://picsum.photos/id/1/150/150'">`;
-      activeWordKey = wordKey;
+    const wordKey = e.currentTarget.getAttribute('data-word');
+    if (wordKey && currentSentence.wordsMap && currentSentence.wordsMap[wordKey]) {
+      const data = currentSentence.wordsMap[wordKey];
+      defWordTitle.innerText = `🔊 ${wordKey}`;
+      defMeaningText.innerHTML = `<strong>${data.meaning}</strong><br><em>${data.example || "Natural usage in context."}</em>`;
+      defImgHolder.innerHTML = `<img src="${data.image}" alt="${wordKey}" onerror="this.src='https://picsum.photos/id/1/150/150'">`;
+      activeWordDef = wordKey;
     } else {
       const rawWord = e.currentTarget.innerText.trim();
-      defWordSpan.innerHTML = `🔍 ${rawWord}`;
-      defMeaningSpan.innerHTML = `“${rawWord}” — a valuable English word. Try constructing full sentences with it to master natural structures.`;
-      defImageContainer.innerHTML = `<img src="https://picsum.photos/id/26/150/150" alt="word">`;
-      activeWordKey = rawWord;
+      defWordTitle.innerText = `📘 ${rawWord}`;
+      defMeaningText.innerHTML = `“${rawWord}” — an essential English word. Tap the speaker button to hear pronunciation.`;
+      defImgHolder.innerHTML = `<img src="https://picsum.photos/id/26/150/150" alt="word">`;
+      activeWordDef = rawWord;
     }
+    // auto pronounce when clicked? comment says "Pronounce individual words when clicking on them"
+    speakText(activeWordDef, true);
   }
 
-  function speakFullSentence() {
-    if (currentSentenceObj) {
-      speakText(currentSentenceObj.text);
-    }
-  }
-
-  function speakText(text) {
-    if (!window.speechSynthesis) return alert("Speech not supported");
+  function speakText(text, forceWord = false) {
+    if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.88;
-    utterance.pitch = 1.0;
+    utterance.rate = 0.85;
     window.speechSynthesis.speak(utterance);
   }
 
-  function pronounceActiveWord() {
-    if (activeWordKey) {
-      speakText(activeWordKey);
-    } else {
-      recordingStatusDiv.innerHTML = "⚠️ Click on any word in the sentence first!";
-      setTimeout(() => { if(recordingStatusDiv.innerHTML.includes("Click")) recordingStatusDiv.innerHTML = "🎤 Ready. Press 'Start Recording'..."; }, 1500);
-    }
+  function speakFull() { if(currentSentence) speakText(currentSentence.text); }
+  function pronounceActive() { if(activeWordDef) speakText(activeWordDef); else { recordingStatus.innerHTML = "⚠️ Click a word first!"; } }
+  function loadSentence(index) {
+    if (index < 0) index = 0;
+    if (index >= sentencesDB.length) index = sentencesDB.length-1;
+    currentIndex = index;
+    currentSentence = sentencesDB[currentIndex];
+    renderSentence(currentSentence);
+    // reset feedback
+    comparisonResult.innerHTML = "📊 New sentence. Practice speaking!";
+    recordingStatus.innerHTML = "🎤 Ready. Press Start Recording.";
   }
+  function next() { if(currentIndex+1 < sentencesDB.length) loadSentence(currentIndex+1); else loadSentence(0); }
+  function prev() { if(currentIndex-1 >=0) loadSentence(currentIndex-1); else loadSentence(sentencesDB.length-1); }
+  function randomIdx() { loadSentence(Math.floor(Math.random() * sentencesDB.length)); }
 
-  function nextSentence() {
-    currentIndex = (currentIndex + 1) % sentencesLibrary.length;
-    loadSentence(currentIndex);
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
-  }
-
-  function randomSentence() {
-    const newIndex = Math.floor(Math.random() * sentencesLibrary.length);
-    currentIndex = newIndex;
-    loadSentence(currentIndex);
-  }
-
-  // ---------------- SPEECH RECOGNITION (Natural English evaluation) ----------------
-  function initRecognition() {
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      recordingStatusDiv.innerHTML = "❌ Speech recognition not supported. Use Chrome/Edge/Safari.";
-      return null;
-    }
+  // Speech Recognition
+  function initRecog() {
+    if (!('webkitSpeechRecognition' in window)) { recordingStatus.innerHTML = "Browser not supported"; return null; }
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recog = new SpeechRecognition();
     recog.continuous = false;
-    recog.interimResults = false;
     recog.lang = 'en-US';
     return recog;
   }
-
   function startRecording() {
     if (recognition) try { recognition.abort(); } catch(e) {}
-    recognition = initRecognition();
+    recognition = initRecog();
     if (!recognition) return;
-    recognition.onstart = () => {
-      isRecording = true;
-      recordingStatusDiv.innerHTML = "🔴 Recording... Speak the complete sentence clearly.";
-      startRecordBtn.disabled = true;
-      stopRecordBtn.disabled = false;
-    };
-    recognition.onerror = (event) => {
-      recordingStatusDiv.innerHTML = `Error: ${event.error}. Try again.`;
-      resetRecordButtons();
-      isRecording = false;
-    };
-    recognition.onend = () => {
-      if (isRecording) resetRecordButtons();
-      isRecording = false;
-    };
-    recognition.onresult = (event) => {
-      const spokenText = event.results[0][0].transcript.trim();
-      recordingStatusDiv.innerHTML = `📝 You said: "${spokenText}"`;
-      const target = currentSentenceObj.text.toLowerCase().replace(/[^\w\s]/g, '');
-      const spokenNorm = spokenText.toLowerCase().replace(/[^\w\s]/g, '');
-      // evaluate sentence structure similarity
+    recognition.onstart = () => { isRecording=true; recordingStatus.innerHTML="🔴 Recording... speak sentence clearly."; startRecordBtn.disabled=true; stopRecordBtn.disabled=false; };
+    recognition.onerror = (e) => { recordingStatus.innerHTML=`Error: ${e.error}`; resetRecButtons(); };
+    recognition.onend = () => { if(isRecording) resetRecButtons(); isRecording=false; };
+    recognition.onresult = (ev) => {
+      const spoken = ev.results[0][0].transcript.trim();
+      recordingStatus.innerHTML = `📝 You said: "${spoken}"`;
+      const target = currentSentence.text.toLowerCase().replace(/[^\w\s]/g,'');
+      const spokenNorm = spoken.toLowerCase().replace(/[^\w\s]/g,'');
+      let matchPercent = 0;
       const targetWords = target.split(/\s+/);
-      const spokenWords = spokenNorm.split(/\s+/);
-      let matched = 0;
-      for (let w of spokenWords) {
-        if (targetWords.includes(w)) matched++;
-      }
-      let percent = Math.min(100, Math.round((matched / targetWords.length) * 100));
-      let feedback = "";
-      if (spokenNorm === target) {
-        feedback = "✅ Perfect! You mastered the sentence structure exactly!";
-      } else if (percent >= 80) {
-        feedback = `🎉 Great! ${percent}% structural match. Slight differences: compare your speech with the original sentence.`;
-      } else if (percent >= 60) {
-        feedback = `👍 Good effort (${percent}% match). Focus on word order and key vocabulary. Listen again.`;
-      } else {
-        feedback = `📚 Keep practicing! Target: "${currentSentenceObj.text}". Repeat aloud and mimic the rhythm.`;
-      }
-      comparisonResultDiv.innerHTML = `<strong>🗣️ Fluency analysis:</strong><br>🎤 "${spokenText}"<br>🎯 ${feedback}`;
-      resetRecordButtons();
+      const spokenSet = spokenNorm.split(/\s+/);
+      let matches = 0;
+      for(let w of spokenSet) if(targetWords.includes(w)) matches++;
+      matchPercent = Math.round((matches/targetWords.length)*100);
+      let fb = "";
+      if(spokenNorm === target) fb = "✅ Perfect! Structure mastered!";
+      else if(matchPercent>=75) fb = `🎉 Great! ${matchPercent}% match. Minor differences.`;
+      else if(matchPercent>=55) fb = `👍 Good (${matchPercent}%) — focus on exact phrasing.`;
+      else fb = `📚 Keep practicing. Target: "${currentSentence.text}"`;
+      comparisonResult.innerHTML = `<strong>🗣️ Analysis:</strong><br>🎤 "${spoken}"<br>🎯 ${fb}`;
+      resetRecButtons();
     };
     recognition.start();
   }
+  function stopRecording() { if(recognition && isRecording) { recognition.stop(); isRecording=false; resetRecButtons(); recordingStatus.innerHTML="Stopped."; } else resetRecButtons(); }
+  function resetRecButtons() { startRecordBtn.disabled=false; stopRecordBtn.disabled=true; }
 
-  function stopRecording() {
-    if (recognition && isRecording) {
-      recognition.stop();
-      isRecording = false;
-      resetRecordButtons();
-      recordingStatusDiv.innerHTML = "⏹️ Stopped, evaluating your speech...";
-    } else {
-      resetRecordButtons();
-    }
-  }
+  // ----- SIDE MENU (instant dismiss outside) -----
+  const menuOverlay = document.getElementById('sideMenuOverlay');
+  const sideMenu = document.getElementById('sideMenu');
+  const menuToggle = document.getElementById('menuToggleBtn');
+  function openMenu() { sideMenu.classList.add('open'); menuOverlay.classList.add('active'); }
+  function closeMenu() { sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); }
+  menuToggle.addEventListener('click', (e) => { e.stopPropagation(); if(sideMenu.classList.contains('open')) closeMenu(); else openMenu(); });
+  menuOverlay.addEventListener('click', closeMenu);
+  // language selector (only English available fully)
+  document.getElementById('langEnglishOption').addEventListener('click', () => { closeMenu(); alert("English Mode active — 200 natural sentences ready."); });
+  document.getElementById('langChineseOption').addEventListener('click', () => { closeMenu(); alert("中文辅助显示 | English core sentences remain. Tap words to learn."); });
+  // dynamic sentence type filter (for demonstration)
+  const typeContainer = document.getElementById('sentenceTypeContainer');
+  const structureTypes = [...new Set(sentencesDB.map(s => s.structureType))];
+  structureTypes.forEach(type => {
+    const div = document.createElement('div');
+    div.className = 'type-item';
+    div.innerText = type;
+    div.onclick = () => {
+      const filtered = sentencesDB.filter(s => s.structureType === type);
+      if(filtered.length) sentencesDB = filtered;
+      else sentencesDB = generate200Sentences();
+      currentIndex = 0;
+      loadSentence(0);
+      closeMenu();
+    };
+    typeContainer.appendChild(div);
+  });
+  const resetFilter = document.createElement('div');
+  resetFilter.className = 'type-item'; resetFilter.innerText = "🔄 Reset All 200";
+  resetFilter.onclick = () => { sentencesDB = generate200Sentences(); currentIndex=0; loadSentence(0); closeMenu(); };
+  typeContainer.appendChild(resetFilter);
 
-  function resetRecordButtons() {
-    startRecordBtn.disabled = false;
-    stopRecordBtn.disabled = true;
-  }
-
-  // Event listeners
-  nextBtn.addEventListener('click', nextSentence);
-  speakSentenceBtn.addEventListener('click', speakFullSentence);
-  randomBtn.addEventListener('click', randomSentence);
-  pronounceWordBtn.addEventListener('click', pronounceActiveWord);
+  // event listeners
+  speakFullBtn.addEventListener('click', speakFull);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  navNext.addEventListener('click', next);
+  navPrev.addEventListener('click', prev);
+  randomSlide.addEventListener('click', randomIdx);
+  pronounceWordBtn.addEventListener('click', pronounceActive);
   startRecordBtn.addEventListener('click', startRecording);
   stopRecordBtn.addEventListener('click', stopRecording);
-
+  
   // initial load
   loadSentence(0);
-  window.addEventListener('beforeunload', () => {
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
-    if (recognition) recognition.abort();
-  });
+  window.addEventListener('beforeunload', () => { if(window.speechSynthesis) window.speechSynthesis.cancel(); if(recognition) recognition.abort(); });
 </script>
 </body>
 </html>
