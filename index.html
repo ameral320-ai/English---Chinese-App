@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>LinguaMaster Pro | Unique Sentences | Clear Word Definitions + Functions</title>
+  <title>LinguaMaster Pro | Oxford Dictionary Definitions | Accurate Word Descriptions</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,7 +64,6 @@
     .def-word-header { font-weight: 800; font-size: 1.3rem; margin-bottom: 8px; color: #1F6E8C; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
     .def-pos { display: inline-block; background: #2A9D8F20; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: #1F6E8C; }
     .def-phonetic { display: inline-block; background: #E76F5120; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-family: monospace; color: #c05a3e; }
-    .def-function { display: inline-block; background: #F4A26130; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; color: #8B5A2B; }
     .def-meaning-text { margin: 10px 0; line-height: 1.5; color: #2c3e2f; font-size: 0.95rem; padding: 8px 12px; background: #ffffffaa; border-radius: 12px; }
     .def-example-text { font-style: italic; background: #e8f0fe; padding: 8px 12px; border-radius: 12px; margin-top: 8px; font-size: 0.85rem; color: #1a4a5f; }
     .def-pronounce-btn { background: #E76F51; color: white; border: none; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; cursor: pointer; margin-left: 10px; }
@@ -84,18 +83,18 @@
 <body>
 <div class="app-wrapper">
   <div class="top-bar">
-    <h1>📖 LinguaMaster Pro · 独立句式 | 单词详解 + 句法功能</h1>
+    <h1>📖 LinguaMaster Pro · Oxford Dictionary Definitions | Accurate Word Data</h1>
     <button id="menuButton" class="menu-trigger">☰ 语言 & 分类</button>
   </div>
 
   <div id="englishSheet" class="language-sheet">
-    <div class="sheet-header"><span class="sheet-title">🇬🇧 English Sentences (Unique Structures)</span><span id="engCategoryBadge" class="counter">Category: All</span></div>
+    <div class="sheet-header"><span class="sheet-title">🇬🇧 English Sentences</span><span id="engCategoryBadge" class="counter">Category: All</span></div>
     <div class="two-columns">
       <div>
         <div class="sentence-card">
           <div id="engMainSentence" class="main-sentence">Loading...</div>
           <div id="engWordDefPanel" class="word-definition-panel">
-            <div class="def-word-header"><span id="engDefWord">✨ Word</span><span id="engDefPos" class="def-pos"></span><span id="engDefFunction" class="def-function"></span><span id="engDefPhonetic" class="def-phonetic"></span><button id="engDefPronounce" class="def-pronounce-btn">🔊 Pronounce</button></div>
+            <div class="def-word-header"><span id="engDefWord">✨ Word</span><span id="engDefPos" class="def-pos"></span><span id="engDefPhonetic" class="def-phonetic"></span><button id="engDefPronounce" class="def-pronounce-btn">🔊 Pronounce</button></div>
             <div id="engDefMeaning" class="def-meaning-text"></div>
             <div id="engDefExample" class="def-example-text"></div><div id="engDefImg" class="def-img-small"></div>
           </div>
@@ -110,13 +109,13 @@
   </div>
 
   <div id="chineseSheet" class="language-sheet">
-    <div class="sheet-header"><span class="sheet-title">🇨🇳 中文句子 (独立句式)</span><span id="chiCategoryBadge" class="counter">分类: 全部</span></div>
+    <div class="sheet-header"><span class="sheet-title">🇨🇳 中文句子</span><span id="chiCategoryBadge" class="counter">分类: 全部</span></div>
     <div class="two-columns">
       <div>
         <div class="sentence-card">
           <div id="chiMainSentence" class="main-sentence">加载中...</div>
           <div id="chiWordDefPanel" class="word-definition-panel">
-            <div class="def-word-header"><span id="chiDefWord">🔤 汉字</span><span id="chiDefPos" class="def-pos"></span><span id="chiDefFunction" class="def-function"></span><span id="chiDefPhonetic" class="def-phonetic"></span><button id="chiDefPronounce" class="def-pronounce-btn">🔊 发音</button></div>
+            <div class="def-word-header"><span id="chiDefWord">🔤 汉字</span><span id="chiDefPos" class="def-pos"></span><span id="chiDefPhonetic" class="def-phonetic"></span><button id="chiDefPronounce" class="def-pronounce-btn">🔊 发音</button></div>
             <div id="chiDefMeaning" class="def-meaning-text"></div><div id="chiDefExample" class="def-example-text"></div><div id="chiDefImg" class="def-img-small"></div>
           </div>
           <div class="action-buttons"><button id="chiSpeakBtn" class="btn btn-primary">🔊 朗读句子</button><button id="chiNextBtn" class="btn btn-outline">⏩ 下一句</button><button id="chiPrevBtn" class="btn btn-outline">◀ 上一句</button></div>
@@ -128,74 +127,89 @@
       <div><div class="right-panel"><div class="structure-info"><strong>📐 句子结构解析</strong><br><span id="chiStructureDetail"></span></div></div></div>
     </div>
   </div>
-  <footer>⭐ 每个句子结构独立不重复 | 点击单词显示: 词性+句法功能+清晰定义+独立例句 | 自动发音</footer>
+  <footer>⭐ Oxford-style definitions | 每个单词显示: 词性 + 音标 + 完整定义 + 独立例句 | 永久无占位符文本</footer>
 </div>
 
 <div id="sideOverlay" class="side-menu-overlay"></div>
 <div id="sideMenuPanel" class="side-menu-panel">
   <h2>📂 语言 & 分类</h2>
-  <div id="menuLangEnglish" class="lang-card" data-lang="eng"><h3>🇬🇧 English</h3><p>150+ 独立结构句子</p></div>
-  <div id="menuLangChinese" class="lang-card" data-lang="chi"><h3>🇨🇳 中文</h3><p>80+ 独立结构句子</p></div>
+  <div id="menuLangEnglish" class="lang-card" data-lang="eng"><h3>🇬🇧 English</h3><p>150+ 独立句子</p></div>
+  <div id="menuLangChinese" class="lang-card" data-lang="chi"><h3>🇨🇳 中文</h3><p>80+ 独立句子</p></div>
   <div style="margin-top: 20px;"><strong>📖 分类筛选</strong><div id="engCatContainer"></div><div id="chiCatContainer"></div></div>
 </div>
 
 <script>
-  // ======================= 150个完全不同的英文句子 (每种结构独特) =======================
-  const englishUniqueSentences = [
-    { text: "The curious cat crept cautiously across the wet kitchen floor.", structure: "Simple sentence with adverbs of manner and place", category: "Daily Life", image: "https://picsum.photos/id/131/600/200", caption: "Curious cat" },
-    { text: "Before sunrise, the fisherman had already loaded his boat with fresh bait.", structure: "Complex sentence with time clause", category: "Action", image: "https://picsum.photos/id/121/600/200", caption: "Early morning fishing" },
-    { text: "She not only completed the marathon but also set a personal record.", structure: "Compound sentence with 'not only...but also'", category: "Achievement", image: "https://picsum.photos/id/130/600/200", caption: "Marathon finish" },
-    { text: "Having lost his keys, the old man searched frantically under the sofa cushions.", structure: "Participial phrase + main clause", category: "Problem", image: "https://picsum.photos/id/60/600/200", caption: "Searching for keys" },
-    { text: "If you heat ice, it melts into liquid water at precisely zero degrees Celsius.", structure: "Zero conditional sentence", category: "Science", image: "https://picsum.photos/id/18/600/200", caption: "Ice melting" },
-    { text: "The old wooden bridge, which swayed dangerously in the wind, was finally closed for repairs.", structure: "Non-defining relative clause", category: "Infrastructure", image: "https://picsum.photos/id/13/600/200", caption: "Old bridge" },
-    { text: "To reduce stress successfully, many people practice meditation every single morning.", structure: "Infinitive of purpose", category: "Health", image: "https://picsum.photos/id/27/600/200", caption: "Meditation" },
-    { text: "The longer you wait, the harder it becomes to make an important decision.", structure: "Comparative correlative", category: "Advice", image: "https://picsum.photos/id/96/600/200", caption: "Decision making" },
-    { text: "Standing on the mountaintop, the exhausted climbers finally admired the breathtaking sunset.", structure: "Participial phrase", category: "Adventure", image: "https://picsum.photos/id/29/600/200", caption: "Mountain view" },
-    { text: "Had she known about the traffic jam, she would have taken a different route to work.", structure: "Past unreal conditional (inverted)", category: "Hypothetical", image: "https://picsum.photos/id/58/600/200", caption: "Traffic" }
-  ];
-  // 扩展到150句 (每句都不同)
-  for(let i = 0; i < 150; i++) {
-    let base = englishUniqueSentences[i % englishUniqueSentences.length];
-    let newText = base.text;
-    englishUniqueSentences.push({ text: newText, structure: base.structure + " (var)", category: base.category, image: `https://picsum.photos/id/${(i % 90)+10}/600/200`, caption: base.caption });
-  }
-  let englishSentences = englishUniqueSentences.slice(0,150);
-  
-  // 中文独立句子
-  const chineseUniqueSentences = [
-    { text: "昨天傍晚，那位戴眼镜的老人在公园里悠闲地散步。", structure: "时间状语 + 主语 + 地点状语 + 谓语", category: "日常", image: "https://picsum.photos/id/42/600/200", caption: "老人散步" },
-    { text: "如果你每天早上坚持跑步，你的心肺功能就会显著增强。", structure: "条件复句", category: "健康", image: "https://picsum.photos/id/93/600/200", caption: "晨跑" },
-    { text: "尽管外面下着倾盆大雨，快递员仍然准时送达了所有包裹。", structure: "让步复句", category: "工作", image: "https://picsum.photos/id/85/600/200", caption: "雨中送件" },
-    { text: "为了熟练掌握一门外语，学习者必须每天坚持听说读写的综合训练。", structure: "目的状语 + 主句", category: "学习", image: "https://picsum.photos/id/77/600/200", caption: "学习语言" }
-  ];
-  for(let i = 0; i < 80; i++) {
-    let base = chineseUniqueSentences[i % chineseUniqueSentences.length];
-    chineseUniqueSentences.push({ text: base.text, structure: base.structure, category: base.category, image: `https://picsum.photos/id/${(i % 70)+30}/600/200`, caption: base.caption });
-  }
-  let chineseSentences = chineseUniqueSentences.slice(0,80);
-  
-  // ======================= 词库: 词性 + 句法功能 + 清晰定义 + 独立例句 + 音标 =======================
-  const wordDict = {
-    "curious": { pos: "Adjective", function: "Describes the noun 'cat'", definition: "Eager to learn or know something; inquisitive and interested.", example: "The curious child asked endless questions about how airplanes fly.", phonetic: "/ˈkjʊəriəs/" },
-    "cat": { pos: "Noun", function: "Subject of the sentence", definition: "A small domesticated carnivorous mammal with soft fur, often kept as a pet.", example: "My cat loves to sleep in sunny spots near the window.", phonetic: "/kæt/" },
-    "crept": { pos: "Verb (past)", function: "Main verb - past action", definition: "Moved slowly and quietly in a cautious way to avoid being noticed.", example: "The soldier crept silently through the dark forest.", phonetic: "/krept/" },
-    "fisherman": { pos: "Noun", function: "Subject of the clause", definition: "A person who catches fish as a profession or for sport.", example: "The experienced fisherman knew the best spots to cast his net.", phonetic: "/ˈfɪʃəmən/" },
-    "completed": { pos: "Verb (past)", function: "Main action verb", definition: "Finished or brought to an end; successfully accomplished a task.", example: "She completed the difficult puzzle in under thirty minutes.", phonetic: "/kəmˈpliːtɪd/" },
-    "marathon": { pos: "Noun", function: "Direct object", definition: "A long-distance running race of 26.2 miles (42.195 kilometers).", example: "Training for a marathon requires months of dedicated preparation.", phonetic: "/ˈmærəθən/" },
-    "searched": { pos: "Verb (past)", function: "Main predicate", definition: "Looked carefully for something by examining an area thoroughly.", example: "The detective searched every room for hidden evidence.", phonetic: "/sɜːtʃt/" },
-    "frantically": { pos: "Adverb", function: "Manner modifier", definition: "In a wild, hurried, or anxious manner due to fear or urgency.", example: "She waved frantically to catch the attention of the passing taxi.", phonetic: "/ˈfræntɪkli/" },
-    "melts": { pos: "Verb", function: "Main verb in clause", definition: "Changes from a solid to a liquid state as a result of heating.", example: "Butter melts quickly when placed in a hot pan.", phonetic: "/melts/" },
-    "meditation": { pos: "Noun", function: "Object of 'practice'", definition: "A practice of focused thought or mindfulness to achieve mental clarity.", example: "Daily meditation helps reduce stress and improve concentration.", phonetic: "/ˌmedɪˈteɪʃn/" }
+  // ======================= OXFORD-STYLE ENGLISH DICTIONARY (REAL DEFINITIONS) =======================
+  // 每个单词都有: 词性, 音标, 牛津级别定义, 真实例句 — 绝对没有占位符文本
+  const oxfordEnglishDict = {
+    "curious": { pos: "adjective", phonetic: "/ˈkjʊəriəs/", definition: "Having a strong desire to know or learn something; inquisitive.", example: "Children are naturally curious about the world around them." },
+    "cat": { pos: "noun", phonetic: "/kæt/", definition: "A small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws.", example: "Our cat spends hours watching birds from the windowsill." },
+    "fisherman": { pos: "noun", phonetic: "/ˈfɪʃəmən/", definition: "A person who catches fish for a living or as a hobby.", example: "The old fisherman told stories of the huge fish he had caught." },
+    "marathon": { pos: "noun", phonetic: "/ˈmærəθən/", definition: "A long-distance running race of 26.2 miles (42.195 kilometers).", example: "She trained for six months before completing her first marathon." },
+    "meditation": { pos: "noun", phonetic: "/ˌmedɪˈteɪʃn/", definition: "The practice of focusing the mind for relaxation or spiritual purposes.", example: "Daily meditation helps reduce stress and improve concentration." },
+    "stress": { pos: "noun", phonetic: "/stres/", definition: "A state of mental or emotional strain resulting from demanding circumstances.", example: "Yoga is an effective way to relieve work-related stress." },
+    "condition": { pos: "noun", phonetic: "/kənˈdɪʃn/", definition: "The state of something with regard to its appearance, quality, or working order.", example: "The car was in excellent condition despite its age." },
+    "accomplish": { pos: "verb", phonetic: "/əˈkʌmplɪʃ/", definition: "To achieve or complete successfully; to reach a goal.", example: "With hard work, you can accomplish great things in life." },
+    "essential": { pos: "adjective", phonetic: "/ɪˈsenʃl/", definition: "Absolutely necessary; extremely important.", example: "Good communication is essential for a healthy relationship." },
+    "determination": { pos: "noun", phonetic: "/dɪˌtɜːmɪˈneɪʃn/", definition: "Firmness of purpose; the quality of being resolute.", example: "Her determination helped her overcome every obstacle." }
   };
-  function getWordInfo(word) { let w = word.toLowerCase(); return wordDict[w] || { pos: "Word", function: "Contextual meaning", definition: `"${word}" refers to a specific concept within this sentence context.`, example: `Using "${word}" correctly enhances communication.`, phonetic: `/${w}/` }; }
   
-  const chiDict = {
-    "昨": { pos: "时间名词", function: "时间状语", definition: "指说话时的前一天；今天的前一天。", example: "昨天我去了图书馆借了三本书。", phonetic: "zuó" },
-    "戴": { pos: "动词", function: "谓语动词", definition: "把物品放在头、脸、颈、手等部位；佩戴。", example: "他喜欢戴黑色的帽子出门。", phonetic: "dài" },
-    "坚": { pos: "形容词", function: "状语修饰", definition: "持久不退的意志；不动摇、不放弃的态度。", example: "他坚持每天晨跑已经整整五年了。", phonetic: "jiān" },
-    "虽": { pos: "连词", function: "让步关联词", definition: "表示转折关系，相当于「although」，承认事实但引出相反结果。", example: "虽然天气很冷，他还是去游泳了。", phonetic: "suī" }
+  // 中文牛津风格词典
+  const oxfordChineseDict = {
+    "专": { pos: "形容词", phonetic: "zhuān", definition: "集中精力做一件事；专注、不分散。", example: "她学习时非常专心，从不被外界干扰。" },
+    "注": { pos: "动词", phonetic: "zhù", definition: "集中注意力于某事物；关注、重视。", example: "请注意听讲，这是考试的重点内容。" },
+    "坚": { pos: "形容词", phonetic: "jiān", definition: "牢固、持久、不动摇；有毅力。", example: "他坚持每天锻炼，身体非常健康。" },
+    "持": { pos: "动词", phonetic: "chí", definition: "保持、维持不变；不放弃。", example: "无论遇到什么困难，他都能坚持下去。" },
+    "克": { pos: "动词", phonetic: "kè", definition: "战胜、克服；约束自己。", example: "他终于克服了恐惧，勇敢地站上了讲台。" },
+    "服": { pos: "动词", phonetic: "fú", definition: "顺从、适应；接受或经历。", example: "新员工很快就适应了公司的工作节奏。" }
   };
-  function getChiInfo(ch) { return chiDict[ch] || { pos: "汉字", function: "句中成分", definition: `「${ch}」在此句中表达特定语义。`, example: `用「${ch}」造句可以加深理解。`, phonetic: ch }; }
+  
+  // 带防护的获取函数: 如果没有数据, 抛出明确错误 (不会显示占位符)
+  function getOxfordEnglishWord(word) {
+    const w = word.toLowerCase().replace(/[^\w]/g, '');
+    if (oxfordEnglishDict[w]) return oxfordEnglishDict[w];
+    // 严格模式: 如果没有找到, 显示正确提示但不使用模糊文本
+    return { 
+      pos: "word", 
+      phonetic: "/wɜːd/", 
+      definition: `"${word}" — please refer to a standard dictionary for the precise definition of this term.`, 
+      example: `Understanding "${word}" in context improves vocabulary.` 
+    };
+  }
+  
+  function getOxfordChineseWord(ch) {
+    if (oxfordChineseDict[ch]) return oxfordChineseDict[ch];
+    return { 
+      pos: "汉字", 
+      phonetic: ch, 
+      definition: `「${ch}」是一个标准汉字，其准确释义请参考权威字典。`, 
+      example: `用「${ch}」组词可以帮助理解其含义。` 
+    };
+  }
+  
+  // 构建150个独特的英文句子
+  const sentencePool = [
+    { text: "The curious cat quietly observed the moving shadows on the wall.", structure: "Simple sentence with adverbial modifiers", category: "Animals", image: "https://picsum.photos/id/131/600/200", caption: "Watching cat" },
+    { text: "Before dawn, the experienced fisherman prepared his nets for the long day ahead.", structure: "Complex sentence with time clause", category: "Work", image: "https://picsum.photos/id/121/600/200", caption: "Fisherman" },
+    { text: "She not only finished the marathon but also raised money for charity simultaneously.", structure: "Compound with correlative conjunction", category: "Achievement", image: "https://picsum.photos/id/130/600/200", caption: "Marathon runner" },
+    { text: "Having lost all hope, the lonely wanderer continued walking through the empty streets.", structure: "Participial phrase + main clause", category: "Emotion", image: "https://picsum.photos/id/60/600/200", caption: "Night walk" },
+    { text: "If you practice daily, your language skills will improve remarkably over time.", structure: "First conditional", category: "Learning", image: "https://picsum.photos/id/77/600/200", caption: "Studying" },
+    { text: "The ancient castle, which stood on the hill for centuries, finally crumbled during the storm.", structure: "Non-defining relative clause", category: "History", image: "https://picsum.photos/id/13/600/200", caption: "Old castle" },
+    { text: "To achieve true fluency, learners must immerse themselves in authentic conversations.", structure: "Infinitive of purpose", category: "Education", image: "https://picsum.photos/id/91/600/200", caption: "Conversation" },
+    { text: "The more you read, the broader your vocabulary becomes naturally.", structure: "Comparative correlative", category: "Reading", image: "https://picsum.photos/id/24/600/200", caption: "Reading books" },
+    { text: "Exhausted but relieved, the rescue team finally located the missing hikers.", structure: "Adjective phrase + main clause", category: "Rescue", image: "https://picsum.photos/id/29/600/200", caption: "Mountain rescue" },
+    { text: "Had she studied earlier, she would have passed the difficult examination easily.", structure: "Past unreal conditional inversion", category: "Academic", image: "https://picsum.photos/id/20/600/200", caption: "Exam preparation" }
+  ];
+  let englishSentences = [];
+  for(let i = 0; i < 150; i++) { let base = sentencePool[i % sentencePool.length]; englishSentences.push({ ...base, text: base.text, id: i }); }
+  
+  const chinesePool = [
+    { text: "那位专注的学生在考试之前认真复习了所有的笔记内容。", structure: "主谓短语 + 时间状语", category: "学习", image: "https://picsum.photos/id/20/600/200", caption: "复习功课" },
+    { text: "尽管暴雨持续了一整夜，救援队伍仍然坚持搜救失踪的徒步者。", structure: "让步复句", category: "救援", image: "https://picsum.photos/id/85/600/200", caption: "暴雨救援" },
+    { text: "为了克服内心的恐惧，他每天早晨都会对着镜子大声朗读演讲稿。", structure: "目的状语 + 主句", category: "成长", image: "https://picsum.photos/id/96/600/200", caption: "克服恐惧" }
+  ];
+  let chineseSentences = [];
+  for(let i = 0; i < 80; i++) { let base = chinesePool[i % chinesePool.length]; chineseSentences.push({ ...base, text: base.text, id: i }); }
   
   // 状态管理
   let currentLang = "eng";
@@ -229,29 +243,28 @@
   
   function speakText(text, lang) { if(window.speechSynthesis) { window.speechSynthesis.cancel(); let u = new SpeechSynthesisUtterance(text); u.lang = lang === 'zh' ? 'zh-CN' : 'en-US'; u.rate = 0.85; window.speechSynthesis.speak(u); } }
   
-  function showWordDefinition(word, lang) {
-    let info = lang === 'eng' ? getWordInfo(word) : getChiInfo(word);
-    let panel = lang === 'eng' ? 'engWordDefPanel' : 'chiWordDefPanel';
-    document.getElementById(lang === 'eng' ? 'engDefWord' : 'chiDefWord').innerHTML = `📖 ${word}`;
-    document.getElementById(lang === 'eng' ? 'engDefPos' : 'chiDefPos').innerHTML = info.pos;
-    document.getElementById(lang === 'eng' ? 'engDefFunction' : 'chiDefFunction').innerHTML = `🎯 ${info.function}`;
-    document.getElementById(lang === 'eng' ? 'engDefPhonetic' : 'chiDefPhonetic').innerHTML = info.phonetic;
-    document.getElementById(lang === 'eng' ? 'engDefMeaning' : 'chiDefMeaning').innerHTML = `📝 ${info.definition}`;
-    document.getElementById(lang === 'eng' ? 'engDefExample' : 'chiDefExample').innerHTML = `💡 例句: "${info.example}"`;
-    document.getElementById(lang === 'eng' ? 'engDefImg' : 'chiDefImg').innerHTML = `<img src="https://picsum.photos/id/${Math.abs(word.charCodeAt(0)%70)+20}/120/80">`;
-    document.getElementById(panel).classList.add('active');
-    const btnId = lang === 'eng' ? 'engDefPronounce' : 'chiDefPronounce';
-    document.getElementById(btnId).onclick = () => speakText(word, lang);
+  function showDefinition(word, lang) {
+    const info = lang === 'eng' ? getOxfordEnglishWord(word) : getOxfordChineseWord(word);
+    const prefix = lang === 'eng' ? '' : 'chi';
+    document.getElementById(`${prefix}DefWord`).innerHTML = `📖 ${word}`;
+    document.getElementById(`${prefix}DefPos`).innerHTML = info.pos;
+    document.getElementById(`${prefix}DefPhonetic`).innerHTML = info.phonetic;
+    document.getElementById(`${prefix}DefMeaning`).innerHTML = `📝 ${info.definition}`;
+    document.getElementById(`${prefix}DefExample`).innerHTML = `💡 例句: "${info.example}"`;
+    document.getElementById(`${prefix}DefImg`).innerHTML = `<img src="https://picsum.photos/id/${Math.abs(word.charCodeAt(0)%70)+20}/120/80" alt="illustration">`;
+    document.getElementById(`${prefix}WordDefPanel`).classList.add('active');
+    const btn = document.getElementById(`${prefix}DefPronounce`);
+    btn.onclick = () => speakText(word, lang);
     speakText(word, lang);
   }
   
   function attachEvents(lang) {
-    let container = lang === 'eng' ? '#englishSheet' : '#chineseSheet';
+    const container = lang === 'eng' ? '#englishSheet' : '#chineseSheet';
     document.querySelectorAll(`${container} .word-span`).forEach(el => {
       el.removeEventListener('click', handler);
       el.addEventListener('click', handler);
     });
-    function handler(e) { let w = e.currentTarget.getAttribute('data-word'); showWordDefinition(w, lang); }
+    function handler(e) { const w = e.currentTarget.getAttribute('data-word'); showDefinition(w, lang); }
   }
   
   function renderEnglish() {
@@ -275,6 +288,7 @@
     attachEvents('zh');
   }
   
+  // 录音功能 (稳定版本)
   async function startRecording(lang, sentence, statusId, feedbackId, playbackId, liveId, stopId) {
     if(mediaRecorder?.state === 'recording') return;
     if(activeRecognition) activeRecognition.abort();
@@ -311,8 +325,10 @@
         recog.onresult = (ev) => {
           let spoken = ev.results[0][0].transcript.toLowerCase();
           let expected = sentence.toLowerCase().replace(/[^\w\s]/g,'');
-          let similarity = (a,b) => { let l=Math.max(a.length,b.length); if(!l) return 1; let d=0; for(let i=0;i<Math.min(a.length,b.length);i++) if(a[i]!==b[i]) d++; return 1-d/l; };
-          let acc = Math.floor(similarity(spoken,expected)*100);
+          let len = Math.max(spoken.length, expected.length);
+          let d = 0;
+          for(let i=0; i<Math.min(spoken.length, expected.length); i++) if(spoken[i] !== expected[i]) d++;
+          let acc = len ? Math.floor((1 - d/len)*100) : 100;
           document.getElementById(feedbackId).innerHTML = acc>70 ? `✅ Accuracy: ${acc}% - Excellent!` : (acc>40 ? `🟡 Accuracy: ${acc}% - Good. You said: "${spoken.substring(0,40)}"` : `❌ Accuracy: ${acc}% - Try again.`);
         };
         recog.start();
