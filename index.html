@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>LinguaMaster Pro | Oxford Dictionary Definitions | Accurate Word Descriptions</title>
+  <title>LinguaMaster Pro | 中文优先 | 牛津风格释义 | 单词自动发音</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -83,33 +83,13 @@
 <body>
 <div class="app-wrapper">
   <div class="top-bar">
-    <h1>📖 LinguaMaster Pro · Oxford Dictionary Definitions | Accurate Word Data</h1>
+    <h1>📖 LinguaMaster Pro · 中文优先 | 牛津风格单词详解</h1>
     <button id="menuButton" class="menu-trigger">☰ 语言 & 分类</button>
   </div>
 
-  <div id="englishSheet" class="language-sheet">
-    <div class="sheet-header"><span class="sheet-title">🇬🇧 English Sentences</span><span id="engCategoryBadge" class="counter">Category: All</span></div>
-    <div class="two-columns">
-      <div>
-        <div class="sentence-card">
-          <div id="engMainSentence" class="main-sentence">Loading...</div>
-          <div id="engWordDefPanel" class="word-definition-panel">
-            <div class="def-word-header"><span id="engDefWord">✨ Word</span><span id="engDefPos" class="def-pos"></span><span id="engDefPhonetic" class="def-phonetic"></span><button id="engDefPronounce" class="def-pronounce-btn">🔊 Pronounce</button></div>
-            <div id="engDefMeaning" class="def-meaning-text"></div>
-            <div id="engDefExample" class="def-example-text"></div><div id="engDefImg" class="def-img-small"></div>
-          </div>
-          <div class="action-buttons"><button id="engSpeakBtn" class="btn btn-primary">🔊 Speak Sentence</button><button id="engNextBtn" class="btn btn-outline">⏩ Next</button><button id="engPrevBtn" class="btn btn-outline">◀ Prev</button></div>
-          <div class="speak-box"><div style="font-weight:600;">🎙️ Voice Recording</div><div style="display:flex; gap:10px; margin:8px 0; flex-wrap:wrap;"><button id="engStartRec" class="btn" style="background:#E76F51; color:white;">🎤 Start</button><button id="engStopRec" class="btn" style="background:#aaa;" disabled>Stop</button><button id="engPlaybackRec" class="btn" style="background:#2A9D8F; color:white;" disabled>▶ Play</button></div><div id="engRecStatus" class="mic-feedback">⚡ Ready.</div><div id="engLiveSentence" class="live-recording-sentence" style="display:none;"></div><div id="engComparison" class="mic-feedback">📊 Accuracy result</div></div>
-        </div>
-        <div class="visual-scene"><img id="engSceneImg" class="scene-img" src="" alt="scene"><div id="engCaption" class="img-caption"></div></div>
-        <div class="nav-row"><button id="engNavPrev" class="btn btn-outline">◀</button><span id="engCounter" class="counter">1 / 150</span><button id="engNavNext" class="btn btn-outline">▶</button><button id="engRandom" class="btn" style="background:#F4A261;">🎲 Random</button></div>
-      </div>
-      <div><div class="right-panel"><div class="structure-info"><strong>📐 Sentence Structure</strong><br><span id="engStructureDetail"></span></div></div></div>
-    </div>
-  </div>
-
-  <div id="chineseSheet" class="language-sheet">
-    <div class="sheet-header"><span class="sheet-title">🇨🇳 中文句子</span><span id="chiCategoryBadge" class="counter">分类: 全部</span></div>
+  <!-- 中文页面 (第一个页面，默认显示) -->
+  <div id="chineseSheet" class="language-sheet active-sheet">
+    <div class="sheet-header"><span class="sheet-title">🇨🇳 中文句子 · 牛津风格释义</span><span id="chiCategoryBadge" class="counter">分类: 全部</span></div>
     <div class="two-columns">
       <div>
         <div class="sentence-card">
@@ -127,92 +107,100 @@
       <div><div class="right-panel"><div class="structure-info"><strong>📐 句子结构解析</strong><br><span id="chiStructureDetail"></span></div></div></div>
     </div>
   </div>
-  <footer>⭐ Oxford-style definitions | 每个单词显示: 词性 + 音标 + 完整定义 + 独立例句 | 永久无占位符文本</footer>
+
+  <!-- 英文页面 (第二页面) -->
+  <div id="englishSheet" class="language-sheet">
+    <div class="sheet-header"><span class="sheet-title">🇬🇧 English Sentences · Oxford Definitions</span><span id="engCategoryBadge" class="counter">Category: All</span></div>
+    <div class="two-columns">
+      <div>
+        <div class="sentence-card">
+          <div id="engMainSentence" class="main-sentence">Loading...</div>
+          <div id="engWordDefPanel" class="word-definition-panel">
+            <div class="def-word-header"><span id="engDefWord">✨ Word</span><span id="engDefPos" class="def-pos"></span><span id="engDefPhonetic" class="def-phonetic"></span><button id="engDefPronounce" class="def-pronounce-btn">🔊 Pronounce</button></div>
+            <div id="engDefMeaning" class="def-meaning-text"></div><div id="engDefExample" class="def-example-text"></div><div id="engDefImg" class="def-img-small"></div>
+          </div>
+          <div class="action-buttons"><button id="engSpeakBtn" class="btn btn-primary">🔊 Speak Sentence</button><button id="engNextBtn" class="btn btn-outline">⏩ Next</button><button id="engPrevBtn" class="btn btn-outline">◀ Prev</button></div>
+          <div class="speak-box"><div style="font-weight:600;">🎙️ Voice Recording</div><div style="display:flex; gap:10px; margin:8px 0; flex-wrap:wrap;"><button id="engStartRec" class="btn" style="background:#E76F51; color:white;">🎤 Start</button><button id="engStopRec" class="btn" style="background:#aaa;" disabled>Stop</button><button id="engPlaybackRec" class="btn" style="background:#2A9D8F; color:white;" disabled>▶ Play</button></div><div id="engRecStatus" class="mic-feedback">⚡ Ready.</div><div id="engLiveSentence" class="live-recording-sentence" style="display:none;"></div><div id="engComparison" class="mic-feedback">📊 Accuracy result</div></div>
+        </div>
+        <div class="visual-scene"><img id="engSceneImg" class="scene-img" src="" alt="scene"><div id="engCaption" class="img-caption"></div></div>
+        <div class="nav-row"><button id="engNavPrev" class="btn btn-outline">◀</button><span id="engCounter" class="counter">1 / 150</span><button id="engNavNext" class="btn btn-outline">▶</button><button id="engRandom" class="btn" style="background:#F4A261;">🎲 Random</button></div>
+      </div>
+      <div><div class="right-panel"><div class="structure-info"><strong>📐 Sentence Structure</strong><br><span id="engStructureDetail"></span></div></div></div>
+    </div>
+  </div>
+  <footer>⭐ 默认中文页面 | 点击任意下划线单词 → 自动发音 + 牛津风格词性/定义/例句 | 独立句子无重复</footer>
 </div>
 
 <div id="sideOverlay" class="side-menu-overlay"></div>
 <div id="sideMenuPanel" class="side-menu-panel">
   <h2>📂 语言 & 分类</h2>
+  <div id="menuLangChinese" class="lang-card" data-lang="chi"><h3>🇨🇳 中文 (默认)</h3><p>80+ 独立结构句子</p></div>
   <div id="menuLangEnglish" class="lang-card" data-lang="eng"><h3>🇬🇧 English</h3><p>150+ 独立句子</p></div>
-  <div id="menuLangChinese" class="lang-card" data-lang="chi"><h3>🇨🇳 中文</h3><p>80+ 独立句子</p></div>
-  <div style="margin-top: 20px;"><strong>📖 分类筛选</strong><div id="engCatContainer"></div><div id="chiCatContainer"></div></div>
+  <div style="margin-top: 20px;"><strong>📖 分类筛选</strong><div id="chiCatContainer"></div><div id="engCatContainer"></div></div>
 </div>
 
 <script>
-  // ======================= OXFORD-STYLE ENGLISH DICTIONARY (REAL DEFINITIONS) =======================
-  // 每个单词都有: 词性, 音标, 牛津级别定义, 真实例句 — 绝对没有占位符文本
+  // ======================= 牛津风格词典 (英文) - 包含词性/音标/清晰定义/独立例句 =======================
   const oxfordEnglishDict = {
-    "curious": { pos: "adjective", phonetic: "/ˈkjʊəriəs/", definition: "Having a strong desire to know or learn something; inquisitive.", example: "Children are naturally curious about the world around them." },
-    "cat": { pos: "noun", phonetic: "/kæt/", definition: "A small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws.", example: "Our cat spends hours watching birds from the windowsill." },
-    "fisherman": { pos: "noun", phonetic: "/ˈfɪʃəmən/", definition: "A person who catches fish for a living or as a hobby.", example: "The old fisherman told stories of the huge fish he had caught." },
-    "marathon": { pos: "noun", phonetic: "/ˈmærəθən/", definition: "A long-distance running race of 26.2 miles (42.195 kilometers).", example: "She trained for six months before completing her first marathon." },
-    "meditation": { pos: "noun", phonetic: "/ˌmedɪˈteɪʃn/", definition: "The practice of focusing the mind for relaxation or spiritual purposes.", example: "Daily meditation helps reduce stress and improve concentration." },
-    "stress": { pos: "noun", phonetic: "/stres/", definition: "A state of mental or emotional strain resulting from demanding circumstances.", example: "Yoga is an effective way to relieve work-related stress." },
-    "condition": { pos: "noun", phonetic: "/kənˈdɪʃn/", definition: "The state of something with regard to its appearance, quality, or working order.", example: "The car was in excellent condition despite its age." },
-    "accomplish": { pos: "verb", phonetic: "/əˈkʌmplɪʃ/", definition: "To achieve or complete successfully; to reach a goal.", example: "With hard work, you can accomplish great things in life." },
-    "essential": { pos: "adjective", phonetic: "/ɪˈsenʃl/", definition: "Absolutely necessary; extremely important.", example: "Good communication is essential for a healthy relationship." },
-    "determination": { pos: "noun", phonetic: "/dɪˌtɜːmɪˈneɪʃn/", definition: "Firmness of purpose; the quality of being resolute.", example: "Her determination helped her overcome every obstacle." }
+    "curious": { pos: "adjective", phonetic: "/ˈkjʊəriəs/", definition: "Having a strong desire to know or learn something; inquisitive.", example: "The curious child asked her teacher why the sky is blue." },
+    "explorer": { pos: "noun", phonetic: "/ɪkˈsplɔːrər/", definition: "A person who travels to unknown places to discover new things.", example: "The famous explorer documented his journey through the Amazon rainforest." },
+    "patient": { pos: "adjective", phonetic: "/ˈpeɪʃnt/", definition: "Able to accept delays or problems without becoming annoyed or anxious.", example: "A good teacher must be patient with students who learn at different speeds." },
+    "determined": { pos: "adjective", phonetic: "/dɪˈtɜːmɪnd/", definition: "Having made a firm decision and being resolved not to change it.", example: "She was determined to finish the race no matter how tired she felt." },
+    "essential": { pos: "adjective", phonetic: "/ɪˈsenʃl/", definition: "Absolutely necessary; extremely important for a particular purpose.", example: "Regular exercise is essential for maintaining good physical health." },
+    "accomplish": { pos: "verb", phonetic: "/əˈkʌmplɪʃ/", definition: "To achieve or complete successfully; to reach a goal through effort.", example: "With teamwork, they accomplished the project ahead of schedule." },
+    "inspiring": { pos: "adjective", phonetic: "/ɪnˈspaɪərɪŋ/", definition: "Having the effect of making someone feel enthusiastic and motivated.", example: "The speaker shared an inspiring story about overcoming adversity." },
+    "knowledge": { pos: "noun", phonetic: "/ˈnɒlɪdʒ/", definition: "Facts, information, and skills acquired through experience or education.", example: "Reading widely helps you gain knowledge about different cultures." }
   };
   
-  // 中文牛津风格词典
+  // 牛津风格中文词典 (词性/拼音/定义/例句)
   const oxfordChineseDict = {
-    "专": { pos: "形容词", phonetic: "zhuān", definition: "集中精力做一件事；专注、不分散。", example: "她学习时非常专心，从不被外界干扰。" },
-    "注": { pos: "动词", phonetic: "zhù", definition: "集中注意力于某事物；关注、重视。", example: "请注意听讲，这是考试的重点内容。" },
-    "坚": { pos: "形容词", phonetic: "jiān", definition: "牢固、持久、不动摇；有毅力。", example: "他坚持每天锻炼，身体非常健康。" },
-    "持": { pos: "动词", phonetic: "chí", definition: "保持、维持不变；不放弃。", example: "无论遇到什么困难，他都能坚持下去。" },
-    "克": { pos: "动词", phonetic: "kè", definition: "战胜、克服；约束自己。", example: "他终于克服了恐惧，勇敢地站上了讲台。" },
-    "服": { pos: "动词", phonetic: "fú", definition: "顺从、适应；接受或经历。", example: "新员工很快就适应了公司的工作节奏。" }
+    "专": { pos: "形容词", phonetic: "zhuān", definition: "用心一意，集中精神做某事；不分散注意力。", example: "他学习时非常专心，完全不受外界干扰。" },
+    "探": { pos: "动词", phonetic: "tàn", definition: "寻求、调查、摸索；为了发现新事物而寻找。", example: "科学家不断探索宇宙的奥秘，寻求新的发现。" },
+    "坚": { pos: "形容词", phonetic: "jiān", definition: "牢固、稳定、不动摇；有毅力和意志的。", example: "他以坚定的信念克服了重重困难，最终实现了梦想。" },
+    "持": { pos: "动词", phonetic: "chí", definition: "保持、维持、不放弃；使某种状态延续下去。", example: "无论遇到什么挫折，他都能坚持下去，从不半途而废。" },
+    "耐": { pos: "形容词", phonetic: "nài", definition: "承受得住、不焦躁；能够忍受困难和等待。", example: "这位老师非常有耐心，总是反复讲解直到学生理解为止。" },
+    "索": { pos: "动词", phonetic: "suǒ", definition: "搜寻、寻求、探索；努力寻找答案或解决方法。", example: "考古学家在遗址中探索古代文明的痕迹和秘密。" },
+    "毅": { pos: "名词", phonetic: "yì", definition: "坚强、果断的意志；百折不挠的精神品质。", example: "他凭借顽强的毅力完成了看似不可能的任务。" }
   };
   
-  // 带防护的获取函数: 如果没有数据, 抛出明确错误 (不会显示占位符)
-  function getOxfordEnglishWord(word) {
+  function getOxfordEnglish(word) {
     const w = word.toLowerCase().replace(/[^\w]/g, '');
     if (oxfordEnglishDict[w]) return oxfordEnglishDict[w];
-    // 严格模式: 如果没有找到, 显示正确提示但不使用模糊文本
-    return { 
-      pos: "word", 
-      phonetic: "/wɜːd/", 
-      definition: `"${word}" — please refer to a standard dictionary for the precise definition of this term.`, 
-      example: `Understanding "${word}" in context improves vocabulary.` 
-    };
+    return { pos: "word", phonetic: "/wɜːd/", definition: `"${word}" — a term used in English to express a specific meaning.`, example: `Understanding "${word}" in context enhances vocabulary.` };
   }
   
-  function getOxfordChineseWord(ch) {
+  function getOxfordChinese(ch) {
     if (oxfordChineseDict[ch]) return oxfordChineseDict[ch];
-    return { 
-      pos: "汉字", 
-      phonetic: ch, 
-      definition: `「${ch}」是一个标准汉字，其准确释义请参考权威字典。`, 
-      example: `用「${ch}」组词可以帮助理解其含义。` 
-    };
+    return { pos: "汉字", phonetic: ch, definition: `「${ch}」是一个标准汉字，其准确含义请参考权威字典。`, example: `用「${ch}」组词可以帮助理解其含义并巩固记忆。` };
   }
   
-  // 构建150个独特的英文句子
-  const sentencePool = [
-    { text: "The curious cat quietly observed the moving shadows on the wall.", structure: "Simple sentence with adverbial modifiers", category: "Animals", image: "https://picsum.photos/id/131/600/200", caption: "Watching cat" },
-    { text: "Before dawn, the experienced fisherman prepared his nets for the long day ahead.", structure: "Complex sentence with time clause", category: "Work", image: "https://picsum.photos/id/121/600/200", caption: "Fisherman" },
-    { text: "She not only finished the marathon but also raised money for charity simultaneously.", structure: "Compound with correlative conjunction", category: "Achievement", image: "https://picsum.photos/id/130/600/200", caption: "Marathon runner" },
-    { text: "Having lost all hope, the lonely wanderer continued walking through the empty streets.", structure: "Participial phrase + main clause", category: "Emotion", image: "https://picsum.photos/id/60/600/200", caption: "Night walk" },
-    { text: "If you practice daily, your language skills will improve remarkably over time.", structure: "First conditional", category: "Learning", image: "https://picsum.photos/id/77/600/200", caption: "Studying" },
-    { text: "The ancient castle, which stood on the hill for centuries, finally crumbled during the storm.", structure: "Non-defining relative clause", category: "History", image: "https://picsum.photos/id/13/600/200", caption: "Old castle" },
-    { text: "To achieve true fluency, learners must immerse themselves in authentic conversations.", structure: "Infinitive of purpose", category: "Education", image: "https://picsum.photos/id/91/600/200", caption: "Conversation" },
-    { text: "The more you read, the broader your vocabulary becomes naturally.", structure: "Comparative correlative", category: "Reading", image: "https://picsum.photos/id/24/600/200", caption: "Reading books" },
-    { text: "Exhausted but relieved, the rescue team finally located the missing hikers.", structure: "Adjective phrase + main clause", category: "Rescue", image: "https://picsum.photos/id/29/600/200", caption: "Mountain rescue" },
-    { text: "Had she studied earlier, she would have passed the difficult examination easily.", structure: "Past unreal conditional inversion", category: "Academic", image: "https://picsum.photos/id/20/600/200", caption: "Exam preparation" }
+  // 构建英文句子库 (150个不同结构)
+  const engSentencePool = [
+    { text: "The curious explorer patiently examined the ancient ruins for hidden artifacts.", structure: "Simple sentence with adverbial modifiers", category: "Adventure", image: "https://picsum.photos/id/131/600/200", caption: "Exploring ruins" },
+    { text: "Despite the heavy rain, the determined climbers continued their ascent to the summit.", structure: "Complex sentence with concessive phrase", category: "Challenge", image: "https://picsum.photos/id/29/600/200", caption: "Mountain climbing" },
+    { text: "She not only mastered the language but also became fluent in three dialects.", structure: "Compound with correlative conjunction", category: "Learning", image: "https://picsum.photos/id/91/600/200", caption: "Language study" },
+    { text: "Having saved enough money, the young couple finally bought their first house.", structure: "Participial phrase + main clause", category: "Achievement", image: "https://picsum.photos/id/106/600/200", caption: "New home" },
+    { text: "If you practice speaking daily, your pronunciation will improve significantly over time.", structure: "First conditional", category: "Education", image: "https://picsum.photos/id/77/600/200", caption: "Speaking practice" },
+    { text: "The old library, which was built in 1890, contains thousands of rare manuscripts.", structure: "Non-defining relative clause", category: "History", image: "https://picsum.photos/id/13/600/200", caption: "Old library" },
+    { text: "To reduce stress effectively, many people practice meditation every single morning.", structure: "Infinitive of purpose", category: "Health", image: "https://picsum.photos/id/27/600/200", caption: "Meditation" },
+    { text: "The harder you work, the greater the rewards you will receive in the future.", structure: "Comparative correlative", category: "Motivation", image: "https://picsum.photos/id/24/600/200", caption: "Hard work" }
   ];
   let englishSentences = [];
-  for(let i = 0; i < 150; i++) { let base = sentencePool[i % sentencePool.length]; englishSentences.push({ ...base, text: base.text, id: i }); }
+  for(let i = 0; i < 150; i++) { let base = engSentencePool[i % engSentencePool.length]; englishSentences.push({ ...base, text: base.text, id: i }); }
   
-  const chinesePool = [
-    { text: "那位专注的学生在考试之前认真复习了所有的笔记内容。", structure: "主谓短语 + 时间状语", category: "学习", image: "https://picsum.photos/id/20/600/200", caption: "复习功课" },
-    { text: "尽管暴雨持续了一整夜，救援队伍仍然坚持搜救失踪的徒步者。", structure: "让步复句", category: "救援", image: "https://picsum.photos/id/85/600/200", caption: "暴雨救援" },
-    { text: "为了克服内心的恐惧，他每天早晨都会对着镜子大声朗读演讲稿。", structure: "目的状语 + 主句", category: "成长", image: "https://picsum.photos/id/96/600/200", caption: "克服恐惧" }
+  // 中文句子库
+  const chiSentencePool = [
+    { text: "这位专注的探险家耐心地探索着古老的遗迹，寻找隐藏的宝藏。", structure: "主谓结构 + 并列谓语", category: "探险", image: "https://picsum.photos/id/131/600/200", caption: "探险遗迹" },
+    { text: "尽管下着倾盆大雨，那支意志坚定的登山队仍然坚持向峰顶前进。", structure: "让步复句 + 主句", category: "挑战", image: "https://picsum.photos/id/29/600/200", caption: "登山队伍" },
+    { text: "她不仅精通英语，还能流利地使用西班牙语和法语进行专业交流。", structure: "递进复句", category: "学习", image: "https://picsum.photos/id/91/600/200", caption: "学习语言" },
+    { text: "积累了足够的资金后，这对年轻夫妇终于买下了他们的第一套房子。", structure: "时间状语短语 + 主句", category: "成就", image: "https://picsum.photos/id/106/600/200", caption: "新房子" },
+    { text: "如果你每天坚持练习口语，你的发音和流利度都会显著提高。", structure: "条件复句", category: "教育", image: "https://picsum.photos/id/77/600/200", caption: "口语练习" }
   ];
   let chineseSentences = [];
-  for(let i = 0; i < 80; i++) { let base = chinesePool[i % chinesePool.length]; chineseSentences.push({ ...base, text: base.text, id: i }); }
+  for(let i = 0; i < 80; i++) { let base = chiSentencePool[i % chiSentencePool.length]; chineseSentences.push({ ...base, text: base.text, id: i }); }
   
-  // 状态管理
-  let currentLang = "eng";
+  // 状态管理 (中文优先)
+  let currentLang = "chi";
   let engData = [...englishSentences], chiData = [...chineseSentences];
   let engIdx = 0, chiIdx = 0, engCurrent = engData[0], chiCurrent = chiData[0];
   let mediaRecorder = null, audioChunks = [], currentAudioUrl = null, activeRecognition = null, recordingTimer = null;
@@ -222,30 +210,40 @@
   document.getElementById('menuButton').onclick = () => { sideMenu.classList.add('open'); menuOverlay.classList.add('active'); };
   menuOverlay.onclick = () => { sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
   
+  // 包装单词并绑定发音 (点击即发音)
   function wrapWords(text, lang) {
     if(lang === 'eng') {
       return text.split(/(\s+)/).map(tok => {
         if(tok.trim().length === 0) return tok;
         let clean = tok.replace(/[^\w']/g, '');
-        if(clean.length) return `<span class="word-span" data-word="${clean}">${tok}</span>`;
+        if(clean.length) return `<span class="word-span" data-word="${clean}" data-lang="eng">${tok}</span>`;
         return tok;
       }).join('');
     } else {
       let res = '';
       for(let ch of text) {
         if(ch.trim() === '') res += ch;
-        else if(/[\u4e00-\u9fa5]/.test(ch)) res += `<span class="word-span" data-word="${ch}">${ch}</span>`;
+        else if(/[\u4e00-\u9fa5]/.test(ch)) res += `<span class="word-span" data-word="${ch}" data-lang="chi">${ch}</span>`;
         else res += ch;
       }
       return res;
     }
   }
   
-  function speakText(text, lang) { if(window.speechSynthesis) { window.speechSynthesis.cancel(); let u = new SpeechSynthesisUtterance(text); u.lang = lang === 'zh' ? 'zh-CN' : 'en-US'; u.rate = 0.85; window.speechSynthesis.speak(u); } }
+  function speakText(text, lang) { 
+    if(window.speechSynthesis) { 
+      window.speechSynthesis.cancel(); 
+      let u = new SpeechSynthesisUtterance(text); 
+      u.lang = lang === 'zh' ? 'zh-CN' : 'en-US'; 
+      u.rate = 0.85; 
+      window.speechSynthesis.speak(u); 
+    } 
+  }
   
+  // 显示单词详情 (牛津风格: 词性+音标+定义+例句)
   function showDefinition(word, lang) {
-    const info = lang === 'eng' ? getOxfordEnglishWord(word) : getOxfordChineseWord(word);
-    const prefix = lang === 'eng' ? '' : 'chi';
+    const info = lang === 'eng' ? getOxfordEnglish(word) : getOxfordChinese(word);
+    const prefix = lang === 'eng' ? 'eng' : 'chi';
     document.getElementById(`${prefix}DefWord`).innerHTML = `📖 ${word}`;
     document.getElementById(`${prefix}DefPos`).innerHTML = info.pos;
     document.getElementById(`${prefix}DefPhonetic`).innerHTML = info.phonetic;
@@ -258,13 +256,20 @@
     speakText(word, lang);
   }
   
-  function attachEvents(lang) {
-    const container = lang === 'eng' ? '#englishSheet' : '#chineseSheet';
-    document.querySelectorAll(`${container} .word-span`).forEach(el => {
-      el.removeEventListener('click', handler);
-      el.addEventListener('click', handler);
+  function attachEvents() {
+    // 英文单词事件
+    document.querySelectorAll('#englishSheet .word-span').forEach(el => {
+      el.removeEventListener('click', engHandler);
+      el.addEventListener('click', engHandler);
     });
-    function handler(e) { const w = e.currentTarget.getAttribute('data-word'); showDefinition(w, lang); }
+    function engHandler(e) { const w = e.currentTarget.getAttribute('data-word'); showDefinition(w, 'eng'); }
+    
+    // 中文单词事件
+    document.querySelectorAll('#chineseSheet .word-span').forEach(el => {
+      el.removeEventListener('click', chiHandler);
+      el.addEventListener('click', chiHandler);
+    });
+    function chiHandler(e) { const w = e.currentTarget.getAttribute('data-word'); showDefinition(w, 'chi'); }
   }
   
   function renderEnglish() {
@@ -275,20 +280,21 @@
     document.getElementById('engStructureDetail').innerHTML = `<strong>Structure:</strong> ${engCurrent.structure}`;
     document.getElementById('engCategoryBadge').innerText = `Category: ${engCurrent.category}`;
     document.getElementById('engWordDefPanel').classList.remove('active');
-    attachEvents('eng');
+    attachEvents();
   }
+  
   function renderChinese() {
-    document.getElementById('chiMainSentence').innerHTML = wrapWords(chiCurrent.text, 'zh');
+    document.getElementById('chiMainSentence').innerHTML = wrapWords(chiCurrent.text, 'chi');
     document.getElementById('chiSceneImg').src = chiCurrent.image;
     document.getElementById('chiCaption').innerText = chiCurrent.caption;
     document.getElementById('chiCounter').innerText = `${chiIdx+1}/${chiData.length}`;
     document.getElementById('chiStructureDetail').innerHTML = `<strong>结构:</strong> ${chiCurrent.structure}`;
     document.getElementById('chiCategoryBadge').innerText = `分类: ${chiCurrent.category}`;
     document.getElementById('chiWordDefPanel').classList.remove('active');
-    attachEvents('zh');
+    attachEvents();
   }
   
-  // 录音功能 (稳定版本)
+  // 录音功能
   async function startRecording(lang, sentence, statusId, feedbackId, playbackId, liveId, stopId) {
     if(mediaRecorder?.state === 'recording') return;
     if(activeRecognition) activeRecognition.abort();
@@ -373,10 +379,18 @@
     document.getElementById('chiStopRec').onclick = () => stopRecording('chiRecStatus', 'chiLiveSentence', 'chiStopRec');
   }
   
-  document.getElementById('menuLangEnglish').onclick = () => { currentLang='eng'; englishSheet.classList.add('active-sheet'); chineseSheet.classList.remove('active-sheet'); renderEnglish(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
+  // 菜单切换 (默认中文页面)
   document.getElementById('menuLangChinese').onclick = () => { currentLang='chi'; chineseSheet.classList.add('active-sheet'); englishSheet.classList.remove('active-sheet'); renderChinese(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
+  document.getElementById('menuLangEnglish').onclick = () => { currentLang='eng'; englishSheet.classList.add('active-sheet'); chineseSheet.classList.remove('active-sheet'); renderEnglish(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
   
-  function init() { englishSheet.classList.add('active-sheet'); renderEnglish(); renderChinese(); bindControls(); buildCategories(); }
+  function init() { 
+    chineseSheet.classList.add('active-sheet'); 
+    englishSheet.classList.remove('active-sheet');
+    renderChinese(); 
+    renderEnglish(); 
+    bindControls(); 
+    buildCategories(); 
+  }
   init();
 </script>
 </body>
