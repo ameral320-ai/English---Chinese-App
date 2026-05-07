@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>双语言学习 · 中英词库滑动句</title>
+  <title>LinguaMaster Pro · 翻译+发音+词性+例句</title>
   <style>
     * {
       margin: 0;
@@ -11,81 +11,83 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Segoe UI', 'Noto Sans', 'Helvetica Neue', system-ui, sans-serif;
-      background: #eef2f5;
+      font-family: 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
+      background: #f2f4f8;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       margin: 0;
     }
-    .app-wrapper {
+    .app-container {
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       height: 100vh;
       background: #ffffff;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      box-shadow: 0 0 30px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
-      border-radius: 20px;
+      border-radius: 28px;
     }
-    /* 顶部栏 */
-    .top-bar {
+    /* 顶部导航 */
+    .header {
       display: flex;
       align-items: center;
-      padding: 12px 16px;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid #edf2f7;
       background: white;
-      border-bottom: 1px solid #f0f0f0;
-      gap: 12px;
     }
-    .menu-icon {
-      font-size: 26px;
+    .menu-btn {
       background: none;
       border: none;
+      font-size: 26px;
       cursor: pointer;
-      padding: 8px 4px;
-      line-height: 1;
-      color: #2c3e50;
-      margin-right: 8px;
-      transition: 0.2s;
-      border-radius: 8px;
-    }
-    .menu-icon:hover {
-      background: #f5f7fa;
-    }
-    .page-title {
-      font-weight: 600;
-      font-size: 1.25rem;
+      padding: 6px;
+      border-radius: 10px;
       color: #1e293b;
-      flex: 1;
     }
-    .slide-counter {
+    .title-section {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .category-badge {
+      background: #eef2ff;
+      color: #4338ca;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .slide-indicator {
       background: #f1f5f9;
       border-radius: 20px;
       padding: 5px 14px;
-      font-size: 0.9rem;
       font-weight: 500;
       color: #334155;
     }
-
     /* 侧滑菜单 */
     .side-menu {
       position: absolute;
       top: 0;
       left: 0;
-      width: 240px;
+      width: 250px;
       height: 100%;
-      background: #ffffff;
-      box-shadow: 6px 0 20px rgba(0,0,0,0.08);
+      background: white;
+      box-shadow: 6px 0 20px rgba(0,0,0,0.07);
       transform: translateX(-100%);
       transition: transform 0.3s ease;
-      z-index: 20;
+      z-index: 30;
+      padding: 24px 16px;
       display: flex;
       flex-direction: column;
-      padding: 24px 16px;
-      border-right: 1px solid #e9eef2;
+      gap: 8px;
     }
     .side-menu.open {
       transform: translateX(0);
@@ -97,521 +99,432 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.2);
-      z-index: 15;
+      z-index: 25;
       display: none;
     }
     .menu-overlay.show {
       display: block;
     }
-    .menu-item {
-      padding: 16px 12px;
-      margin: 6px 0;
-      border-radius: 12px;
-      font-weight: 600;
+    .lang-option {
+      padding: 16px 14px;
+      border-radius: 14px;
+      font-weight: 700;
       font-size: 1.2rem;
       background: #f8fafc;
       border: none;
       text-align: left;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
       color: #0f172a;
-      transition: 0.2s;
     }
-    .menu-item.active {
+    .lang-option.active {
       background: #2563eb;
       color: white;
     }
-
-    /* 句子卡片区 */
+    /* 句子卡片 */
     .sentence-slider {
       flex: 1;
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      padding: 12px 0;
       background: #ffffff;
     }
     .sentence-card {
       flex: 0 0 100%;
       scroll-snap-align: start;
+      padding: 20px 18px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 16px 20px;
-      box-sizing: border-box;
     }
     .sentence-text {
-      font-size: 1.5rem;
-      line-height: 2.2;
+      font-size: 1.7rem;
+      line-height: 2.3;
       font-weight: 500;
       text-align: center;
-      margin: 10px 0 20px;
       word-break: break-word;
-      max-width: 100%;
+      margin: 10px 0;
     }
-    .word {
+    .word-clickable {
       text-decoration: underline;
       text-decoration-color: #3b82f6;
-      text-underline-offset: 4px;
-      color: #0f172a;
+      text-underline-offset: 5px;
       cursor: pointer;
-      transition: 0.15s;
-      padding: 0 2px;
-      border-radius: 4px;
+      color: #0f172a;
+      transition: 0.1s;
     }
-    .word:hover {
+    .word-clickable:hover {
       background: #dbeafe;
+      border-radius: 6px;
+    }
+    /* 底部面板 */
+    .bottom-panel {
+      border-top: 2px solid #e9eef3;
+      padding: 16px 18px 20px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .word-detail {
+      background: #f9fafb;
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .detail-word {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    .detail-pos {
+      background: #e0e7ff;
+      padding: 3px 12px;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      color: #3730a3;
+    }
+    .detail-meaning {
+      font-size: 1.1rem;
+      color: #1e293b;
+      margin: 6px 0;
+    }
+    .example-sentence {
+      font-style: italic;
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      color: #334155;
+    }
+    .word-image {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin: 8px 0;
+      background: #f1f5f9;
     }
     .action-row {
       display: flex;
-      gap: 16px;
-      margin: 12px 0 6px;
       flex-wrap: wrap;
-      justify-content: center;
+      gap: 10px;
+      align-items: center;
     }
     .btn {
       background: white;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #d1d5db;
       border-radius: 30px;
-      padding: 10px 20px;
-      font-size: 0.95rem;
+      padding: 10px 18px;
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       cursor: pointer;
-      background: #f8fafc;
-      transition: 0.2s;
-      color: #1e293b;
-    }
-    .btn:active {
-      background: #e2e8f0;
+      background: #f9fafb;
+      transition: 0.15s;
+      font-size: 0.9rem;
     }
     .btn-primary {
       background: #2563eb;
       border-color: #2563eb;
       color: white;
     }
-    .btn-primary:active {
-      background: #1d4ed8;
+    .record-status {
+      font-size: 0.8rem;
+      color: #b91c1c;
+      margin-left: 6px;
     }
-
-    /* 单词详情弹出卡片 */
-    .word-detail-panel {
-      background: #ffffff;
-      border-top: 2px solid #e0e7ff;
-      padding: 20px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 45%;
-      overflow-y: auto;
-      box-shadow: 0 -6px 18px rgba(0,0,0,0.05);
-      transition: 0.2s;
-    }
-    .detail-word {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #1e40af;
-    }
-    .detail-pos {
-      font-style: italic;
-      background: #f1f5f9;
-      padding: 4px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      width: fit-content;
-      color: #334155;
-    }
-    .detail-meaning {
-      font-size: 1.1rem;
-      color: #0f172a;
-    }
-    .example-box {
-      background: #f9fafb;
-      padding: 12px;
-      border-radius: 12px;
-      font-style: italic;
-      color: #1e293b;
-    }
-    .word-image {
-      width: 100%;
-      max-height: 160px;
-      object-fit: cover;
-      border-radius: 14px;
-      margin-top: 6px;
-      background: #f1f5f9;
-    }
-    .nav-slide-btns {
+    .nav-btns {
       display: flex;
       justify-content: space-between;
-      padding: 8px 16px;
-    }
-    .hidden {
-      display: none;
-    }
-    .recording-status {
-      font-size: 0.9rem;
-      margin-left: 6px;
-      color: #b91c1c;
+      margin-top: 4px;
     }
   </style>
 </head>
 <body>
-<div class="app-wrapper">
-  <!-- 菜单遮罩 -->
+<div class="app-container">
   <div class="menu-overlay" id="menuOverlay"></div>
-  <!-- 侧滑菜单 -->
+  <!-- 侧边菜单 -->
   <div class="side-menu" id="sideMenu">
-    <h3 style="margin-bottom: 20px; font-weight: 600; color: #64748b;">语言选择</h3>
-    <button class="menu-item active" id="menuChinese">🇨🇳 中文 · Chinese</button>
-    <button class="menu-item" id="menuEnglish">🇬🇧 英语 · English</button>
+    <h3 style="margin-bottom: 16px; color:#475569;">三语言 & 分类</h3>
+    <button class="lang-option active" id="chineseOption">🇨🇳 中文 · Chinese</button>
+    <button class="lang-option" id="englishOption">🇬🇧 English · 英语</button>
   </div>
 
-  <!-- 顶部导航 -->
-  <div class="top-bar">
-    <button class="menu-icon" id="menuToggleBtn">☰</button>
-    <span class="page-title" id="pageTitle">中文学习</span>
-    <span class="slide-counter" id="slideCounter">1/200</span>
+  <!-- 头部 -->
+  <div class="header">
+    <button class="menu-btn" id="menuToggle">☰</button>
+    <div class="title-section">
+      <span id="langTitle">中文学习</span>
+      <span class="category-badge" id="categoryDisplay">Adventure</span>
+    </div>
+    <span class="slide-indicator" id="slideCounter">1/200</span>
   </div>
 
-  <!-- 句子滑动区域 -->
+  <!-- 句子滑动区 -->
   <div class="sentence-slider" id="sentenceSlider"></div>
 
-  <!-- 前/后滑动按钮 -->
-  <div class="nav-slide-btns">
-    <button class="btn" id="prevSlideBtn">◀ 上一句</button>
-    <button class="btn" id="nextSlideBtn">下一句 ▶</button>
-  </div>
-
-  <!-- 底部单词详情 + 操作 -->
-  <div class="word-detail-panel" id="wordDetailPanel">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <span class="detail-word" id="detailWord">—</span>
-      <button class="btn" id="closeDetailBtn" style="padding:6px 14px;">✕</button>
-    </div>
-    <span class="detail-pos" id="detailPOS"></span>
-    <div class="detail-meaning" id="detailMeaning"></div>
-    <div class="example-box" id="detailExample"></div>
-    <img class="word-image" id="detailImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Crect width='200' height='120' fill='%23f1f5f9'/%3E%3Ctext x='30' y='68' font-family='sans-serif' font-size='14' fill='%2394a3b8'%3E🖼️ 图像示意%3C/text%3E%3C/svg%3E" alt="word illustration">
-    <div class="action-row">
-      <button class="btn" id="playWordBtn">🔊 播放单词</button>
-      <button class="btn" id="playSentenceBtn">🔊 整句发音</button>
+  <!-- 底部详情+操作 -->
+  <div class="bottom-panel">
+    <div class="word-detail" id="wordDetailCard">
+      <div class="detail-header">
+        <span class="detail-word" id="detailWord">the</span>
+        <span class="detail-pos" id="detailPOS">word</span>
+      </div>
+      <div class="detail-meaning" id="detailMeaning">"the" — an English word used in this sentence.</div>
+      <div class="example-sentence" id="detailExample">例句: "The word 'the' appears in context here."</div>
+      <img class="word-image" id="detailImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23f1f5f9'/%3E%3Ctext x='30' y='60' font-size='16' fill='%2394a3b8'%3E🖼️ 图像%3C/text%3E%3C/svg%3E" alt="illustration">
+      <button class="btn" id="pronounceWordBtn" style="margin-top:6px;">🔊 Pronounce</button>
     </div>
     <div class="action-row">
-      <button class="btn" id="recordBtn">🎤 录音</button>
-      <button class="btn" id="playbackBtn">▶️ 回放</button>
-      <span class="recording-status" id="recordingStatus"></span>
+      <button class="btn btn-primary" id="speakSentenceBtn">🔊 Speak Sentence</button>
+      <button class="btn" id="nextSlideBtn">Next ▶</button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn" id="prevSlideBtn">◀ Prev</button>
+      <div style="display:flex; gap:8px;">
+        <button class="btn" id="recordStartBtn">🎤 Start</button>
+        <button class="btn" id="recordStopBtn">⏹️ Stop</button>
+        <button class="btn" id="playRecordBtn">▶️ Play</button>
+        <span class="record-status" id="recordStatus">Ready.</span>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   (function() {
-    // ---------- 数据准备：中英文各200句 (使用生成模式保证数量) ----------
-    const CHINESE_TEMPLATES = [
-      "我喜欢在公园里散步。", "今天天气真好。", "他学习中文很努力。", "我们一起吃晚饭吧。",
-      "这本书非常有趣。", "明天可能会下雨。", "她唱歌很好听。", "请把门关上。",
-      "咖啡还是茶？", "动物园里有熊猫。"
+    // ---------- 200句中英文生成 ----------
+    const ZH_TEMPLATES = [
+      "充满好奇的旅行者探索了隐藏在森林深处的古老废墟。",
+      "今天天气非常适合户外散步。","他努力学习中文以便交流。","我们一起品尝了美味的晚餐。",
+      "这本书包含了有趣的故事。","明天可能会下一场大雨。","她的歌声像鸟儿一样动听。",
+      "请把窗户关上。","咖啡和茶你更喜欢哪一个？","动物园里有一只可爱的熊猫。"
     ];
-    const ENGLISH_TEMPLATES = [
-      "I enjoy walking in the park.", "The weather is lovely today.", "He studies Chinese very hard.",
-      "Let's have dinner together.", "This book is extremely interesting.", "It might rain tomorrow.",
-      "She sings beautifully.", "Please close the door.", "Coffee or tea?", "There is a panda in the zoo."
+    const EN_TEMPLATES = [
+      "The curious wanderer explored the ancient ruins hidden deep within the forest.",
+      "The weather is perfect for an outdoor walk today.","He studies Chinese diligently to communicate.",
+      "We enjoyed a delicious dinner together.","This book contains fascinating stories.",
+      "It might rain heavily tomorrow.","Her singing is as beautiful as a bird.",
+      "Please close the window.","Which do you prefer, coffee or tea?","There is a cute panda in the zoo."
     ];
 
-    function generateSentences(baseList, count, lang) {
-      let sentences = [];
+    function buildSentences(base, count, lang) {
+      let arr = [];
       for (let i = 0; i < count; i++) {
-        let base = baseList[i % baseList.length];
-        // 简单变化使句子略有不同
+        let baseStr = base[i % base.length];
         if (lang === 'zh') {
-          if (i % 3 === 0) base = base.replace('。','') + '，真美好。';
-          else if (i % 3 === 1) base = '我觉得' + base.charAt(0).toLowerCase() + base.slice(1);
-          sentences.push(base);
+          if (i % 3 === 0) baseStr = '我觉得' + baseStr;
+          else if (i % 3 === 1) baseStr = baseStr.replace('。','') + '，真有趣。';
         } else {
-          if (i % 3 === 0) base = base.replace('.','') + ', truly wonderful.';
-          else if (i % 3 === 1) base = 'I think ' + base.charAt(0).toLowerCase() + base.slice(1);
-          sentences.push(base);
+          if (i % 3 === 0) baseStr = 'I think ' + baseStr.charAt(0).toLowerCase() + baseStr.slice(1);
+          else if (i % 3 === 1) baseStr = baseStr.replace('.','') + ', truly remarkable.';
         }
+        arr.push(baseStr);
       }
-      return sentences;
+      return arr;
     }
 
-    const chineseSentences = generateSentences(CHINESE_TEMPLATES, 200, 'zh');
-    const englishSentences = generateSentences(ENGLISH_TEMPLATES, 200, 'en');
+    const zhSentences = buildSentences(ZH_TEMPLATES, 200, 'zh');
+    const enSentences = buildSentences(EN_TEMPLATES, 200, 'en');
 
-    // 当前状态
-    let currentLang = 'zh'; // 'zh' or 'en'
-    let currentSentenceIndex = 0;
-    let sentencesArray = chineseSentences;
+    let currentLang = 'en'; // 默认英文界面
+    let sentences = enSentences;
+    let currentIndex = 0;
+    let currentWord = { text: 'the', pos: 'word', meaning: '"the" — an English word.', example: 'The word "the" appears in context here.' };
 
-    // UI元素
-    const menuToggle = document.getElementById('menuToggleBtn');
+    // DOM元素
+    const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');
     const menuOverlay = document.getElementById('menuOverlay');
-    const menuChinese = document.getElementById('menuChinese');
-    const menuEnglish = document.getElementById('menuEnglish');
-    const pageTitle = document.getElementById('pageTitle');
+    const chineseOption = document.getElementById('chineseOption');
+    const englishOption = document.getElementById('englishOption');
+    const langTitle = document.getElementById('langTitle');
+    const categoryDisplay = document.getElementById('categoryDisplay');
     const slideCounter = document.getElementById('slideCounter');
     const sentenceSlider = document.getElementById('sentenceSlider');
     const prevBtn = document.getElementById('prevSlideBtn');
     const nextBtn = document.getElementById('nextSlideBtn');
-    const wordDetailPanel = document.getElementById('wordDetailPanel');
     const detailWord = document.getElementById('detailWord');
     const detailPOS = document.getElementById('detailPOS');
     const detailMeaning = document.getElementById('detailMeaning');
     const detailExample = document.getElementById('detailExample');
     const detailImage = document.getElementById('detailImage');
-    const closeDetailBtn = document.getElementById('closeDetailBtn');
-    const playWordBtn = document.getElementById('playWordBtn');
-    const playSentenceBtn = document.getElementById('playSentenceBtn');
-    const recordBtn = document.getElementById('recordBtn');
-    const playbackBtn = document.getElementById('playbackBtn');
-    const recordingStatus = document.getElementById('recordingStatus');
-
-    // 当前选中的单词信息
-    let currentWordInfo = { word: '', pos: '', meaning: '', example: '', imageUrl: '' };
+    const pronounceWordBtn = document.getElementById('pronounceWordBtn');
+    const speakSentenceBtn = document.getElementById('speakSentenceBtn');
+    const recordStartBtn = document.getElementById('recordStartBtn');
+    const recordStopBtn = document.getElementById('recordStopBtn');
+    const playRecordBtn = document.getElementById('playRecordBtn');
+    const recordStatus = document.getElementById('recordStatus');
 
     // 录音相关
     let mediaRecorder = null;
     let audioChunks = [];
-    let recordedAudio = null;
+    let recordedAudioURL = null;
 
-    // ---------- 工具函数 ----------
-    function updateMenuActive() {
-      menuChinese.classList.remove('active');
-      menuEnglish.classList.remove('active');
-      if (currentLang === 'zh') menuChinese.classList.add('active');
-      else menuEnglish.classList.add('active');
-    }
+    function openMenu() { sideMenu.classList.add('open'); menuOverlay.classList.add('show'); }
+    function closeMenu() { sideMenu.classList.remove('open'); menuOverlay.classList.remove('show'); }
 
     function switchLanguage(lang) {
       currentLang = lang;
-      sentencesArray = lang === 'zh' ? chineseSentences : englishSentences;
-      currentSentenceIndex = 0;
-      pageTitle.textContent = lang === 'zh' ? '中文学习' : 'English Learning';
+      sentences = lang === 'zh' ? zhSentences : enSentences;
+      currentIndex = 0;
+      langTitle.textContent = lang === 'zh' ? '中文学习' : 'English Sentences';
+      categoryDisplay.textContent = 'Adventure';
       updateMenuActive();
-      renderAllSlides();
-      updateSlideCounter();
+      renderSlides();
+      updateCounter();
       closeMenu();
-      clearWordDetail();
+      resetWordDetail();
     }
 
-    function closeMenu() {
-      sideMenu.classList.remove('open');
-      menuOverlay.classList.remove('show');
+    function updateMenuActive() {
+      chineseOption.classList.remove('active');
+      englishOption.classList.remove('active');
+      if (currentLang === 'zh') chineseOption.classList.add('active');
+      else englishOption.classList.add('active');
     }
 
-    function openMenu() {
-      sideMenu.classList.add('open');
-      menuOverlay.classList.add('show');
+    function updateCounter() {
+      slideCounter.textContent = `${currentIndex+1}/${sentences.length}`;
     }
 
-    function updateSlideCounter() {
-      slideCounter.textContent = `${currentSentenceIndex+1}/${sentencesArray.length}`;
+    function tokenize(sentence, lang) {
+      if (lang === 'zh') return sentence.split('').filter(c => c.trim() !== '');
+      return sentence.split(/(\s+|(?=[.,!?;:'"()-]))/).filter(t => t.trim() !== '');
     }
 
-    // 解析句子为可点击单词 (简单按空格/标点分割，保留中文连续)
-    function tokenizeSentence(sentence, lang) {
-      if (lang === 'zh') {
-        // 简单按字符拆分，保留中文单字词或词组（这里按字符展示）
-        return sentence.split('').filter(ch => ch.trim() !== '');
-      } else {
-        // 英文按单词和标点分割
-        return sentence.split(/(\s+|(?=[.,!?;:'"()-]))/).filter(t => t.trim() !== '');
-      }
-    }
-
-    function renderSentenceHtml(sentence, lang) {
-      const tokens = tokenizeSentence(sentence, lang);
-      return tokens.map(token => {
-        if (/[a-zA-Z\u4e00-\u9fff]/.test(token)) {
-          return `<span class="word" data-word="${escapeHtml(token)}">${token}</span>`;
-        } else {
-          return token; // 标点等
+    function renderSentenceHTML(sentence, lang) {
+      const tokens = tokenize(sentence, lang);
+      return tokens.map(t => {
+        if (/[a-zA-Z\u4e00-\u9fff]/.test(t)) {
+          return `<span class="word-clickable" data-word="${t}">${t}</span>`;
         }
+        return t;
       }).join('');
     }
 
-    function escapeHtml(text) {
-      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    // 创建滑动卡片
-    function createSlideCard(sentence, index, lang) {
-      const card = document.createElement('div');
-      card.className = 'sentence-card';
-      card.dataset.index = index;
-      const sentenceHtml = renderSentenceHtml(sentence, lang);
-      card.innerHTML = `<div class="sentence-text">${sentenceHtml}</div>`;
-      // 绑定单词点击事件
-      card.querySelectorAll('.word').forEach(wordSpan => {
-        wordSpan.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const word = wordSpan.dataset.word;
-          handleWordClick(word, lang);
-        });
-      });
-      return card;
-    }
-
-    function renderAllSlides() {
+    function renderSlides() {
       sentenceSlider.innerHTML = '';
-      sentencesArray.forEach((sentence, idx) => {
-        sentenceSlider.appendChild(createSlideCard(sentence, idx, currentLang));
+      sentences.forEach((s, idx) => {
+        const card = document.createElement('div');
+        card.className = 'sentence-card';
+        card.dataset.index = idx;
+        card.innerHTML = `<div class="sentence-text">${renderSentenceHTML(s, currentLang)}</div>`;
+        card.querySelectorAll('.word-clickable').forEach(span => {
+          span.addEventListener('click', (e) => {
+            const word = span.dataset.word;
+            showWordDetail(word);
+          });
+        });
+        sentenceSlider.appendChild(card);
       });
-      // 滚动到当前索引
-      scrollToIndex(currentSentenceIndex);
+      scrollToIndex(currentIndex);
     }
 
-    function scrollToIndex(index) {
+    function scrollToIndex(idx) {
       const cards = document.querySelectorAll('.sentence-card');
-      if (cards[index]) {
-        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-      }
+      if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function goToSlide(index) {
-      if (index < 0) index = 0;
-      if (index >= sentencesArray.length) index = sentencesArray.length - 1;
-      if (currentSentenceIndex !== index) {
-        currentSentenceIndex = index;
-        scrollToIndex(currentSentenceIndex);
-        updateSlideCounter();
-        clearWordDetail();
-      }
-    }
-
-    // 监听滑动结束更新索引
     sentenceSlider.addEventListener('scroll', () => {
       const cards = document.querySelectorAll('.sentence-card');
-      if (cards.length === 0) return;
-      let closestIndex = 0;
-      let minDistance = Infinity;
+      if (!cards.length) return;
+      let closest = 0, minDist = Infinity;
       const containerLeft = sentenceSlider.getBoundingClientRect().left;
-      cards.forEach((card, idx) => {
-        const rect = card.getBoundingClientRect();
-        const distance = Math.abs(rect.left - containerLeft);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIndex = idx;
-        }
+      cards.forEach((card, i) => {
+        const dist = Math.abs(card.getBoundingClientRect().left - containerLeft);
+        if (dist < minDist) { minDist = dist; closest = i; }
       });
-      if (currentSentenceIndex !== closestIndex) {
-        currentSentenceIndex = closestIndex;
-        updateSlideCounter();
-        clearWordDetail();
+      if (currentIndex !== closest) {
+        currentIndex = closest;
+        updateCounter();
       }
     });
 
-    // ---------- 单词词典模拟 (中英) ----------
-    function getWordDetails(word, lang) {
-      const lowerWord = word.toLowerCase().trim();
+    function goToSlide(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= sentences.length) idx = sentences.length - 1;
+      currentIndex = idx;
+      scrollToIndex(currentIndex);
+      updateCounter();
+    }
+
+    // 单词词典 (中英独立，翻译保持同语言)
+    function getWordInfo(word, lang) {
+      const w = word.toLowerCase();
       if (lang === 'zh') {
-        const dict = {
-          '我': { pos: '代词', meaning: 'I / me', example: '我是学生。', img: '👤' },
-          '喜欢': { pos: '动词', meaning: 'to like', example: '我喜欢音乐。', img: '❤️' },
-          '公园': { pos: '名词', meaning: 'park', example: '公园里有花。', img: '🌳' },
-          '散步': { pos: '动词', meaning: 'take a walk', example: '晚饭后散步。', img: '🚶' },
-          '今天': { pos: '名词', meaning: 'today', example: '今天星期一。', img: '📅' },
-          '天气': { pos: '名词', meaning: 'weather', example: '天气晴朗。', img: '☀️' },
-          '他': { pos: '代词', meaning: 'he/him', example: '他是老师。', img: '👨' },
-          '学习': { pos: '动词', meaning: 'to study', example: '学习中文。', img: '📚' },
-          '书': { pos: '名词', meaning: 'book', example: '一本书。', img: '📖' },
-          '熊猫': { pos: '名词', meaning: 'panda', example: '熊猫可爱。', img: '🐼' },
+        const map = {
+          '旅行者': { pos:'名词', meaning:'旅行的人', example:'那位旅行者背着大包。', img:'🎒' },
+          '探索': { pos:'动词', meaning:'探寻未知', example:'探索森林很有趣。', img:'🔍' },
+          '废墟': { pos:'名词', meaning:'遗迹', example:'古老废墟充满神秘。', img:'🏚️' },
+          '熊猫': { pos:'名词', meaning:'国宝动物', example:'熊猫喜欢吃竹子。', img:'🐼' },
+          '天气': { pos:'名词', meaning:'气象', example:'今天天气晴朗。', img:'☀️' },
         };
-        return dict[word] || { pos: '词汇', meaning: word, example: `使用“${word}”造句。`, img: '📝' };
+        return map[word] || { pos:'词汇', meaning:word, example:`使用“${word}”造句。`, img:'📝' };
       } else {
-        const dict = {
-          'i': { pos: 'pronoun', meaning: '我', example: 'I am happy.', img: '👤' },
-          'enjoy': { pos: 'verb', meaning: '享受', example: 'I enjoy music.', img: '🎵' },
-          'walking': { pos: 'verb', meaning: '散步', example: 'Walking is healthy.', img: '🚶' },
-          'park': { pos: 'noun', meaning: '公园', example: 'Central Park.', img: '🌳' },
-          'weather': { pos: 'noun', meaning: '天气', example: 'Nice weather.', img: '☀️' },
-          'lovely': { pos: 'adjective', meaning: '可爱的', example: 'lovely day.', img: '😊' },
-          'studies': { pos: 'verb', meaning: '学习', example: 'He studies hard.', img: '📚' },
-          'chinese': { pos: 'adjective', meaning: '中文', example: 'Chinese food.', img: '🥢' },
-          'panda': { pos: 'noun', meaning: '熊猫', example: 'panda bear.', img: '🐼' },
-          'book': { pos: 'noun', meaning: '书', example: 'read a book.', img: '📖' },
+        const map = {
+          'the': { pos:'article', meaning:'used before nouns', example:'The sun is bright.', img:'🌞' },
+          'curious': { pos:'adjective', meaning:'eager to know', example:'A curious child asks many questions.', img:'❓' },
+          'wanderer': { pos:'noun', meaning:'traveler', example:'The wanderer crossed the desert.', img:'🧭' },
+          'explored': { pos:'verb', meaning:'travel through', example:'She explored the cave.', img:'🗺️' },
+          'ancient': { pos:'adjective', meaning:'very old', example:'ancient history', img:'🏛️' },
+          'ruins': { pos:'noun', meaning:'remains', example:'old ruins', img:'🏚️' },
+          'forest': { pos:'noun', meaning:'woods', example:'deep forest', img:'🌲' },
         };
-        return dict[lowerWord] || { pos: 'word', meaning: word, example: `Example with "${word}".`, img: '📝' };
+        return map[w] || { pos:'word', meaning:word, example:`Example with "${word}".`, img:'📘' };
       }
     }
 
-    function generateImageUrl(word, imgEmoji) {
-      // 使用emoji或占位图，模拟清晰图片
-      return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='140' viewBox='0 0 200 140'%3E%3Crect width='200' height='140' fill='%23f0f4ff'/%3E%3Ctext x='30' y='85' font-size='60'%3E${encodeURIComponent(imgEmoji || '📷')}%3C/text%3E%3Ctext x='30' y='120' font-size='16' fill='%23333'%3E${encodeURIComponent(word)}%3C/text%3E%3C/svg%3E`;
-    }
-
-    function handleWordClick(word, lang) {
-      const details = getWordDetails(word, lang);
-      currentWordInfo = {
-        word: word,
-        pos: details.pos,
-        meaning: details.meaning,
-        example: details.example,
-        imageUrl: generateImageUrl(word, details.img)
-      };
-      displayWordDetail(currentWordInfo);
-    }
-
-    function displayWordDetail(info) {
-      detailWord.textContent = info.word;
+    function showWordDetail(word) {
+      const info = getWordInfo(word, currentLang);
+      currentWord = { text: word, pos: info.pos, meaning: info.meaning, example: info.example };
+      detailWord.textContent = word;
       detailPOS.textContent = info.pos;
-      detailMeaning.textContent = info.meaning;
-      detailExample.textContent = `📎 ${info.example}`;
-      detailImage.src = info.imageUrl;
-      wordDetailPanel.classList.remove('hidden');
+      detailMeaning.textContent = `"${word}" — ${info.meaning}`;
+      detailExample.textContent = `例句: "${info.example}"`;
+      detailImage.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23f0f4ff'/%3E%3Ctext x='30' y='65' font-size='50'%3E${encodeURIComponent(info.img)}%3C/text%3E%3C/svg%3E`;
     }
 
-    function clearWordDetail() {
-      currentWordInfo = { word: '', pos: '', meaning: '', example: '', imageUrl: '' };
-      detailWord.textContent = '—';
-      detailPOS.textContent = '';
-      detailMeaning.textContent = '';
-      detailExample.textContent = '';
-      detailImage.src = generateImageUrl('?', '🖼️');
-      // 不隐藏面板，保留框架
-    }
-
-    // 语音合成 (TTS)
-    function speakText(text, lang) {
-      if (!window.speechSynthesis) {
-        alert('浏览器不支持语音合成');
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function playCurrentWord() {
-      if (currentWordInfo.word) {
-        speakText(currentWordInfo.word, currentLang);
+    function resetWordDetail() {
+      if (currentLang === 'en') {
+        showWordDetail('the');
       } else {
-        alert('请先点击一个单词');
+        showWordDetail('旅行者');
       }
     }
 
-    function playCurrentSentence() {
-      if (sentencesArray[currentSentenceIndex]) {
-        speakText(sentencesArray[currentSentenceIndex], currentLang);
-      }
+    function speakText(text, lang) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
     }
 
-    // 录音功能
-    async function startRecording() {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        alert('录音功能需要HTTPS或本地环境');
-        return;
-      }
+    // 事件绑定
+    menuToggle.addEventListener('click', openMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    chineseOption.addEventListener('click', () => switchLanguage('zh'));
+    englishOption.addEventListener('click', () => switchLanguage('en'));
+
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+    speakSentenceBtn.addEventListener('click', () => {
+      if (sentences[currentIndex]) speakText(sentences[currentIndex], currentLang);
+    });
+    pronounceWordBtn.addEventListener('click', () => {
+      if (currentWord.text) speakText(currentWord.text, currentLang);
+    });
+
+    // 录音控制
+    recordStartBtn.addEventListener('click', async () => {
+      if (!navigator.mediaDevices) return;
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
@@ -619,68 +532,33 @@
         mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
         mediaRecorder.onstop = () => {
           const blob = new Blob(audioChunks, { type: 'audio/webm' });
-          recordedAudio = URL.createObjectURL(blob);
-          recordingStatus.textContent = '✅ 录音完成';
+          recordedAudioURL = URL.createObjectURL(blob);
+          recordStatus.textContent = 'Recording saved.';
         };
         mediaRecorder.start();
-        recordingStatus.textContent = '🔴 录音中...';
-        recordBtn.disabled = true;
-        setTimeout(() => { if (mediaRecorder && mediaRecorder.state === 'recording') stopRecording(); }, 8000); // 最长8秒
-      } catch (err) {
-        alert('麦克风权限未授权');
+        recordStatus.textContent = '🔴 Recording...';
+      } catch (e) {
+        recordStatus.textContent = 'Mic access denied.';
       }
-    }
-
-    function stopRecording() {
+    });
+    recordStopBtn.addEventListener('click', () => {
       if (mediaRecorder && mediaRecorder.state === 'recording') {
         mediaRecorder.stop();
-        mediaRecorder.stream.getTracks().forEach(track => track.stop());
-        recordBtn.disabled = false;
-      }
-    }
-
-    function playRecording() {
-      if (recordedAudio) {
-        const audio = new Audio(recordedAudio);
-        audio.play();
-      } else {
-        alert('没有可回放的录音');
-      }
-    }
-
-    // 事件绑定
-    menuToggle.addEventListener('click', openMenu);
-    menuOverlay.addEventListener('click', closeMenu);
-    menuChinese.addEventListener('click', () => switchLanguage('zh'));
-    menuEnglish.addEventListener('click', () => switchLanguage('en'));
-
-    prevBtn.addEventListener('click', () => goToSlide(currentSentenceIndex - 1));
-    nextBtn.addEventListener('click', () => goToSlide(currentSentenceIndex + 1));
-
-    closeDetailBtn.addEventListener('click', () => {
-      wordDetailPanel.classList.add('hidden');
-    });
-
-    playWordBtn.addEventListener('click', playCurrentWord);
-    playSentenceBtn.addEventListener('click', playCurrentSentence);
-
-    recordBtn.addEventListener('click', () => {
-      if (mediaRecorder && mediaRecorder.state === 'recording') {
-        stopRecording();
-      } else {
-        startRecording();
+        mediaRecorder.stream.getTracks().forEach(t => t.stop());
+        recordStatus.textContent = 'Stopped.';
       }
     });
-    playbackBtn.addEventListener('click', playRecording);
+    playRecordBtn.addEventListener('click', () => {
+      if (recordedAudioURL) {
+        new Audio(recordedAudioURL).play();
+      } else {
+        recordStatus.textContent = 'No recording.';
+      }
+    });
 
-    // 初始化
+    // 初始化英文界面
+    switchLanguage('en');
     updateMenuActive();
-    renderAllSlides();
-    updateSlideCounter();
-    wordDetailPanel.classList.remove('hidden'); // 显示面板
-    clearWordDetail();
-
-    // 触摸滑动优化
   })();
 </script>
 </body>
