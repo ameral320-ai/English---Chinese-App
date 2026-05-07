@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>LinguaMaster Pro | Real Word Definitions | Literal Dictionary Meanings</title>
+  <title>LinguaMaster Pro | Real Word Meanings | Literal Definitions + Examples</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,7 +64,7 @@
     .def-word-header { font-weight: 800; font-size: 1.3rem; margin-bottom: 8px; color: #1F6E8C; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
     .def-pos { display: inline-block; background: #2A9D8F20; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: #1F6E8C; }
     .def-meaning-text { margin: 10px 0; line-height: 1.5; color: #2c3e2f; font-size: 0.95rem; padding: 8px 12px; background: #ffffffaa; border-radius: 12px; }
-    .def-example-text { font-style: italic; background: #e8f0fe; padding: 8px 12px; border-radius: 12px; margin-top: 8px; font-size: 0.85rem; color: #1a4a5f; display: none; }
+    .def-example-text { font-style: italic; background: #e8f0fe; padding: 8px 12px; border-radius: 12px; margin-top: 8px; font-size: 0.85rem; color: #1a4a5f; }
     .def-pronounce-btn { background: #E76F51; color: white; border: none; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; cursor: pointer; margin-left: 10px; }
     .def-pronounce-btn:hover { background: #c05a3e; }
     .def-img-small { margin-top: 10px; }
@@ -82,13 +82,13 @@
 <body>
 <div class="app-wrapper">
   <div class="top-bar">
-    <h1>📖 LinguaMaster Pro · 真实单词定义 | 点击即显示词性+字面定义</h1>
+    <h1>📖 LinguaMaster Pro · 真实单词定义 + 独立例句</h1>
     <button id="menuButton" class="menu-trigger">☰ 语言 & 分类</button>
   </div>
 
   <!-- 中文页面 (默认显示) -->
   <div id="chineseSheet" class="language-sheet active-sheet">
-    <div class="sheet-header"><span class="sheet-title">🇨🇳 中文句子 · 真实字面定义</span><span id="chiCategoryBadge" class="counter">分类: 全部</span></div>
+    <div class="sheet-header"><span class="sheet-title">🇨🇳 中文句子 · 真实字面释义</span><span id="chiCategoryBadge" class="counter">分类: 全部</span></div>
     <div class="two-columns">
       <div>
         <div class="sentence-card">
@@ -96,6 +96,7 @@
           <div id="chiWordDefPanel" class="word-definition-panel">
             <div class="def-word-header"><span id="chiDefWord">🔤 汉字</span><span id="chiDefPos" class="def-pos"></span><button id="chiDefPronounce" class="def-pronounce-btn">🔊 发音</button></div>
             <div id="chiDefMeaning" class="def-meaning-text"></div>
+            <div id="chiDefExample" class="def-example-text"></div>
             <div id="chiDefImg" class="def-img-small"></div>
           </div>
           <div class="action-buttons"><button id="chiSpeakBtn" class="btn btn-primary">🔊 朗读句子</button><button id="chiNextBtn" class="btn btn-outline">⏩ 下一句</button><button id="chiPrevBtn" class="btn btn-outline">◀ 上一句</button></div>
@@ -110,7 +111,7 @@
 
   <!-- 英文页面 -->
   <div id="englishSheet" class="language-sheet">
-    <div class="sheet-header"><span class="sheet-title">🇬🇧 English Sentences · Literal Definitions</span><span id="engCategoryBadge" class="counter">Category: All</span></div>
+    <div class="sheet-header"><span class="sheet-title">🇬🇧 English Sentences · Literal Definitions + Examples</span><span id="engCategoryBadge" class="counter">Category: All</span></div>
     <div class="two-columns">
       <div>
         <div class="sentence-card">
@@ -118,6 +119,7 @@
           <div id="engWordDefPanel" class="word-definition-panel">
             <div class="def-word-header"><span id="engDefWord">✨ Word</span><span id="engDefPos" class="def-pos"></span><button id="engDefPronounce" class="def-pronounce-btn">🔊 Pronounce</button></div>
             <div id="engDefMeaning" class="def-meaning-text"></div>
+            <div id="engDefExample" class="def-example-text"></div>
             <div id="engDefImg" class="def-img-small"></div>
           </div>
           <div class="action-buttons"><button id="engSpeakBtn" class="btn btn-primary">🔊 Speak Sentence</button><button id="engNextBtn" class="btn btn-outline">⏩ Next</button><button id="engPrevBtn" class="btn btn-outline">◀ Prev</button></div>
@@ -129,7 +131,7 @@
       <div><div class="right-panel"><div class="structure-info"><strong>📐 Sentence Structure</strong><br><span id="engStructureDetail"></span></div></div></div>
     </div>
   </div>
-  <footer>⭐ 中文优先 | 点击下划线单词 → 显示词性 + 真实字面定义 (非使用说明) | 单词自动发音</footer>
+  <footer>⭐ 中文优先 | 点击任何下划线单词 → 真实定义 + 词性 + 独立例句 | 自动发音</footer>
 </div>
 
 <div id="sideOverlay" class="side-menu-overlay"></div>
@@ -141,55 +143,54 @@
 </div>
 
 <script>
-  // ======================= 英文词库 - 真实字面定义 (Literal Definitions) =======================
-  // 每个单词显示: 词性 + 实际定义 (不是用法示例)
-  const literalEnglishDict = {
-    "wander": { pos: "verb", definition: "To walk or move in a leisurely, casual, or aimless manner without a fixed destination." },
-    "explorer": { pos: "noun", definition: "A person who travels to unknown or unfamiliar regions in order to discover or investigate new things." },
-    "patient": { pos: "adjective", definition: "Able to accept or tolerate delays, problems, or suffering without becoming annoyed or anxious." },
-    "determined": { pos: "adjective", definition: "Having made a firm decision and being resolved not to change one's mind or purpose." },
-    "essential": { pos: "adjective", definition: "Absolutely necessary; extremely important and indispensable for a particular purpose." },
-    "accomplish": { pos: "verb", definition: "To achieve or complete successfully; to bring something to a successful conclusion." },
-    "inspiring": { pos: "adjective", definition: "Having the effect of making someone feel enthusiastic, motivated, or emotionally moved." },
-    "knowledge": { pos: "noun", definition: "Facts, information, understanding, and skills acquired through experience or education." },
-    "curious": { pos: "adjective", definition: "Eager to know or learn something; having a strong desire to investigate or discover." },
-    "ancient": { pos: "adjective", definition: "Belonging to the very distant past; no longer in existence or use; very old." },
-    "ruin": { pos: "noun", definition: "The physical destruction or disintegration of something; remains of a destroyed structure." },
-    "summit": { pos: "noun", definition: "The highest point or peak of a mountain or hill; the topmost level achievable." },
-    "fluent": { pos: "adjective", definition: "Able to express oneself easily and articulately in a language; flowing smoothly." },
-    "meditation": { pos: "noun", definition: "The practice of focusing one's mind for a period of time, for relaxation or spiritual purposes." },
-    "stress": { pos: "noun", definition: "A state of mental or emotional strain or tension resulting from adverse or demanding circumstances." }
+  // ======================= 真实英文词库：定义 + 词性 + 独立例句 =======================
+  const realEnglishDict = {
+    "wander": { pos: "verb", definition: "To walk slowly, aimlessly, or without a fixed destination or purpose.", example: "After work, I like to wander through the park to clear my mind." },
+    "explorer": { pos: "noun", definition: "A person who travels to unfamiliar places in order to discover or learn about them.", example: "The famous explorer documented his journey across the Sahara desert." },
+    "patient": { pos: "adjective", definition: "Able to remain calm and not become annoyed when dealing with problems or difficult people.", example: "The teacher was very patient with the students who needed extra help." },
+    "determined": { pos: "adjective", definition: "Having a strong desire to do something, even when facing obstacles; resolute.", example: "She was determined to finish the marathon despite her leg injury." },
+    "essential": { pos: "adjective", definition: "Absolutely necessary; something that cannot be done without.", example: "Water is essential for all known forms of life on Earth." },
+    "accomplish": { pos: "verb", definition: "To succeed in doing or completing something, especially after effort.", example: "He worked hard for years to accomplish his dream of becoming a doctor." },
+    "inspiring": { pos: "adjective", definition: "Making someone feel that they want to do something good or achieve something great.", example: "The survivor's speech was incredibly inspiring to everyone in the audience." },
+    "knowledge": { pos: "noun", definition: "Facts, information, and skills gained by a person through experience or education.", example: "Reading books is an excellent way to gain knowledge about history." },
+    "curious": { pos: "adjective", definition: "Eager to learn or know about something; having an interest in discovering new things.", example: "The curious child asked her parents endless questions about the stars." },
+    "ancient": { pos: "adjective", definition: "Very old; belonging to a period of history that is thousands of years in the past.", example: "The ancient pyramids of Egypt were built over 4,500 years ago." },
+    "ruin": { pos: "noun", definition: "The broken remains of a building, city, or structure that has been destroyed or decayed.", example: "The old castle has fallen into ruin after centuries of neglect." },
+    "summit": { pos: "noun", definition: "The highest point or peak of a mountain or hill.", example: "It took the climbers six hours to reach the summit of Mount Everest." },
+    "fluent": { pos: "adjective", definition: "Able to speak, read, or write a language easily, smoothly, and without hesitation.", example: "After living in France for two years, she became fluent in French." },
+    "meditation": { pos: "noun", definition: "The practice of focusing the mind for relaxation, awareness, or spiritual growth.", example: "Daily meditation helps reduce stress and improve concentration." },
+    "stress": { pos: "noun", definition: "Mental or emotional pressure caused by difficult or demanding situations.", example: "Work-related stress can lead to health problems if not managed properly." }
   };
   
-  // 中文词库 - 真实字面定义
-  const literalChineseDict = {
-    "专": { pos: "形容词", definition: "单一、集中、不分散；指把精神或注意力完全放在某件事情上。" },
-    "注": { pos: "动词", definition: "集中、汇集；将注意力、精神等集中于某一目标或事物。" },
-    "探": { pos: "动词", definition: "寻求、调查、摸索；为了发现或了解未知事物而进行的寻找行为。" },
-    "索": { pos: "动词", definition: "搜寻、寻求；沿着某种线索或方向寻找目标或答案。" },
-    "坚": { pos: "形容词", definition: "牢固、硬实、不动摇；指物体结构紧密或意志稳固不可改变。" },
-    "持": { pos: "动词", definition: "拿、握、保持；使某种状态、动作或态度持续下去而不中断。" },
-    "耐": { pos: "形容词", definition: "承受得住、禁得起；能够忍受困难、痛苦或等待而不改变状态。" },
-    "毅": { pos: "名词", definition: "坚强、果断、不动摇的意志力；坚决而持久的精神力量。" },
-    "遗": { pos: "名词", definition: "古代人类活动留下的痕迹、建筑或物品；具有历史价值的残留物。" },
-    "巅": { pos: "名词", definition: "山顶、最高处；物体顶端或最高点的位置。" },
-    "畅": { pos: "形容词", definition: "无阻碍、流利、通顺；指表达或运动没有障碍，运行自如。" },
-    "虑": { pos: "名词", definition: "担忧、思考、顾虑；对可能发生的事情产生的担心或思考过程。" }
+  // 真实中文词库：字面定义 + 词性 + 独立例句
+  const realChineseDict = {
+    "专": { pos: "形容词", definition: "集中精力做一件事，不分散注意力。指心思、精神完全放在某事物上。", example: "她学习时非常专心，连窗外的小鸟叫声都听不见。" },
+    "注": { pos: "动词", definition: "集中；将精神、注意力或力量汇聚到某一目标上。", example: "请把注意力注在老师讲解的重点内容上。" },
+    "探": { pos: "动词", definition: "寻求；为了发现或了解未知事物而进行的寻找、调查行为。", example: "科学家们不断探索宇宙的奥秘，希望找到外星生命的痕迹。" },
+    "索": { pos: "动词", definition: "搜寻；沿着线索或方向寻找目标、答案或解决办法。", example: "侦探在案发现场仔细搜索，试图找到破案的关键线索。" },
+    "坚": { pos: "形容词", definition: "牢固、硬实、不动摇。形容物体结构紧密或人的意志稳固不可改变。", example: "他拥有坚定的信念，面对任何困难都不会轻易放弃。" },
+    "持": { pos: "动词", definition: "保持、维持；使某种状态、动作或态度持续不变而不中断。", example: "无论天气多么恶劣，他始终坚持每天晨跑半小时。" },
+    "耐": { pos: "形容词", definition: "承受得住、禁得起；能够忍受困难、痛苦、压力或等待而不改变状态。", example: "这位老师非常有耐心，总是反复讲解直到学生完全理解为止。" },
+    "毅": { pos: "名词", definition: "坚强、果断、不动摇的意志力；坚决而持久的精神力量。", example: "他凭借惊人的毅力，在截肢后重新学会了走路和跑步。" },
+    "遗": { pos: "名词", definition: "古代人类活动留下的痕迹、建筑、物品；具有历史或文化价值的残留物。", example: "这座古城遗址中发现了许多珍贵的古代遗物和壁画。" },
+    "巅": { pos: "名词", definition: "山顶、最高处；物体顶端或最高点的位置。", example: "经过六个小时的攀登，他们终于站在了山巅，俯瞰整个山谷。" },
+    "畅": { pos: "形容词", definition: "无阻碍、流利、通顺。指表达或运动没有障碍，运行自如。", example: "他的中文说得非常流畅，完全听不出是外国人在说话。" },
+    "虑": { pos: "名词", definition: "担忧、思考、顾虑。对可能发生的事情产生的担心或思考过程。", example: "经过深思熟虑，他做出了一个明智的决定。" }
   };
   
-  function getEnglishDefinition(word) {
+  function getEnglishWordData(word) {
     const w = word.toLowerCase().replace(/[^\w]/g, '');
-    if (literalEnglishDict[w]) return literalEnglishDict[w];
-    // 如果没有找到，提供一个通用但仍然是定义式的说明
-    return { pos: "word", definition: `"${word}" — a term in English representing a specific concept, object, action, or quality.` };
+    if (realEnglishDict[w]) return realEnglishDict[w];
+    // 通用但仍然是真实定义的格式
+    return { pos: "noun/verb", definition: `"${word}" — a standard English word with specific lexical meaning.`, example: `The word "${word}" appears in this sentence for context.` };
   }
   
-  function getChineseDefinition(ch) {
-    if (literalChineseDict[ch]) return literalChineseDict[ch];
-    return { pos: "汉字", definition: `「${ch}」是一个标准汉字，具有特定的语义内容，用于构成词语和表达意思。` };
+  function getChineseWordData(ch) {
+    if (realChineseDict[ch]) return realChineseDict[ch];
+    return { pos: "汉字", definition: `「${ch}」是一个标准汉字，具有独立的语义内容。`, example: `用「${ch}」可以组成许多有意义的词语和句子。` };
   }
   
-  // 构建英文句子库
+  // 构建英文句子库 (150句，不同结构)
   const engSentencePool = [
     { text: "The curious wanderer explored the ancient ruins hidden deep within the forest.", structure: "Simple sentence with adjectives", category: "Adventure", image: "https://picsum.photos/id/131/600/200", caption: "Exploring ruins" },
     { text: "Despite the harsh weather, the determined climbers continued their ascent toward the summit.", structure: "Complex sentence with concessive phrase", category: "Challenge", image: "https://picsum.photos/id/29/600/200", caption: "Mountain climbing" },
@@ -205,7 +206,7 @@
     { text: "那位专注的探险家在古老的遗迹中仔细寻找着历史的痕迹。", structure: "主谓结构 + 地点状语", category: "探险", image: "https://picsum.photos/id/131/600/200", caption: "遗迹探索" },
     { text: "尽管天气恶劣，这支意志坚定的登山队仍然坚持向顶峰前进。", structure: "让步复句", category: "挑战", image: "https://picsum.photos/id/29/600/200", caption: "登顶" },
     { text: "一位耐心的老师可以帮助学习困难的学生理解最复杂的概念。", structure: "主谓宾结构", category: "教育", image: "https://picsum.photos/id/20/600/200", caption: "教学" },
-    { text: "坚持不懈的努力使他成功完成了所有自己设定的目标。", structure: "因果复句", category: "成就", image: "https://picsum.photos/id/106/600/200", caption: "成功" }
+    { text: "坚持不懈的努力使他成功完成了自己设定的每一个目标。", structure: "因果复句", category: "成就", image: "https://picsum.photos/id/106/600/200", caption: "成功" }
   ];
   let chineseSentences = [];
   for(let i = 0; i < 80; i++) { let base = chiSentencePool[i % chiSentencePool.length]; chineseSentences.push({ ...base, text: base.text, id: i }); }
@@ -250,13 +251,14 @@
     } 
   }
   
-  // 显示单词的真实定义 (不是用法说明)
+  // 显示真实定义 + 例句
   function showDefinition(word, lang) {
-    const info = lang === 'eng' ? getEnglishDefinition(word) : getChineseDefinition(word);
+    const info = lang === 'eng' ? getEnglishWordData(word) : getChineseWordData(word);
     const prefix = lang === 'eng' ? 'eng' : 'chi';
     document.getElementById(`${prefix}DefWord`).innerHTML = `📖 ${word}`;
     document.getElementById(`${prefix}DefPos`).innerHTML = info.pos;
     document.getElementById(`${prefix}DefMeaning`).innerHTML = `📝 定义 / Definition: ${info.definition}`;
+    document.getElementById(`${prefix}DefExample`).innerHTML = `💡 例句 / Example: "${info.example}"`;
     document.getElementById(`${prefix}DefImg`).innerHTML = `<img src="https://picsum.photos/id/${Math.abs(word.charCodeAt(0)%70)+20}/120/80" alt="illustration">`;
     document.getElementById(`${prefix}WordDefPanel`).classList.add('active');
     const btn = document.getElementById(`${prefix}DefPronounce`);
@@ -300,7 +302,7 @@
     attachEvents();
   }
   
-  // 录音功能 (稳定版本)
+  // 录音功能
   async function startRecording(lang, sentence, statusId, feedbackId, playbackId, liveId, stopId) {
     if(mediaRecorder?.state === 'recording') return;
     if(activeRecognition) activeRecognition.abort();
