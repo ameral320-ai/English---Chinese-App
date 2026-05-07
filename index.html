@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>LinguaMaster Pro | Specific Word Descriptions | Accurate Definitions</title>
+  <title>LinguaMaster Pro | Word Pronunciation | Type + Definition + Example + Audio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -255,7 +255,7 @@
       font-size: 0.85rem;
       color: #1a4a5f;
     }
-    .def-pronounce-btn {
+    .def-pronounce-btn, .def-pronounce-word {
       background: #E76F51;
       color: white;
       border: none;
@@ -265,7 +265,7 @@
       cursor: pointer;
       margin-left: 10px;
     }
-    .def-pronounce-btn:hover { background: #c05a3e; }
+    .def-pronounce-btn:hover, .def-pronounce-word:hover { background: #c05a3e; }
     .def-img-small { margin-top: 10px; }
     .def-img-small img { max-width: 100%; border-radius: 0.8rem; max-height: 80px; object-fit: cover; }
     .structure-info {
@@ -287,7 +287,7 @@
 <body>
 <div class="app-wrapper">
   <div class="top-bar">
-    <h1>📖 LinguaMaster Pro · 精准单词释义 | 词性+定义+例句</h1>
+    <h1>📖 LinguaMaster Pro · 单词发音 | 词性+定义+例句+音频</h1>
     <button id="menuButton" class="menu-trigger">☰ 语言 & 分类</button>
   </div>
 
@@ -302,7 +302,7 @@
             <div class="def-word-header">
               <span id="engDefWord">✨ Word</span>
               <span id="engDefPos" class="def-pos"></span>
-              <button id="engDefPronounce" class="def-pronounce-btn">🔊 Pronounce Word</button>
+              <button id="engDefPronounceBtn" class="def-pronounce-btn">🔊 Pronounce Word</button>
             </div>
             <div id="engDefMeaning" class="def-meaning-text"></div>
             <div id="engDefExample" class="def-example-text"></div>
@@ -346,7 +346,7 @@
             <div class="def-word-header">
               <span id="chiDefWord">🔤 汉字</span>
               <span id="chiDefPos" class="def-pos"></span>
-              <button id="chiDefPronounce" class="def-pronounce-btn">🔊 发音</button>
+              <button id="chiDefPronounceBtn" class="def-pronounce-btn">🔊 发音</button>
             </div>
             <div id="chiDefMeaning" class="def-meaning-text"></div>
             <div id="chiDefExample" class="def-example-text"></div>
@@ -378,7 +378,7 @@
       <div><div class="right-panel"><div class="structure-info"><strong>📐 句子结构解析</strong><br><span id="chiStructureDetail">语法分析将显示于此</span></div></div></div>
     </div>
   </div>
-  <footer>⭐ 点击任意单词 → 显示精准【词性 + 完整定义 + 实用例句】| 录音后可播放回放并比对准确度</footer>
+  <footer>⭐ 点击任意带下划线的单词 → 显示【词性 + 定义 + 例句 + 发音按钮】| 录音后可播放回放</footer>
 </div>
 
 <div id="sideOverlay" class="side-menu-overlay"></div>
@@ -391,48 +391,37 @@
 </div>
 
 <script>
-  // ======================= 精准英文词库 - 每个单词都有具体、准确的描述 =======================
+  // ======================= 精准英文词库 (词性 + 定义 + 例句) =======================
   const englishWordDetails = {
-    "dedicated": { pos: "Adjective (形容词)", definition: "Working hard for a particular purpose; showing strong commitment and devotion to a task, cause, or person.", example: "The dedicated nurse worked through the night to care for her patients during the emergency." },
-    "student": { pos: "Noun (名词)", definition: "A person who is studying at a school, college, or university; someone who learns about a particular subject.", example: "Every dedicated student develops effective study habits to succeed academically." },
-    "reviewed": { pos: "Verb - Past Tense (动词过去式)", definition: "Examined, studied, or looked at something again carefully, especially to prepare for an examination or refresh memory.", example: "Before the final exam, she reviewed all her notes and highlighted key concepts." },
+    "dedicated": { pos: "Adjective (形容词)", definition: "Working hard for a particular purpose; showing strong commitment and devotion to a task, cause, or person.", example: "The dedicated teacher stayed after school every day to help her struggling students." },
+    "student": { pos: "Noun (名词)", definition: "A person who is studying at a school, college, or university; someone who learns about a particular subject.", example: "Every successful student develops effective study habits to succeed academically." },
+    "reviewed": { pos: "Verb - Past Tense (动词过去式)", definition: "Examined, studied, or looked at something again carefully, especially to prepare for an examination.", example: "Before the final exam, she reviewed all her notes and highlighted key concepts." },
     "material": { pos: "Noun (名词)", definition: "The information, content, documents, or resources used for learning, reference, or completing a task.", example: "The professor provided supplementary reading material to help students understand complex theories." },
     "raining": { pos: "Verb - Present Participle (动词现在分词)", definition: "Water falling from clouds in drops; precipitation occurring from the sky as a weather phenomenon.", example: "It was raining so heavily that we had to cancel our outdoor picnic and stay indoors." },
-    "continued": { pos: "Verb - Past Tense (动词过去式)", definition: "Kept doing something persistently without stopping or giving up, even when facing difficulties or obstacles.", example: "Even though the project was challenging, she continued working until it was successfully completed." },
-    "inventor": { pos: "Noun (名词)", definition: "A person who creates, designs, or develops something new, especially a device, method, or technology that did not exist before.", example: "Thomas Edison was a famous inventor who created the practical light bulb and phonograph." },
+    "continued": { pos: "Verb - Past Tense (动词过去式)", definition: "Kept doing something persistently without stopping or giving up, even when facing difficulties.", example: "Even though the project was challenging, she continued working until it was successfully completed." },
+    "inventor": { pos: "Noun (名词)", definition: "A person who creates, designs, or develops something new, especially a device, method, or technology.", example: "Thomas Edison was a famous inventor who created the practical light bulb and phonograph." },
     "revolutionary": { pos: "Adjective (形容词)", definition: "Involving or causing a complete or dramatic change in thinking, technology, society, or a particular field.", example: "The invention of the internet was a revolutionary development that transformed global communication." },
-    "fluency": { pos: "Noun (名词)", definition: "The ability to speak, write, or express oneself smoothly, easily, and confidently in a particular language.", example: "Achieving fluency in a foreign language requires consistent daily practice and real conversation with native speakers." },
+    "fluency": { pos: "Noun (名词)", definition: "The ability to speak, write, or express oneself smoothly, easily, and confidently in a particular language.", example: "Achieving fluency in a foreign language requires consistent daily practice and real conversation." },
     "practice": { pos: "Noun / Verb (名词/动词)", definition: "Repeated exercise or activity done regularly to improve or maintain a skill; to perform such activity habitually.", example: "Daily practice is essential if you want to master any musical instrument or learn a new language." },
     "improve": { pos: "Verb (动词)", definition: "To become better at something or to make something better through effort, learning, and continuous practice.", example: "You will gradually improve your writing skills by reading more books and writing every single day." },
     "achieve": { pos: "Verb (动词)", definition: "To successfully reach a goal, obtain a desired result, or accomplish something significant after sustained effort.", example: "With determination, discipline, and hard work, you can achieve anything you set your mind to." },
-    "examination": { pos: "Noun (名词)", definition: "A formal test or assessment of knowledge, skills, or abilities, often taken at the end of a course or period of study.", example: "Students felt nervous before the final examination but felt relieved after preparing thoroughly." },
-    "training": { pos: "Noun (名词)", definition: "The process of learning skills, knowledge, or behaviors through instruction, practice, and systematic exercise.", example: "Regular physical training helps athletes improve their performance and prevent sports-related injuries." },
-    "problem": { pos: "Noun (名词)", definition: "A difficult situation, question, issue, or challenge that requires a solution, resolution, or answer.", example: "Every complex problem has a solution if you approach it with patience, logic, and creative thinking." },
-    "energy": { pos: "Noun (名词)", definition: "Power, vitality, or the physical and mental capacity to do work, perform activities, or produce change.", example: "Solar panels convert sunlight into clean, renewable energy that powers homes and businesses." },
-    "thoroughly": { pos: "Adverb (副词)", definition: "In a complete, careful, and detailed manner; with great attention to every aspect or part.", example: "She thoroughly cleaned the entire house, including every corner and hidden surface, before the guests arrived." },
-    "session": { pos: "Noun (名词)", definition: "A period of time devoted to a specific activity, meeting, class, or work.", example: "The afternoon study session lasted for three hours, covering three different subjects." },
-    "manageable": { pos: "Adjective (形容词)", definition: "Able to be controlled, handled, organized, or dealt with easily and without excessive difficulty.", example: "Breaking a large project into smaller daily tasks makes the workload more manageable and less overwhelming." },
-    "device": { pos: "Noun (名词)", definition: "A tool, machine, instrument, or piece of equipment designed and built for a specific practical purpose.", example: "The new handheld device measures air quality, temperature, and humidity in real time." },
-    "generates": { pos: "Verb (动词)", definition: "Produces, creates, or brings something into existence, especially power, energy, or results.", example: "The wind turbine generates enough electricity to power an entire neighborhood." },
-    "solar": { pos: "Adjective (形容词)", definition: "Relating to, powered by, or derived from the sun's light and heat.", example: "Solar panels installed on the roof capture sunlight and convert it into usable electricity." },
-    "panels": { pos: "Noun (名词)", definition: "Flat, rectangular pieces or sections that are part of a larger surface, such as solar panels used for energy collection.", example: "The house has twelve solar panels mounted on its south-facing roof to maximize sun exposure." },
-    "learners": { pos: "Noun (名词)", definition: "People who are gaining knowledge, skills, or understanding through study, experience, or instruction.", example: "Successful language learners practice every day and are not afraid to make mistakes." }
+    "examination": { pos: "Noun (名词)", definition: "A formal test or assessment of knowledge, skills, or abilities, often taken at the end of a course.", example: "Students felt nervous before the final examination but felt relieved after preparing thoroughly." },
+    "training": { pos: "Noun (名词)", definition: "The process of learning skills, knowledge, or behaviors through instruction, practice, and systematic exercise.", example: "Regular physical training helps athletes improve their performance and prevent injuries." },
+    "problem": { pos: "Noun (名词)", definition: "A difficult situation, question, issue, or challenge that requires a solution, resolution, or answer.", example: "Every complex problem has a solution if you approach it with patience and creative thinking." },
+    "energy": { pos: "Noun (名词)", definition: "Power, vitality, or the physical and mental capacity to do work, perform activities, or produce change.", example: "Solar panels convert sunlight into clean, renewable energy that powers homes and businesses." }
   };
   
   function getEnglishWordInfo(word) {
     let w = word.toLowerCase().replace(/[^\w]/g, '');
-    if (englishWordDetails[w]) {
-      return englishWordDetails[w];
-    }
-    // 对于未收录的单词，提供基于常见词性的合理描述
+    if (englishWordDetails[w]) return englishWordDetails[w];
     return { 
-      pos: "Vocabulary Word (词汇)", 
-      definition: `"${word}" is an English word that functions as a key term within this sentence. In standard usage, it contributes meaning related to actions, objects, or qualities.`,
-      example: `Understanding how to use "${word}" in different contexts will enhance your English vocabulary and communication skills.` 
+      pos: "Word (单词)", 
+      definition: `"${word}" is an English word used in this sentence to express a specific meaning related to the context.`,
+      example: `Learning to use "${word}" correctly will enhance your English vocabulary and communication skills.` 
     };
   }
   
-  // 精准中文词库 - 每个汉字都有具体描述
+  // 精准中文词库
   const chineseWordDetails = {
     "勤": { pos: "形容词", definition: "指做事努力、不懈怠、不懒惰的积极态度；形容一个人用功、勤奋的品质。", example: "他的勤奋让他在工作中获得了领导的认可和同事们的尊重与赞赏。" },
     "奋": { pos: "形容词 / 动词", definition: "振作精神、鼓起劲头、努力进取；表示积极向上、不轻易放弃的精神状态。", example: "奋斗是通往成功的必经之路，没有捷径可走，只有坚持不懈的努力。" },
@@ -441,31 +430,25 @@
     "雨": { pos: "名词", definition: "从云层中降落到地面的液态水滴，是自然界最常见的降水现象之一。", example: "大雨过后，空气变得格外清新湿润，彩虹出现在天边，景色十分美丽。" },
     "训": { pos: "名词 / 动词", definition: "系统的教导、指导、练习或锻炼，旨在提升能力、技能或体能水平。", example: "每日坚持体能训练能显著提高你的身体素质、耐力水平和运动表现。" },
     "复": { pos: "动词", definition: "再次学习、回顾、重温已学过的内容，以加深理解和巩固记忆。", example: "考试前认真复习所有知识点和重点内容，可以帮助你取得更好的成绩。" },
-    "材": { pos: "名词", definition: "学习、工作或创作中使用的资料、内容、原料或参考资源。", example: "老师提供了丰富的学习材料来帮助我们理解这个复杂且抽象的理论概念。" },
-    "料": { pos: "名词", definition: "可供参考、分析或使用的信息、数据、文献或物质资源。", example: "请把这些学习资料整理归类放好，为明天的考试做好充分准备。" },
-    "试": { pos: "名词", definition: "检测、测量或评估知识、能力、技能水平的正式考核或测试。", example: "期末考试是对整个学期学习成果的综合检验和全面评估。" },
-    "尽": { pos: "副词", definition: "表示达到最大可能或全部完成的程度；完全、全部、没有丝毫保留。", example: "她已尽全力完成了这项艰巨的任务，结果令人非常满意。" },
-    "管": { pos: "连词", definition: "表示让步关系，相当于「although」或「despite」，引出与主句相反的情况。", example: "尽管遇到了许多困难，她仍然坚持完成了自己的目标和计划。" }
+    "材": { pos: "名词", definition: "学习、工作或创作中使用的资料、内容、原料或参考资源。", example: "老师提供了丰富的学习材料来帮助我们理解这个复杂且抽象的理论概念。" }
   };
   
   function getChineseWordInfo(ch) {
-    if (chineseWordDetails[ch]) {
-      return chineseWordDetails[ch];
-    }
+    if (chineseWordDetails[ch]) return chineseWordDetails[ch];
     return { 
       pos: "汉字", 
-      definition: `「${ch}」是中文中的一个常用汉字。在这个句子中，它表达了特定的语义内容，帮助构建完整的句意表达。`,
-      example: `尝试用「${ch}」造一个完整的句子，这样可以帮助你更好地理解和记忆这个汉字的用法和含义。` 
+      definition: `「${ch}」是中文中的一个常用汉字，在这个句子中表达了特定的语义内容。`,
+      example: `尝试用「${ch}」造一个完整的句子，这样可以帮助你更好地理解和记忆这个汉字的用法。` 
     };
   }
   
-  // 构建英文句子库 (180句)
+  // 构建句子库
   const englishTemplates = [
-    { text: "The dedicated student reviewed the material thoroughly before the final examination.", structure: "Simple sentence with prepositional phrase", category: "Academic", image: "https://picsum.photos/id/20/600/200", caption: "Student studying diligently" },
-    { text: "Although it was raining heavily, the team continued their outdoor training session.", structure: "Complex sentence: concessive clause", category: "Challenge", image: "https://picsum.photos/id/15/600/200", caption: "Training in rain" },
-    { text: "Whenever she faces a difficult problem, she breaks it into smaller manageable parts.", structure: "Adverbial clause of time", category: "Problem Solving", image: "https://picsum.photos/id/26/600/200", caption: "Breaking down problems" },
-    { text: "The inventor created a revolutionary device that generates clean energy from solar panels.", structure: "Relative clause", category: "Innovation", image: "https://picsum.photos/id/0/600/200", caption: "Clean energy innovation" },
-    { text: "To achieve fluency in speaking, learners must practice every day without fear of making mistakes.", structure: "Infinitive of purpose", category: "Learning", image: "https://picsum.photos/id/91/600/200", caption: "Daily practice" }
+    { text: "The dedicated student reviewed the material thoroughly before the final examination.", structure: "Simple sentence with prepositional phrase", category: "Academic", image: "https://picsum.photos/id/20/600/200", caption: "Student studying" },
+    { text: "Although it was raining heavily, the team continued their outdoor training session.", structure: "Complex sentence: concessive clause", category: "Challenge", image: "https://picsum.photos/id/15/600/200", caption: "Rain training" },
+    { text: "Whenever she faces a difficult problem, she breaks it into smaller manageable parts.", structure: "Adverbial clause of time", category: "Problem Solving", image: "https://picsum.photos/id/26/600/200", caption: "Problem solving" },
+    { text: "The inventor created a revolutionary device that generates clean energy from solar panels.", structure: "Relative clause", category: "Innovation", image: "https://picsum.photos/id/0/600/200", caption: "Innovation" },
+    { text: "To achieve fluency in speaking, learners must practice every day without fear of making mistakes.", structure: "Infinitive of purpose", category: "Learning", image: "https://picsum.photos/id/91/600/200", caption: "Practice" }
   ];
   let englishSentences = [];
   for(let i = 0; i < 180; i++) {
@@ -473,7 +456,6 @@
     englishSentences.push({ ...t, text: t.text, id:i });
   }
   
-  // 中文句子库
   const chineseTemplates = [
     { text: "这位勤奋的学生在期末考试前认真复习了所有材料。", structure: "主谓结构 + 时间状语", category: "学习", image: "https://picsum.photos/id/20/600/200", caption: "认真学习" },
     { text: "尽管雨下得很大，这支队伍仍然继续他们的户外训练。", structure: "让步复句", category: "挑战", image: "https://picsum.photos/id/15/600/200", caption: "坚持训练" },
@@ -498,34 +480,15 @@
   let activeRecognition = null;
   let recordingTimer = null;
   
-  // DOM 元素
-  const englishSheet = document.getElementById('englishSheet');
-  const chineseSheet = document.getElementById('chineseSheet');
+  const englishSheetDiv = document.getElementById('englishSheet');
+  const chineseSheetDiv = document.getElementById('chineseSheet');
   const menuOverlay = document.getElementById('sideOverlay');
   const sideMenu = document.getElementById('sideMenuPanel');
   document.getElementById('menuButton').onclick = () => { sideMenu.classList.add('open'); menuOverlay.classList.add('active'); };
   menuOverlay.onclick = () => { sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
   
-  function wrapEnglishWords(text) {
-    return text.split(/(\s+)/).map(tok => {
-      if(tok.trim().length === 0) return tok;
-      let clean = tok.replace(/[^\w']/g, '');
-      if(clean.length && clean.length > 0) return `<span class="word-span" data-word="${clean}">${tok}</span>`;
-      return tok;
-    }).join('');
-  }
-  
-  function wrapChineseChars(text) {
-    let res = '';
-    for(let ch of text) {
-      if(ch.trim() === '') res += ch;
-      else if(/[\u4e00-\u9fa5]/.test(ch)) res += `<span class="word-span" data-word="${ch}">${ch}</span>`;
-      else res += ch;
-    }
-    return res;
-  }
-  
-  function speakText(text, lang) {
+  // 单词包装和发音功能
+  function speakWord(text, lang) {
     if(window.speechSynthesis) {
       window.speechSynthesis.cancel();
       let u = new SpeechSynthesisUtterance(text);
@@ -535,7 +498,29 @@
     }
   }
   
-  // 单词定义显示 - 完整精准信息
+  function wrapEnglishWords(text) {
+    return text.split(/(\s+)/).map(tok => {
+      if(tok.trim().length === 0) return tok;
+      let clean = tok.replace(/[^\w']/g, '');
+      if(clean.length && clean.length > 0) {
+        return `<span class="word-span" data-word="${clean}" data-lang="en">${tok}</span>`;
+      }
+      return tok;
+    }).join('');
+  }
+  
+  function wrapChineseChars(text) {
+    let res = '';
+    for(let ch of text) {
+      if(ch.trim() === '') res += ch;
+      else if(/[\u4e00-\u9fa5]/.test(ch)) {
+        res += `<span class="word-span" data-word="${ch}" data-lang="zh">${ch}</span>`;
+      } else res += ch;
+    }
+    return res;
+  }
+  
+  // 显示单词定义面板 (包含词性、定义、例句、发音按钮)
   function showEnglishWordDefinition(word) {
     let info = getEnglishWordInfo(word);
     document.getElementById('engDefWord').innerHTML = `📖 ${word}`;
@@ -544,8 +529,8 @@
     document.getElementById('engDefExample').innerHTML = `💡 例句: "${info.example}"`;
     document.getElementById('engDefImg').innerHTML = `<img src="https://picsum.photos/id/${Math.abs(word.charCodeAt(0) % 70) + 20}/120/80" alt="illustration">`;
     document.getElementById('engWordDefPanel').classList.add('active');
-    const pronounceBtn = document.getElementById('engDefPronounce');
-    pronounceBtn.onclick = () => speakText(word, 'en');
+    const pronounceBtn = document.getElementById('engDefPronounceBtn');
+    pronounceBtn.onclick = () => speakWord(word, 'en');
   }
   
   function showChineseWordDefinition(ch) {
@@ -556,10 +541,11 @@
     document.getElementById('chiDefExample').innerHTML = `💡 例句: "${info.example}"`;
     document.getElementById('chiDefImg').innerHTML = `<img src="https://picsum.photos/id/${Math.abs(ch.charCodeAt(0) % 70) + 30}/120/80" alt="illustration">`;
     document.getElementById('chiWordDefPanel').classList.add('active');
-    const pronounceBtn = document.getElementById('chiDefPronounce');
-    pronounceBtn.onclick = () => speakText(ch, 'zh');
+    const pronounceBtn = document.getElementById('chiDefPronounceBtn');
+    pronounceBtn.onclick = () => speakWord(ch, 'zh');
   }
   
+  // 为所有带下划线的单词添加点击发音和定义显示
   function attachWordEvents(lang) {
     let container = lang === 'eng' ? '#englishSheet' : '#chineseSheet';
     const words = document.querySelectorAll(`${container} .word-span`);
@@ -570,6 +556,10 @@
     function wordHandler(e) {
       e.stopPropagation();
       let word = e.currentTarget.getAttribute('data-word');
+      let wordLang = e.currentTarget.getAttribute('data-lang') || (lang === 'eng' ? 'en' : 'zh');
+      // 先发音
+      speakWord(word, wordLang);
+      // 然后显示定义
       if(lang === 'eng') {
         showEnglishWordDefinition(word);
       } else {
@@ -598,6 +588,16 @@
     document.getElementById('chiCategoryBadge').innerText = `分类: ${chiCurrent.category}`;
     document.getElementById('chiWordDefPanel').classList.remove('active');
     attachWordEvents('chi');
+  }
+  
+  function speakText(text, lang) {
+    if(window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      let u = new SpeechSynthesisUtterance(text);
+      u.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
+      u.rate = 0.85;
+      window.speechSynthesis.speak(u);
+    }
   }
   
   // 录音功能
@@ -646,7 +646,7 @@
           let accuracy = Math.min(100, Math.floor(similarity * 100));
           let fb = document.getElementById(feedbackId);
           if(accuracy > 70) fb.innerHTML = `✅ Accuracy: ${accuracy}% - Excellent! Great pronunciation.`;
-          else if(accuracy > 40) fb.innerHTML = `🟡 Accuracy: ${accuracy}% - Good effort. Keep practicing! You said: "${spoken.substring(0,60)}"`;
+          else if(accuracy > 40) fb.innerHTML = `🟡 Accuracy: ${accuracy}% - Good effort. You said: "${spoken.substring(0,60)}"`;
           else fb.innerHTML = `❌ Accuracy: ${accuracy}% - Try again. Expected: "${sentence.substring(0,60)}..."`;
         };
         recog.onerror = () => {};
@@ -721,10 +721,10 @@
     document.getElementById('chiStopRec').onclick = () => stopRecording('chiRecStatus', 'chiLiveSentence', 'chiStopRec');
   }
   
-  document.getElementById('menuLangEnglish').onclick = () => { currentLang='eng'; englishSheet.classList.add('active-sheet'); chineseSheet.classList.remove('active-sheet'); renderEnglish(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
-  document.getElementById('menuLangChinese').onclick = () => { currentLang='chi'; chineseSheet.classList.add('active-sheet'); englishSheet.classList.remove('active-sheet'); renderChinese(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
+  document.getElementById('menuLangEnglish').onclick = () => { currentLang='eng'; englishSheetDiv.classList.add('active-sheet'); chineseSheetDiv.classList.remove('active-sheet'); renderEnglish(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
+  document.getElementById('menuLangChinese').onclick = () => { currentLang='chi'; chineseSheetDiv.classList.add('active-sheet'); englishSheetDiv.classList.remove('active-sheet'); renderChinese(); sideMenu.classList.remove('open'); menuOverlay.classList.remove('active'); };
   
-  function init() { englishSheet.classList.add('active-sheet'); renderEnglish(); renderChinese(); bindControls(); buildCategoryMenus(); }
+  function init() { englishSheetDiv.classList.add('active-sheet'); renderEnglish(); renderChinese(); bindControls(); buildCategoryMenus(); }
   init();
 </script>
 </body>
