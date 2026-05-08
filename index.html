@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,23 +6,21 @@
     <title>LinguaMaster Pro · 翻译 + 发音 + 词性 + 例句</title>
     <style>
         :root {
-            --bg-main: #fafaf8;
-            --bg-white: #ffffff;
-            --gold-light: #fef9f0;
-            --gold-dark: #c8a45c;
-            --gold-border: #d4b87a;
-            --green-accent: #4a9c6c;
-            --green-light: #e8f5e9;
-            --green-border: #66bb6a;
-            --text-dark: #2d2d2d;
-            --text-medium: #555555;
-            --text-light: #777777;
-            --text-muted: #999999;
-            --purple-accent: #7c5cfc;
+            --bg-main: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --bg-card-inner: #1e1e32;
+            --accent-purple: #7c5cfc;
+            --accent-purple-light: #9b83ff;
+            --accent-gold: #e8b84b;
+            --text-primary: #f0edf5;
+            --text-secondary: #b8b5c9;
+            --text-muted: #8a879e;
+            --border-subtle: #2a2a40;
+            --border-medium: #3a3a52;
             --red-rec: #e0555f;
-            --blue-info: #5b9cf5;
-            --radius-lg: 18px;
-            --radius-md: 14px;
+            --green-play: #4cceac;
+            --radius-lg: 16px;
+            --radius-md: 12px;
             --radius-sm: 10px;
         }
 
@@ -34,7 +32,7 @@
 
         body {
             font-family: 'Segoe UI', 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', 'Inter', system-ui, sans-serif;
-            background: #f0f0ed;
+            background: var(--bg-main);
             min-height: 100vh;
             height: 100vh;
             display: flex;
@@ -47,7 +45,7 @@
 
         .app-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             height: 100vh;
             max-height: 100vh;
             background: var(--bg-main);
@@ -56,8 +54,7 @@
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 2px 10px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e8e8e2;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
 
         /* ---- Header ---- */
@@ -65,55 +62,57 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px 8px 16px;
+            padding: 10px 14px 6px 14px;
             flex-shrink: 0;
-            background: var(--bg-white);
-            border-bottom: 1px solid #f0ece5;
+            background: var(--bg-main);
         }
         .app-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            color: #4a4a4a;
+            color: var(--accent-purple-light);
             letter-spacing: 0.2px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-        .app-title .icon {
-            font-size: 1.3rem;
+        .app-title span {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.65rem;
+            letter-spacing: 0.3px;
+            display: none;
         }
         .menu-btn {
-            background: #faf8f5;
-            border: 1.5px solid #e0d8c8;
-            color: #5a5a5a;
+            background: var(--bg-card);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
             font-weight: 600;
-            font-size: 0.8rem;
-            padding: 8px 16px;
+            font-size: 0.78rem;
+            padding: 7px 14px;
             border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             transition: all 0.2s;
         }
         .menu-btn:hover {
-            background: #f5f0e8;
-            border-color: #c8a45c;
+            background: #2a2a44;
         }
 
         /* ---- Menu Panel ---- */
         .menu-panel {
             position: absolute;
-            top: 52px;
-            right: 14px;
-            background: #ffffff;
+            top: 48px;
+            right: 12px;
+            background: var(--bg-card-inner);
             border-radius: 16px;
             padding: 10px 14px;
             display: none;
             flex-direction: column;
             gap: 6px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-            border: 1.5px solid #e0d8c8;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-medium);
             z-index: 30;
             animation: fadeDown 0.2s ease;
         }
@@ -125,32 +124,30 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .lang-option {
-            background: #faf8f5;
-            border: 1.5px solid #e8e0d0;
-            color: #4a4a4a;
-            padding: 9px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 8px 16px;
             border-radius: 14px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             white-space: nowrap;
-            transition: all 0.2s;
         }
         .lang-option:hover {
-            background: #fef9f0;
-            border-color: var(--gold-dark);
-            color: #3a3a3a;
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            color: #fff;
         }
 
-        /* ---- Main Content ---- */
+        /* ---- Main Content (no scroll) ---- */
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 6px 14px 8px 14px;
-            gap: 7px;
+            padding: 4px 12px 6px 12px;
+            gap: 6px;
             overflow: hidden;
-            background: var(--bg-main);
         }
 
         /* ---- Meta Row ---- */
@@ -162,337 +159,290 @@
             gap: 6px;
         }
         .category-badge {
-            background: #fef9f0;
-            color: #8b7355;
-            font-size: 0.7rem;
+            background: #1f1a2e;
+            color: #c8b5e8;
+            font-size: 0.68rem;
             font-weight: 600;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 14px;
-            border: 1.5px solid #e8dcc8;
+            border: 1px solid #3b3050;
         }
         .page-badge {
-            background: #ffffff;
-            color: #888888;
-            font-size: 0.7rem;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 0.68rem;
             font-weight: 500;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 14px;
-            border: 1.5px solid #e8e8e2;
+            border: 1px solid var(--border-subtle);
         }
 
-        /* ---- Sentence Card (Light Gold with Dark Gold Left Margin) ---- */
+        /* ---- Sentence Card ---- */
         .sentence-card {
-            background: var(--gold-light);
+            background: var(--bg-card);
             border-radius: var(--radius-lg);
-            padding: 16px 16px 16px 20px;
-            border: 1.5px solid #f0e6d0;
-            border-left: 5px solid var(--gold-dark);
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            padding: 14px 14px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
             flex-shrink: 0;
         }
         .sentence-label {
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #b8976a;
-            margin-bottom: 8px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
             font-weight: 700;
         }
         .sentence-text {
-            font-size: 1.45rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            line-height: 1.6;
-            color: #3a3028;
+            line-height: 1.55;
+            color: var(--text-primary);
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 4px;
             align-items: center;
             word-break: break-word;
         }
         .word-clickable {
             display: inline-block;
             cursor: pointer;
-            padding: 3px 7px;
-            border-radius: 6px;
+            padding: 3px 6px;
+            border-radius: 8px;
             transition: all 0.2s;
-            color: #4a3f35;
+            color: #e6dcc0;
             font-weight: 500;
             font-size: inherit;
-            text-decoration: underline;
-            text-decoration-color: #66bb6a;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 4px;
-            position: relative;
+            border-bottom: 2px solid transparent;
         }
         .word-clickable:hover {
-            background: rgba(102, 187, 106, 0.12);
-            color: #2d5a3a;
-            text-decoration-color: #4a9c6c;
+            background: rgba(124, 92, 252, 0.2);
+            color: #fff;
+            border-bottom: 2px solid var(--accent-purple-light);
         }
         .word-clickable.highlight {
-            background: rgba(200, 164, 92, 0.2);
-            text-decoration-color: #c8a45c;
-            color: #5a4020;
+            background: rgba(232, 184, 75, 0.25);
+            border-bottom: 2px solid var(--accent-gold);
+            color: #fff;
         }
 
         /* ---- Action Row ---- */
         .action-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-shrink: 0;
         }
         .btn-speak {
-            background: var(--green-accent);
+            background: var(--accent-purple);
             border: none;
             color: #fff;
             font-weight: 600;
-            padding: 10px 18px;
-            border-radius: 22px;
+            padding: 9px 16px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(74, 156, 108, 0.25);
+            gap: 5px;
+            box-shadow: 0 4px 14px rgba(124, 92, 252, 0.35);
             flex-shrink: 0;
-            transition: all 0.2s;
-        }
-        .btn-speak:hover {
-            background: #3d8b5e;
-            box-shadow: 0 6px 18px rgba(74, 156, 108, 0.35);
         }
         .btn-speak:active {
             transform: scale(0.95);
         }
 
-        /* ---- Word Detail Panel (Green Border) ---- */
+        /* ---- Word Detail Panel ---- */
         .word-detail-panel {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: var(--radius-md);
-            padding: 12px 16px;
-            border: 2px solid var(--green-border);
-            border-left: 5px solid var(--green-accent);
+            padding: 10px 14px;
+            border: 1px solid var(--border-subtle);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             flex-shrink: 0;
-            min-height: 45px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            font-size: 0.73rem;
-            background: #fafff9;
+            min-height: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 0.72rem;
         }
         .word-detail-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 6px;
         }
         .word-detail-word {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            color: #2d2d2d;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .word-image {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1.5px solid #e0e0d8;
-            display: inline-block;
-            background: #f5f5f0;
+            color: #fff;
         }
         .btn-pronounce {
-            background: #f0faf2;
-            border: 1.5px solid #a5d6a7;
-            color: #2d6a3f;
-            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid var(--border-medium);
+            color: var(--accent-purple-light);
+            padding: 5px 10px;
             border-radius: 14px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 4px;
-            transition: all 0.2s;
-        }
-        .btn-pronounce:hover {
-            background: #c8e6c9;
-            border-color: #66bb6a;
+            gap: 3px;
         }
         .word-detail-meaning {
-            font-size: 0.78rem;
-            color: #3a3a3a;
-            line-height: 1.5;
-            padding: 6px 0;
-            border-bottom: 1px solid #e8f0e5;
-            font-weight: 500;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            padding: 3px 0;
+            border-bottom: 1px solid var(--border-subtle);
         }
         .word-detail-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            font-size: 0.7rem;
-            color: #555555;
+            gap: 5px;
+            font-size: 0.68rem;
+            color: var(--text-secondary);
         }
         .info-chip {
-            background: #f5faf5;
-            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 3px 8px;
             border-radius: 8px;
-            border: 1px solid #d0e8d0;
-            font-weight: 500;
+            border: 1px solid var(--border-subtle);
         }
         .info-chip strong {
-            color: #3d6b45;
-            font-weight: 700;
+            color: #c0b0f0;
+            font-weight: 600;
         }
         .word-detail-example {
-            font-size: 0.72rem;
-            color: #666666;
+            font-size: 0.68rem;
+            color: #aaa5c8;
             font-style: italic;
-            border-left: 3px solid var(--green-accent);
-            padding-left: 10px;
-            line-height: 1.45;
-            margin-top: 2px;
+            border-left: 2px solid var(--accent-purple);
+            padding-left: 8px;
+            line-height: 1.35;
         }
 
         /* ---- Recording Section ---- */
         .recording-section {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: var(--radius-md);
-            padding: 10px 14px;
-            border: 1.5px solid #e8e8e2;
+            padding: 8px 12px;
+            border: 1px solid var(--border-subtle);
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             flex-wrap: wrap;
             justify-content: space-between;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         .recording-label {
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #999999;
+            color: var(--text-muted);
             font-weight: 700;
         }
         .recording-controls {
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
         .btn-rec {
             border: none;
             font-weight: 600;
-            padding: 7px 12px;
+            padding: 6px 10px;
             border-radius: 16px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             display: flex;
             align-items: center;
-            gap: 4px;
-            transition: all 0.2s;
+            gap: 3px;
         }
         .btn-rec-start {
             background: var(--red-rec);
             color: #fff;
         }
-        .btn-rec-start:hover {
-            background: #c94a53;
-        }
         .btn-rec-stop {
-            background: #f0f0ed;
-            color: #555;
-            border: 1.5px solid #d8d8d0;
-        }
-        .btn-rec-stop:hover {
-            background: #e5e5e0;
+            background: #3a3a52;
+            color: #fff;
+            border: 1px solid var(--border-medium);
         }
         .btn-rec-play {
-            background: var(--green-accent);
-            color: #fff;
-        }
-        .btn-rec-play:hover {
-            background: #3d8b5e;
+            background: var(--green-play);
+            color: #111;
         }
         .recording-status {
-            font-size: 0.68rem;
-            color: #888888;
+            font-size: 0.65rem;
+            color: var(--text-muted);
             font-weight: 500;
         }
 
         /* ---- Accuracy Row ---- */
         .accuracy-row {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: var(--radius-sm);
-            padding: 7px 14px;
-            border: 1.5px solid #e8e8e2;
+            padding: 6px 12px;
+            border: 1px solid var(--border-subtle);
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.68rem;
-            color: #888888;
+            gap: 5px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
         }
         .accuracy-dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: var(--green-accent);
+            background: var(--green-play);
         }
 
         /* ---- Navigation ---- */
         .nav-row {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
             flex-shrink: 0;
-            padding: 4px 0;
+            padding: 2px 0;
         }
         .nav-btn {
-            background: #ffffff;
-            border: 1.5px solid #e0d8c8;
-            color: #5a5a5a;
-            font-size: 1.1rem;
-            width: 42px;
-            height: 42px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-size: 1rem;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            transition: all 0.2s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
         }
         .nav-btn:hover {
-            background: var(--gold-light);
-            border-color: var(--gold-dark);
-            color: #3a3028;
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            color: #fff;
         }
 
         @media (max-width: 380px) {
             .sentence-text {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
                 gap: 3px;
             }
             .word-clickable {
                 padding: 2px 5px;
             }
             .btn-speak {
-                padding: 8px 14px;
-                font-size: 0.75rem;
+                padding: 7px 12px;
+                font-size: 0.72rem;
             }
         }
         @media (min-height: 800px) {
             .sentence-text {
                 font-size: 1.55rem;
-            }
-            .word-detail-panel {
-                padding: 14px 18px;
             }
         }
     </style>
@@ -500,9 +450,7 @@
 <body>
     <div class="app-container">
         <div class="header">
-            <div class="app-title">
-                <span class="icon">🌐</span> LinguaMaster Pro
-            </div>
+            <div class="app-title">🌐 LinguaMaster Pro</div>
             <button class="menu-btn" id="menuToggleBtn">🌍 Menu</button>
         </div>
         <div class="menu-panel" id="menuPanel">
@@ -517,16 +465,16 @@
             </div>
 
             <div class="sentence-card">
-                <div class="sentence-label">📝 Current Sentence</div>
+                <div class="sentence-label">CURRENT SENTENCE</div>
                 <div class="sentence-text" id="sentenceDisplay"></div>
             </div>
 
             <div class="action-row">
-                <button class="btn-speak" id="playSentenceBtn">🔊 Speak Sentence</button>
+                <button class="btn-speak" id="playSentenceBtn">🔊 Speak</button>
             </div>
 
             <div class="word-detail-panel" id="wordDetailPanel">
-                <span style="color:#999999; font-size:0.72rem;">👆 Tap any underlined word to see its details</span>
+                <span style="color:#8a879e; font-size:0.7rem;">👆 Tap a word to see details</span>
             </div>
 
             <div class="recording-section">
@@ -541,7 +489,7 @@
 
             <div class="accuracy-row" id="accuracyRow">
                 <span class="accuracy-dot"></span>
-                <span id="accuracyText">Ready to record your voice</span>
+                <span id="accuracyText">Ready</span>
             </div>
 
             <div class="nav-row">
@@ -584,216 +532,179 @@
                 englishSentences.push({ ...englishTemplates[i % 10] });
             }
 
-            // Emoji图片映射
-            const wordImages = {
-                "今天": "📅", "天气": "☀️", "公园": "🌳", "散步": "🚶", "她": "👩", "咖啡": "☕",
-                "雨": "🌧️", "因为": "💡", "昨天": "📆", "早上": "🌅", "银行": "🏦", "工作": "💼",
-                "学习": "📚", "生活": "🌟", "巧克力": "🍫", "猫咪": "🐱", "阳光": "☀️", "爬山": "⛰️",
-                "中文": "🇨🇳", "日语": "🇯🇵", "韩语": "🇰🇷", "书": "📖",
-                "she": "👩", "store": "🏪", "milk": "🥛", "raining": "🌧️", "hiking": "🥾",
-                "museum": "🏛️", "cat": "🐱", "mat": "🧘", "world": "🌍", "language": "🗣️",
-                "doors": "🚪", "french": "🇫🇷", "spanish": "🇪🇸", "restaurant": "🍽️",
-                "sunset": "🌅", "forest": "🌲", "wanderer": "🧭", "ruins": "🏚️", "ancient": "🏛️",
-                "run": "🏃", "go": "🚶", "rain": "🌧️", "sun": "☀️", "mountain": "⛰️",
-                "the": "📖", "a": "📖", "to": "➡️", "and": "➕", "but": "↔️", "if": "❓",
-                "he": "👨", "i": "🙋", "you": "👉", "me": "🙋", "they": "👥", "everyone": "👥",
-                "time": "⏰", "travel": "✈️", "beautiful": "✨", "comfortable": "🛋️",
-            };
-
-            // 中文词典 (英文解释 - 更长)
+            // 中文词典 (英文解释)
             const chineseWordDict = {
-                "今天": { meaning: "Today — the current day, the present 24-hour period from midnight to midnight.", pronunciation: "jīn tiān", pos: "noun", example: "Today is Monday and we have an important meeting at 10 AM." },
-                "天气": { meaning: "Weather — the state of the atmosphere at a particular time and place, including temperature and precipitation.", pronunciation: "tiān qì", pos: "noun", example: "The weather today is perfect for outdoor activities and picnics." },
-                "真不错": { meaning: "Really good, excellent, not bad at all — expresses strong approval or satisfaction.", pronunciation: "zhēn bú cuò", pos: "adjective", example: "Your Chinese speaking skills are really good, I'm impressed!" },
-                "我们": { meaning: "We, us — refers to the speaker together with one or more other people.", pronunciation: "wǒ men", pos: "pronoun", example: "We are going to have dinner together at the new restaurant." },
-                "去": { meaning: "To go — to move or travel from one place to another.", pronunciation: "qù", pos: "verb", example: "I go to the office every morning by subway." },
-                "公园": { meaning: "Park — a large public garden or area of land used for recreation and enjoyment.", pronunciation: "gōng yuán", pos: "noun", example: "The children are playing happily in the park near our house." },
-                "散步": { meaning: "To take a walk — to walk at a leisurely pace for exercise or pleasure.", pronunciation: "sàn bù", pos: "verb", example: "After dinner, I enjoy taking a relaxing walk along the river." },
-                "吧": { meaning: "A sentence-final particle used to make suggestions or soften the tone of a request.", pronunciation: "ba", pos: "particle", example: "Let's go now, it's getting late and we should head home." },
-                "她": { meaning: "She, her — third person singular female pronoun used to refer to a woman or girl.", pronunciation: "tā", pos: "pronoun", example: "She is my best friend and we have known each other for ten years." },
-                "慢慢地": { meaning: "Slowly, gradually — doing something at a low speed without rushing or hurrying.", pronunciation: "màn màn de", pos: "adverb", example: "Please speak slowly so that I can understand every word clearly." },
-                "喝": { meaning: "To drink — to take liquid into the mouth and swallow it.", pronunciation: "hē", pos: "verb", example: "Would you like to drink some water or would you prefer hot tea?" },
-                "热咖啡": { meaning: "Hot coffee — a warm beverage made from roasted coffee beans, served at a high temperature.", pronunciation: "rè kā fēi", pos: "noun", example: "Drinking a cup of hot coffee in winter feels extremely comfortable and warming." },
-                "看着": { meaning: "Looking at, watching — directing one's gaze toward something continuously.", pronunciation: "kàn zhe", pos: "verb", example: "She is staring out the window, quietly watching the beautiful scenery outside." },
-                "窗外": { meaning: "Outside the window — the area or view that is visible through a window.", pronunciation: "chuāng wài", pos: "noun", example: "It's snowing heavily outside the window, covering everything in white." },
-                "雨": { meaning: "Rain — water that falls in drops from clouds in the atmosphere.", pronunciation: "yǔ", pos: "noun", example: "It's raining heavily outside, so you should take an umbrella with you." },
-                "因为": { meaning: "Because, since — introduces the reason or cause for an action or situation.", pronunciation: "yīn wèi", pos: "conjunction", example: "Because I was feeling sick yesterday, I didn't go to school at all." },
-                "昨天": { meaning: "Yesterday — the day immediately before today, the previous day.", pronunciation: "zuó tiān", pos: "noun", example: "Yesterday I watched a very interesting movie that made me think deeply." },
-                "睡得太晚": { meaning: "Slept too late — went to bed at a very late hour, resulting in insufficient sleep.", pronunciation: "shuì de tài wǎn", pos: "phrase", example: "I slept too late last night watching movies, so now I feel extremely sleepy." },
-                "所以": { meaning: "So, therefore — indicates the result or consequence of a previous statement.", pronunciation: "suǒ yǐ", pos: "conjunction", example: "He studies very hard every day, so his progress has been remarkably fast." },
-                "早上": { meaning: "Morning — the early part of the day, from sunrise until around noon.", pronunciation: "zǎo shang", pos: "noun", example: "Every morning I wake up at six o'clock and go for a refreshing jog." },
-                "起不来": { meaning: "Can't get up — unable to rise from bed, usually due to tiredness or cold weather.", pronunciation: "qǐ bù lái", pos: "phrase", example: "It's so cold this morning that I simply cannot get out of my warm bed." },
-                "你": { meaning: "You — second person singular pronoun, referring to the person being addressed.", pronunciation: "nǐ", pos: "pronoun", example: "Where are you from originally? Your accent sounds very interesting." },
-                "能否": { meaning: "Could you, would it be possible — a polite way of making a request or asking permission.", pronunciation: "néng fǒu", pos: "auxiliary", example: "Could you please help me with this difficult problem I'm facing?" },
-                "告诉": { meaning: "To tell, to inform — to communicate information or facts to someone verbally.", pronunciation: "gào sù", pos: "verb", example: "Please tell me the complete truth about what happened yesterday." },
-                "最近": { meaning: "Nearest, most recent, lately — refers to something close in distance or time.", pronunciation: "zuì jìn", pos: "adjective", example: "Where is the nearest supermarket? I need to buy some groceries urgently." },
-                "银行": { meaning: "Bank — a financial institution that accepts deposits and makes loans to customers.", pronunciation: "yín háng", pos: "noun", example: "I need to go to the bank this afternoon to withdraw some money." },
-                "在哪里": { meaning: "Where is — used to ask about the location or position of something or someone.", pronunciation: "zài nǎ lǐ", pos: "question", example: "Where is my phone? I can't find it anywhere in this room." },
-                "虽然": { meaning: "Although, even though — introduces a concessive clause acknowledging a fact.", pronunciation: "suī rán", pos: "conjunction", example: "Although I am very tired after work, I still feel happy and satisfied." },
-                "工作": { meaning: "Work, job — activity involving mental or physical effort done to achieve a purpose or earn money.", pronunciation: "gōng zuò", pos: "noun/verb", example: "He works at a large international company in the city center." },
-                "很忙": { meaning: "Very busy — having a great deal of work or activity to deal with.", pronunciation: "hěn máng", pos: "adjective", example: "I've been very busy recently with lots of projects and deadlines." },
-                "但": { meaning: "But, however — used to introduce a contrast or exception to what has been said.", pronunciation: "dàn", pos: "conjunction", example: "The item is quite expensive, but the quality is truly excellent." },
-                "他": { meaning: "He, him — third person singular male pronoun referring to a man or boy.", pronunciation: "tā", pos: "pronoun", example: "He is my older brother and he works as a software engineer." },
-                "仍然": { meaning: "Still, yet — indicates that a situation continues to exist without change.", pronunciation: "réng rán", pos: "adverb", example: "Even after all these years, he still deeply loves her with all his heart." },
-                "坚持": { meaning: "To persist, to insist on — to continue firmly despite difficulty or opposition.", pronunciation: "jiān chí", pos: "verb", example: "Persistence is the key to success; keep going and never give up." },
-                "每天": { meaning: "Every day, daily — happening or done each day without exception.", pronunciation: "měi tiān", pos: "adverb", example: "I study Chinese for at least one hour every single day without fail." },
-                "学习": { meaning: "To study, to learn — the process of acquiring knowledge or skills through experience.", pronunciation: "xué xí", pos: "verb", example: "Learning a new language requires a lot of patience and consistent practice." },
-                "生活": { meaning: "Life — the condition that distinguishes animals and plants from inorganic matter, including growth and reproduction.", pronunciation: "shēng huó", pos: "noun", example: "Life is full of wonderful surprises and unexpected opportunities." },
-                "就像": { meaning: "Just like, as if — used to draw a comparison between two things or situations.", pronunciation: "jiù xiàng", pos: "adverb", example: "She is just like an angel, always so kind and gentle to everyone." },
-                "一盒": { meaning: "A box of — a quantity of items contained in one box or carton.", pronunciation: "yī hé", pos: "quantifier", example: "I bought a beautiful box of chocolates as a gift for my friend." },
-                "巧克力": { meaning: "Chocolate — a sweet food made from roasted and ground cacao beans.", pronunciation: "qiǎo kè lì", pos: "noun", example: "Dark chocolate with high cocoa content is actually good for your health." },
-                "永远": { meaning: "Forever, always — for all future time; for an endless period without stopping.", pronunciation: "yǒng yuǎn", pos: "adverb", example: "I will never ever forget the kindness you have shown me throughout my life." },
-                "不知道": { meaning: "Don't know, unaware — lacking knowledge or information about something specific.", pronunciation: "bù zhī dào", pos: "verb", example: "I honestly don't know what the correct answer to this question is." },
-                "下一颗": { meaning: "The next one — referring to the following item in a sequence of small round objects.", pronunciation: "xià yī kē", pos: "phrase", example: "The next candy in the box is strawberry flavored and looks delicious." },
-                "味道": { meaning: "Taste, flavor — the sensation of flavor perceived in the mouth on contact with a substance.", pronunciation: "wèi dào", pos: "noun", example: "This dish has an incredibly wonderful taste that reminds me of home cooking." },
-                "那只": { meaning: "That — used to point to a specific animal or object at a distance.", pronunciation: "nà zhī", pos: "determiner", example: "That little puppy over there is so adorable, I want to pet it." },
-                "可爱的": { meaning: "Cute, lovely, adorable — delightful and charming in appearance or manner.", pronunciation: "kě ài de", pos: "adjective", example: "Your child is really cute with those big bright eyes and sweet smile." },
-                "猫咪": { meaning: "Cat, kitty — an affectionate term for a domestic cat, often used by cat lovers.", pronunciation: "māo mī", pos: "noun", example: "Cats absolutely love to bask lazily in the warm afternoon sunlight." },
-                "阳光": { meaning: "Sunlight, sunshine — the natural light and warmth that comes from the sun.", pronunciation: "yáng guāng", pos: "noun", example: "Today's sunshine is particularly warm and makes everyone feel happy." },
-                "睡得很香": { meaning: "Sleeping soundly — in a state of deep and comfortable sleep.", pronunciation: "shuì de hěn xiāng", pos: "phrase", example: "The baby is sleeping so soundly that nothing can wake her up right now." },
-                "如果": { meaning: "If — introduces a conditional clause, expressing a hypothetical situation.", pronunciation: "rú guǒ", pos: "conjunction", example: "If it rains heavily tomorrow, then I will not go to the outdoor event." },
-                "明天": { meaning: "Tomorrow — the day immediately following today, the next day.", pronunciation: "míng tiān", pos: "noun", example: "See you tomorrow! I'm looking forward to our meeting at the cafe." },
-                "不下雨": { meaning: "Not raining — the absence of precipitation; dry weather conditions.", pronunciation: "bú xià yǔ", pos: "phrase", example: "It's not raining today, so we can finally go out and enjoy the sunshine." },
-                "爬山": { meaning: "To climb mountains — the activity of ascending mountains for recreation or sport.", pronunciation: "pá shān", pos: "verb", example: "Let's go mountain climbing this weekend; the weather should be perfect." },
-                "这本书": { meaning: "This book — the specific book that is near the speaker or currently being discussed.", pronunciation: "zhè běn shū", pos: "phrase", example: "This book is incredibly fascinating; I couldn't put it down last night." },
-                "比": { meaning: "Than — used to introduce the second element in a comparison of inequality.", pronunciation: "bǐ", pos: "preposition", example: "I am significantly taller than my younger sister by about ten centimeters." },
-                "那本书": { meaning: "That book — a book that is farther away from the speaker.", pronunciation: "nà běn shū", pos: "phrase", example: "That book on the top shelf is very old and has yellowed pages." },
-                "有趣多了": { meaning: "Much more interesting — significantly more engaging or entertaining by comparison.", pronunciation: "yǒu qù duō le", pos: "phrase", example: "This new game is much more interesting and exciting than the old one." },
-                "不但": { meaning: "Not only — used to introduce the first of two related points.", pronunciation: "bú dàn", pos: "conjunction", example: "He is not only intelligent but also extremely hardworking and dedicated." },
-                "会说": { meaning: "Can speak — has the ability to communicate using a particular language.", pronunciation: "huì shuō", pos: "verb", example: "I can speak English fluently after years of practice and study." },
-                "中文": { meaning: "Chinese language — the language spoken by the majority of people in China.", pronunciation: "zhōng wén", pos: "noun", example: "I am learning Chinese because I want to understand the rich culture better." },
-                "还会": { meaning: "Also can — additionally has the ability to do something else.", pronunciation: "hái huì", pos: "phrase", example: "I can also play the piano beautifully besides playing the guitar." },
-                "日语": { meaning: "Japanese language — the language spoken primarily in Japan.", pronunciation: "rì yǔ", pos: "noun", example: "Japanese is considered quite difficult to learn due to its complex writing system." },
-                "和": { meaning: "And — used to connect words, phrases, or clauses of equal importance.", pronunciation: "hé", pos: "conjunction", example: "You and I should work together to complete this important project." },
-                "韩语": { meaning: "Korean language — the language spoken in both North and South Korea.", pronunciation: "hán yǔ", pos: "noun", example: "Korean sounds very beautiful and melodious when spoken by native speakers." },
+                "今天": { meaning: "today", pronunciation: "jīn tiān", pos: "noun", example: "Today is Monday." },
+                "天气": { meaning: "weather", pronunciation: "tiān qì", pos: "noun", example: "The weather is nice." },
+                "真不错": { meaning: "really good", pronunciation: "zhēn bú cuò", pos: "adj.", example: "This is really good!" },
+                "我们": { meaning: "we, us", pronunciation: "wǒ men", pos: "pron.", example: "We are friends." },
+                "去": { meaning: "to go", pronunciation: "qù", pos: "verb", example: "I go to school." },
+                "公园": { meaning: "park", pronunciation: "gōng yuán", pos: "noun", example: "Let's go to the park." },
+                "散步": { meaning: "take a walk", pronunciation: "sàn bù", pos: "verb", example: "I like walking." },
+                "吧": { meaning: "suggestion particle", pronunciation: "ba", pos: "part.", example: "Let's go." },
+                "她": { meaning: "she, her", pronunciation: "tā", pos: "pron.", example: "She is kind." },
+                "慢慢地": { meaning: "slowly", pronunciation: "màn màn de", pos: "adv.", example: "Walk slowly." },
+                "喝": { meaning: "to drink", pronunciation: "hē", pos: "verb", example: "Drink water." },
+                "热咖啡": { meaning: "hot coffee", pronunciation: "rè kā fēi", pos: "noun", example: "I want hot coffee." },
+                "看着": { meaning: "looking at", pronunciation: "kàn zhe", pos: "verb", example: "She is looking at me." },
+                "窗外": { meaning: "outside the window", pronunciation: "chuāng wài", pos: "noun", example: "It's raining outside." },
+                "雨": { meaning: "rain", pronunciation: "yǔ", pos: "noun", example: "It rains heavily." },
+                "因为": { meaning: "because", pronunciation: "yīn wèi", pos: "conj.", example: "Because I am tired." },
+                "昨天": { meaning: "yesterday", pronunciation: "zuó tiān", pos: "noun", example: "Yesterday was fun." },
+                "睡得太晚": { meaning: "slept too late", pronunciation: "shuì de tài wǎn", pos: "phrase", example: "I slept too late." },
+                "所以": { meaning: "so, therefore", pronunciation: "suǒ yǐ", pos: "conj.", example: "So I stayed home." },
+                "早上": { meaning: "morning", pronunciation: "zǎo shang", pos: "noun", example: "Good morning." },
+                "起不来": { meaning: "can't get up", pronunciation: "qǐ bù lái", pos: "phrase", example: "I can't get up." },
+                "你": { meaning: "you", pronunciation: "nǐ", pos: "pron.", example: "You are nice." },
+                "能否": { meaning: "could you", pronunciation: "néng fǒu", pos: "aux.", example: "Could you help?" },
+                "告诉": { meaning: "to tell", pronunciation: "gào sù", pos: "verb", example: "Tell me the truth." },
+                "最近": { meaning: "nearest, recent", pronunciation: "zuì jìn", pos: "adj.", example: "The nearest store." },
+                "银行": { meaning: "bank", pronunciation: "yín háng", pos: "noun", example: "I go to the bank." },
+                "在哪里": { meaning: "where is", pronunciation: "zài nǎ lǐ", pos: "q.", example: "Where is it?" },
+                "虽然": { meaning: "although", pronunciation: "suī rán", pos: "conj.", example: "Although tired." },
+                "工作": { meaning: "work, job", pronunciation: "gōng zuò", pos: "n./v.", example: "I work hard." },
+                "很忙": { meaning: "very busy", pronunciation: "hěn máng", pos: "adj.", example: "I am very busy." },
+                "但": { meaning: "but", pronunciation: "dàn", pos: "conj.", example: "But I like it." },
+                "他": { meaning: "he, him", pronunciation: "tā", pos: "pron.", example: "He is tall." },
+                "仍然": { meaning: "still", pronunciation: "réng rán", pos: "adv.", example: "He still loves her." },
+                "坚持": { meaning: "persist", pronunciation: "jiān chí", pos: "verb", example: "Keep persisting." },
+                "每天": { meaning: "every day", pronunciation: "měi tiān", pos: "adv.", example: "Study every day." },
+                "学习": { meaning: "study, learn", pronunciation: "xué xí", pos: "verb", example: "Learn Chinese." },
+                "生活": { meaning: "life", pronunciation: "shēng huó", pos: "noun", example: "Life is beautiful." },
+                "就像": { meaning: "just like", pronunciation: "jiù xiàng", pos: "adv.", example: "Just like a dream." },
+                "一盒": { meaning: "a box of", pronunciation: "yī hé", pos: "quant.", example: "A box of candy." },
+                "巧克力": { meaning: "chocolate", pronunciation: "qiǎo kè lì", pos: "noun", example: "I love chocolate." },
+                "永远": { meaning: "forever", pronunciation: "yǒng yuǎn", pos: "adv.", example: "Forever young." },
+                "不知道": { meaning: "don't know", pronunciation: "bù zhī dào", pos: "verb", example: "I don't know." },
+                "下一颗": { meaning: "the next one", pronunciation: "xià yī kē", pos: "phrase", example: "The next candy." },
+                "味道": { meaning: "taste, flavor", pronunciation: "wèi dào", pos: "noun", example: "Good taste." },
+                "那只": { meaning: "that (animal)", pronunciation: "nà zhī", pos: "det.", example: "That cat." },
+                "可爱的": { meaning: "cute, lovely", pronunciation: "kě ài de", pos: "adj.", example: "Cute puppy." },
+                "猫咪": { meaning: "cat, kitty", pronunciation: "māo mī", pos: "noun", example: "A cute cat." },
+                "阳光": { meaning: "sunlight", pronunciation: "yáng guāng", pos: "noun", example: "Warm sunlight." },
+                "睡得很香": { meaning: "sleep soundly", pronunciation: "shuì de hěn xiāng", pos: "phrase", example: "Sleep well." },
+                "如果": { meaning: "if", pronunciation: "rú guǒ", pos: "conj.", example: "If it rains." },
+                "明天": { meaning: "tomorrow", pronunciation: "míng tiān", pos: "noun", example: "See you tomorrow." },
+                "不下雨": { meaning: "not raining", pronunciation: "bú xià yǔ", pos: "phrase", example: "No rain today." },
+                "爬山": { meaning: "climb mountains", pronunciation: "pá shān", pos: "verb", example: "Let's hike." },
+                "这本书": { meaning: "this book", pronunciation: "zhè běn shū", pos: "phrase", example: "This book is good." },
+                "比": { meaning: "than", pronunciation: "bǐ", pos: "prep.", example: "Better than that." },
+                "那本书": { meaning: "that book", pronunciation: "nà běn shū", pos: "phrase", example: "That book is old." },
+                "有趣多了": { meaning: "much more interesting", pronunciation: "yǒu qù duō le", pos: "phrase", example: "Much more fun." },
+                "不但": { meaning: "not only", pronunciation: "bú dàn", pos: "conj.", example: "Not only smart." },
+                "会说": { meaning: "can speak", pronunciation: "huì shuō", pos: "verb", example: "Can speak English." },
+                "中文": { meaning: "Chinese language", pronunciation: "zhōng wén", pos: "noun", example: "Learn Chinese." },
+                "还会": { meaning: "also can", pronunciation: "hái huì", pos: "phrase", example: "Also can dance." },
+                "日语": { meaning: "Japanese language", pronunciation: "rì yǔ", pos: "noun", example: "Study Japanese." },
+                "和": { meaning: "and", pronunciation: "hé", pos: "conj.", example: "You and me." },
+                "韩语": { meaning: "Korean language", pronunciation: "hán yǔ", pos: "noun", example: "Learn Korean." },
             };
 
-            // 英文词典 (英文解释 - 更长)
+            // 英文词典 (英文解释)
             const englishWordDict = {
-                "she": { meaning: "A female person or animal previously mentioned or easily identified in the context.", pronunciation: "/ʃiː/", pos: "pronoun", example: "She is an absolutely wonderful teacher who inspires all her students." },
-                "quickly": { meaning: "At a fast speed; rapidly; moving or happening with great swiftness and efficiency.", pronunciation: "/ˈkwɪkli/", pos: "adverb", example: "Please come quickly, we are running late for the important appointment!" },
-                "ran": { meaning: "Moved at a speed faster than walking; past tense of the verb 'to run'.", pronunciation: "/ræn/", pos: "verb", example: "He ran as fast as he could to catch the last bus home." },
-                "to": { meaning: "Expressing motion in the direction of a particular location or destination.", pronunciation: "/tuː/", pos: "preposition", example: "I walk to school every morning through the beautiful park." },
-                "the": { meaning: "The definite article used to refer to a specific person or thing already mentioned.", pronunciation: "/ðə/", pos: "article", example: "The sun rises in the east and sets in the west every day." },
-                "store": { meaning: "A retail establishment where goods are sold to consumers for personal use.", pronunciation: "/stɔːr/", pos: "noun", example: "I need to stop by the grocery store to pick up some fresh vegetables." },
-                "because": { meaning: "For the reason that; since; introduces an explanation or justification.", pronunciation: "/bɪˈkɔːz/", pos: "conjunction", example: "I stayed home from work because I was feeling quite unwell." },
-                "needed": { meaning: "Required something because it was essential, important, or very useful at that moment.", pronunciation: "/ˈniːdɪd/", pos: "verb", example: "She desperately needed help with her difficult math homework assignment." },
-                "milk": { meaning: "A white liquid produced by female mammals to nourish their young, commonly consumed by humans.", pronunciation: "/mɪlk/", pos: "noun", example: "I drink a glass of fresh milk every morning with my breakfast." },
-                "although": { meaning: "In spite of the fact that; even though; introduces a contrasting statement.", pronunciation: "/ɔːlˈðoʊ/", pos: "conjunction", example: "Although it was freezing cold outside, I still went for a jog." },
-                "it": { meaning: "Used to refer to a thing, animal, or situation previously mentioned or easily identified.", pronunciation: "/ɪt/", pos: "pronoun", example: "It is raining heavily outside so you should take an umbrella." },
-                "was": { meaning: "Past tense of the verb 'to be' for first and third person singular subjects.", pronunciation: "/wʌz/", pos: "verb", example: "It was extremely cold yesterday, so I wore my warmest coat." },
-                "raining": { meaning: "Water falling in drops from clouds in the sky; precipitation in liquid form.", pronunciation: "/ˈreɪnɪŋ/", pos: "verb", example: "It's been raining continuously for three days without stopping." },
-                "they": { meaning: "Used to refer to two or more people or things previously mentioned or easily identified.", pronunciation: "/ðeɪ/", pos: "pronoun", example: "They are my closest friends and we have known each other since childhood." },
-                "decided": { meaning: "Made a choice or reached a conclusion about a course of action after consideration.", pronunciation: "/dɪˈsaɪdɪd/", pos: "verb", example: "After much thought, we decided to move to a different city." },
-                "go": { meaning: "To move or travel from one place to another; to proceed or depart.", pronunciation: "/ɡoʊ/", pos: "verb", example: "Let's go to the beach this weekend if the weather is nice." },
-                "hiking": { meaning: "The recreational activity of going for long, vigorous walks in the countryside or wilderness.", pronunciation: "/ˈhaɪkɪŋ/", pos: "noun", example: "Hiking through the mountains is my absolute favorite outdoor activity." },
-                "could": { meaning: "Used to indicate possibility, past ability, or to make polite requests.", pronunciation: "/kʊd/", pos: "modal verb", example: "Could you possibly help me carry these heavy boxes upstairs?" },
-                "you": { meaning: "Used to refer to the person or people that the speaker is directly addressing.", pronunciation: "/juː/", pos: "pronoun", example: "You are one of the kindest people I have ever met in my life." },
-                "please": { meaning: "Used to add politeness and respect to a request, command, or invitation.", pronunciation: "/pliːz/", pos: "adverb", example: "Please sit down, make yourself comfortable, and enjoy the meal." },
-                "show": { meaning: "To cause or allow something to be visible; to display or demonstrate.", pronunciation: "/ʃoʊ/", pos: "verb", example: "Can you show me the beautiful photos from your recent vacation?" },
-                "me": { meaning: "Used by a speaker to refer to himself or herself as the object of a verb or preposition.", pronunciation: "/miː/", pos: "pronoun", example: "Please tell me the complete story of what happened last night." },
-                "way": { meaning: "A method, style, or manner of doing something; also a road, path, or direction.", pronunciation: "/weɪ/", pos: "noun", example: "Could you show me the quickest way to the train station?" },
-                "museum": { meaning: "A building where objects of historical, scientific, or artistic interest are exhibited and preserved.", pronunciation: "/mjuˈziːəm/", pos: "noun", example: "The natural history museum has an amazing collection of dinosaur fossils." },
-                "cat": { meaning: "A small domesticated carnivorous mammal with soft fur, often kept as a pet.", pronunciation: "/kæt/", pos: "noun", example: "My cat loves to curl up on my lap and purr contentedly." },
-                "sat": { meaning: "Past tense of sit; rested with the body supported by the buttocks or thighs.", pronunciation: "/sæt/", pos: "verb", example: "She sat quietly on the comfortable chair reading her favorite book." },
-                "on": { meaning: "Physically in contact with and supported by a surface; positioned above and touching.", pronunciation: "/ɒn/", pos: "preposition", example: "The book is lying on the wooden table next to the lamp." },
-                "mat": { meaning: "A piece of coarse fabric or material placed on a floor for wiping feet or for exercise.", pronunciation: "/mæt/", pos: "noun", example: "Please wipe your muddy feet on the mat before entering the house." },
-                "and": { meaning: "Used to connect words, phrases, or clauses of the same type, indicating addition.", pronunciation: "/ænd/", pos: "conjunction", example: "You and I should collaborate on this interesting project together." },
-                "looked": { meaning: "Directed one's gaze in a specified direction; appeared or seemed in a particular way.", pronunciation: "/lʊkt/", pos: "verb", example: "She looked incredibly happy when she received the wonderful news." },
-                "very": { meaning: "In a high degree; extremely; used to emphasize the extent of a quality or condition.", pronunciation: "/ˈvɛri/", pos: "adverb", example: "That's a very thoughtful gift; I truly appreciate your kindness." },
-                "comfortable": { meaning: "Providing physical ease and relaxation; free from stress, pain, or constraint.", pronunciation: "/ˈkʌmftəbəl/", pos: "adjective", example: "This new sofa is incredibly comfortable; I could sit here all day." },
-                "if": { meaning: "Introducing a conditional clause; on the condition or supposition that something happens.", pronunciation: "/ɪf/", pos: "conjunction", example: "If it rains tomorrow, we will stay indoors and watch movies." },
-                "i": { meaning: "Used by a speaker to refer to himself or herself; first person singular pronoun.", pronunciation: "/aɪ/", pos: "pronoun", example: "I am truly happy to be here with all of you today." },
-                "had": { meaning: "Past tense of have; possessed, owned, or experienced something in the past.", pronunciation: "/hæd/", pos: "verb", example: "I had a strange dream last night about flying through the clouds." },
-                "more": { meaning: "A greater or additional amount, degree, or number of something than before.", pronunciation: "/mɔːr/", pos: "adjective", example: "I would like some more time to finish this very important work." },
-                "time": { meaning: "The indefinite continued progress of existence and events; a point or period measured in seconds, minutes, hours.", pronunciation: "/taɪm/", pos: "noun", example: "Time is the most precious resource we have; use it wisely." },
-                "would": { meaning: "Expressing a conditional or future intention; also used to make polite requests or offers.", pronunciation: "/wʊd/", pos: "modal verb", example: "I would love to travel around the world if I had enough money." },
-                "travel": { meaning: "To make a journey, typically of some length or to a distant or foreign place.", pronunciation: "/ˈtrævəl/", pos: "verb", example: "I absolutely love to travel and explore new cultures and cuisines." },
-                "around": { meaning: "Located or situated on every side; surrounding; in various directions.", pronunciation: "/əˈraʊnd/", pos: "preposition", example: "We walked slowly around the beautiful lake enjoying the scenery." },
-                "world": { meaning: "The earth together with all of its countries, peoples, and natural features.", pronunciation: "/wɜːrld/", pos: "noun", example: "I dream of traveling around the entire world and seeing every continent." },
-                "learning": { meaning: "The acquisition of knowledge or skills through study, experience, or being taught.", pronunciation: "/ˈlɜːrnɪŋ/", pos: "noun", example: "Learning is a lifelong journey that never truly ends." },
-                "a": { meaning: "The indefinite article used before nouns to refer to any one of a type.", pronunciation: "/ə/", pos: "article", example: "A strange cat is sitting on the roof of our house." },
-                "new": { meaning: "Not existing before; made, introduced, or discovered recently for the first time.", pronunciation: "/njuː/", pos: "adjective", example: "I just bought a brand new smartphone with amazing features." },
-                "language": { meaning: "A structured system of communication used by humans, consisting of words and rules.", pronunciation: "/ˈlæŋɡwɪdʒ/", pos: "noun", example: "Language is the bridge that connects people from different cultures." },
-                "opens": { meaning: "Moves or adjusts so as to leave a space allowing access, view, or passage.", pronunciation: "/ˈoʊpənz/", pos: "verb", example: "Education opens countless doors to amazing opportunities in life." },
-                "many": { meaning: "A large number of; numerous; consisting of or amounting to a great quantity.", pronunciation: "/ˈmɛni/", pos: "adjective", example: "Many people from all over the world attended the exciting concert." },
-                "doors": { meaning: "Hinged, sliding, or revolving barriers at entrances to buildings, rooms, or vehicles.", pronunciation: "/dɔːrz/", pos: "noun", example: "Learning a new skill opens many doors to exciting career opportunities." },
-                "he": { meaning: "Used to refer to a male person or animal previously mentioned or easily identified.", pronunciation: "/hiː/", pos: "pronoun", example: "He is my closest and most trusted friend in the entire world." },
-                "not only": { meaning: "Used to introduce the first of two related points, emphasizing that both are true.", pronunciation: "/nɒt ˈoʊnli/", pos: "conjunction", example: "She not only sings beautifully but also plays several musical instruments." },
-                "speaks": { meaning: "Says words in order to convey information, express feelings, or communicate ideas.", pronunciation: "/spiːks/", pos: "verb", example: "He speaks three different languages fluently and confidently." },
-                "english": { meaning: "The West Germanic language primarily spoken in England, the United States, and many Commonwealth countries.", pronunciation: "/ˈɪŋɡlɪʃ/", pos: "noun", example: "English is widely spoken as a second language around the world." },
-                "but": { meaning: "Used to introduce a phrase or clause contrasting with what has already been mentioned.", pronunciation: "/bʌt/", pos: "conjunction", example: "I am very tired but extremely happy about our success today." },
-                "also": { meaning: "In addition; too; as well; used to add another point or item.", pronunciation: "/ˈɔːlsoʊ/", pos: "adverb", example: "I also enjoy playing the piano in my free time besides reading." },
-                "french": { meaning: "The Romance language of France, also spoken in parts of Belgium, Switzerland, Canada, and Africa.", pronunciation: "/frentʃ/", pos: "noun", example: "French is often called the language of love due to its melodious sound." },
-                "spanish": { meaning: "The Romance language of Spain and of most countries in Latin America.", pronunciation: "/ˈspænɪʃ/", pos: "noun", example: "Spanish is the second most spoken native language in the world." },
-                "this": { meaning: "Used to identify a specific person or thing close at hand or being indicated.", pronunciation: "/ðɪs/", pos: "determiner", example: "This delicious cake is the best dessert I have ever tasted." },
-                "restaurant": { meaning: "A place where people pay to sit and eat meals that are prepared and served.", pronunciation: "/ˈrestərɒnt/", pos: "noun", example: "This small Italian restaurant serves the most authentic pasta in town." },
-                "is": { meaning: "Third person singular present tense of the verb 'to be'; exists or occurs.", pronunciation: "/ɪz/", pos: "verb", example: "She is an incredibly talented artist with a unique creative style." },
-                "better": { meaning: "Of a more excellent, effective, or desirable type or quality; superior to something else.", pronunciation: "/ˈbetər/", pos: "adjective", example: "Today is much better than yesterday; I feel refreshed and energized." },
-                "than": { meaning: "Introducing the second element in a comparison of inequality or difference.", pronunciation: "/ðæn/", pos: "conjunction", example: "She runs much faster than I do during our morning exercises." },
-                "that": { meaning: "Used to identify a specific person or thing observed or heard by the speaker.", pronunciation: "/ðæt/", pos: "determiner", example: "That vintage car parked outside is absolutely stunning and rare." },
-                "one": { meaning: "Referring to a person or thing previously mentioned or easily identified in context.", pronunciation: "/wʌn/", pos: "pronoun", example: "I prefer the blue one rather than the red one on the shelf." },
-                "have": { meaning: "To possess, own, hold, or experience something; also used as an auxiliary verb.", pronunciation: "/hæv/", pos: "verb", example: "I have a very important question that I need to ask you." },
-                "never": { meaning: "At no time in the past or future; not ever; on no occasion whatsoever.", pronunciation: "/ˈnevər/", pos: "adverb", example: "I have never visited Paris, but I dream of going there someday." },
-                "seen": { meaning: "Past participle of see; perceived with the eyes; observed or witnessed.", pronunciation: "/siːn/", pos: "verb", example: "I have seen that amazing movie three times already this year." },
-                "such": { meaning: "Of the type or degree previously mentioned or implied; to so high a degree.", pronunciation: "/sʌtʃ/", pos: "determiner", example: "Such natural beauty is rarely found in this industrialized world." },
-                "beautiful": { meaning: "Pleasing the senses or mind aesthetically; of a very high standard; excellent.", pronunciation: "/ˈbjuːtɪfəl/", pos: "adjective", example: "What an absolutely beautiful sunset painting the sky with brilliant colors." },
-                "sunset": { meaning: "The time in the evening when the sun disappears below the horizon.", pronunciation: "/ˈsʌnset/", pos: "noun", example: "The sunset over the ocean was the most breathtaking sight imaginable." },
-                "before": { meaning: "During the period of time preceding a particular event, date, or time.", pronunciation: "/bɪˈfɔːr/", pos: "preposition", example: "Please think carefully before you make such an important decision." },
-                "when": { meaning: "At or during the time that; at whatever time; used to ask about time.", pronunciation: "/wɛn/", pos: "conjunction", example: "When I arrived at the party, everyone was already dancing happily." },
-                "arrived": { meaning: "Reached a place at the end of a journey or a stage in a journey.", pronunciation: "/əˈraɪvd/", pos: "verb", example: "They finally arrived at the mountain summit after hours of climbing." },
-                "everyone": { meaning: "Every person; all people in a particular group without exception.", pronunciation: "/ˈevriwʌn/", pos: "pronoun", example: "Everyone in the room applauded enthusiastically after the amazing performance." },
-                "already": { meaning: "Before or by a specified or implied time; so soon; as early as this.", pronunciation: "/ɔːlˈrɛdi/", pos: "adverb", example: "I have already finished all my homework, so I can relax now." },
-                "waiting": { meaning: "Staying where one is or delaying action until a particular time or event occurs.", pronunciation: "/ˈweɪtɪŋ/", pos: "verb", example: "I've been patiently waiting for this exciting moment for many years." },
-                "wanderer": { meaning: "A person who travels aimlessly from place to place without a fixed destination.", pronunciation: "/ˈwɒndərər/", pos: "noun", example: "The lonely wanderer roamed the countryside seeking adventure." },
-                "explored": { meaning: "Traveled through an unfamiliar area to learn about it; investigated systematically.", pronunciation: "/ɪkˈsplɔːd/", pos: "verb", example: "They explored the hidden caves deep beneath the mountain." },
-                "ancient": { meaning: "Belonging to the very distant past; extremely old; no longer in existence.", pronunciation: "/ˈeɪnʃənt/", pos: "adjective", example: "The ancient temple was built thousands of years ago." },
-                "ruins": { meaning: "The remains of a building or city that has been destroyed or decayed over time.", pronunciation: "/ˈruːɪnz/", pos: "noun", example: "We visited the Roman ruins on our trip to Italy." },
-                "hidden": { meaning: "Kept out of sight; concealed; not easily found or discovered.", pronunciation: "/ˈhɪdn/", pos: "adjective", example: "The treasure was hidden deep within the secret cave." },
-                "deep": { meaning: "Extending far down or in from the top or surface; profound.", pronunciation: "/diːp/", pos: "adjective", example: "The well was so deep that we couldn't see the bottom." },
-                "within": { meaning: "Inside the boundaries or limits of something; not beyond.", pronunciation: "/wɪðˈɪn/", pos: "preposition", example: "The answer lies within yourself; trust your instincts." },
-                "forest": { meaning: "A large area covered chiefly with trees and undergrowth; a woodland.", pronunciation: "/ˈfɒrɪst/", pos: "noun", example: "The dense forest was home to many wild animals." },
-                "curious": { meaning: "Eager to know or learn something new; inquisitive and interested.", pronunciation: "/ˈkjʊəriəs/", pos: "adjective", example: "The curious child asked many questions about the stars." },
+                "she": { meaning: "a female person", pronunciation: "/ʃiː/", pos: "pron.", example: "She is happy." },
+                "quickly": { meaning: "at a fast speed", pronunciation: "/ˈkwɪkli/", pos: "adv.", example: "Run quickly!" },
+                "ran": { meaning: "moved fast (past)", pronunciation: "/ræn/", pos: "verb", example: "He ran home." },
+                "to": { meaning: "direction toward", pronunciation: "/tuː/", pos: "prep.", example: "Go to school." },
+                "the": { meaning: "definite article", pronunciation: "/ðə/", pos: "art.", example: "The sun." },
+                "store": { meaning: "a shop", pronunciation: "/stɔːr/", pos: "noun", example: "Grocery store." },
+                "because": { meaning: "for the reason that", pronunciation: "/bɪˈkɔːz/", pos: "conj.", example: "Because I can." },
+                "needed": { meaning: "required (past)", pronunciation: "/ˈniːdɪd/", pos: "verb", example: "Needed help." },
+                "milk": { meaning: "white liquid food", pronunciation: "/mɪlk/", pos: "noun", example: "Drink milk." },
+                "although": { meaning: "even though", pronunciation: "/ɔːlˈðoʊ/", pos: "conj.", example: "Although cold." },
+                "it": { meaning: "a thing", pronunciation: "/ɪt/", pos: "pron.", example: "It is big." },
+                "was": { meaning: "past of 'is'", pronunciation: "/wʌz/", pos: "verb", example: "It was fun." },
+                "raining": { meaning: "water falling", pronunciation: "/ˈreɪnɪŋ/", pos: "verb", example: "Raining now." },
+                "they": { meaning: "those people", pronunciation: "/ðeɪ/", pos: "pron.", example: "They are here." },
+                "decided": { meaning: "made a choice", pronunciation: "/dɪˈsaɪdɪd/", pos: "verb", example: "Decided to go." },
+                "go": { meaning: "to move", pronunciation: "/ɡoʊ/", pos: "verb", example: "Let's go." },
+                "hiking": { meaning: "walking in nature", pronunciation: "/ˈhaɪkɪŋ/", pos: "noun", example: "Love hiking." },
+                "could": { meaning: "was able to", pronunciation: "/kʊd/", pos: "modal", example: "Could you?" },
+                "you": { meaning: "the person addressed", pronunciation: "/juː/", pos: "pron.", example: "You are kind." },
+                "please": { meaning: "politely request", pronunciation: "/pliːz/", pos: "adv.", example: "Please come." },
+                "show": { meaning: "make visible", pronunciation: "/ʃoʊ/", pos: "verb", example: "Show me." },
+                "me": { meaning: "myself", pronunciation: "/miː/", pos: "pron.", example: "Tell me." },
+                "way": { meaning: "path, method", pronunciation: "/weɪ/", pos: "noun", example: "This way." },
+                "museum": { meaning: "exhibition building", pronunciation: "/mjuˈziːəm/", pos: "noun", example: "Art museum." },
+                "cat": { meaning: "feline animal", pronunciation: "/kæt/", pos: "noun", example: "Black cat." },
+                "sat": { meaning: "rested (past)", pronunciation: "/sæt/", pos: "verb", example: "Sat down." },
+                "on": { meaning: "upon a surface", pronunciation: "/ɒn/", pos: "prep.", example: "On the table." },
+                "mat": { meaning: "floor covering", pronunciation: "/mæt/", pos: "noun", example: "Wipe feet." },
+                "and": { meaning: "also, in addition", pronunciation: "/ænd/", pos: "conj.", example: "You and me." },
+                "looked": { meaning: "appeared (past)", pronunciation: "/lʊkt/", pos: "verb", example: "Looked nice." },
+                "very": { meaning: "extremely", pronunciation: "/ˈvɛri/", pos: "adv.", example: "Very good." },
+                "comfortable": { meaning: "feeling ease", pronunciation: "/ˈkʌmftəbəl/", pos: "adj.", example: "Comfy chair." },
+                "if": { meaning: "on condition that", pronunciation: "/ɪf/", pos: "conj.", example: "If possible." },
+                "i": { meaning: "myself", pronunciation: "/aɪ/", pos: "pron.", example: "I am here." },
+                "had": { meaning: "possessed (past)", pronunciation: "/hæd/", pos: "verb", example: "Had a car." },
+                "more": { meaning: "greater amount", pronunciation: "/mɔːr/", pos: "adj.", example: "More time." },
+                "time": { meaning: "duration", pronunciation: "/taɪm/", pos: "noun", example: "No time." },
+                "would": { meaning: "conditional intention", pronunciation: "/wʊd/", pos: "modal", example: "Would go." },
+                "travel": { meaning: "make a journey", pronunciation: "/ˈtrævəl/", pos: "verb", example: "Travel far." },
+                "around": { meaning: "on all sides", pronunciation: "/əˈraʊnd/", pos: "prep.", example: "Around world." },
+                "world": { meaning: "the Earth", pronunciation: "/wɜːrld/", pos: "noun", example: "Whole world." },
+                "learning": { meaning: "gaining knowledge", pronunciation: "/ˈlɜːrnɪŋ/", pos: "noun", example: "Learning is fun." },
+                "a": { meaning: "one, any", pronunciation: "/ə/", pos: "art.", example: "A cat." },
+                "new": { meaning: "not old", pronunciation: "/njuː/", pos: "adj.", example: "New phone." },
+                "language": { meaning: "communication system", pronunciation: "/ˈlæŋɡwɪdʒ/", pos: "noun", example: "New language." },
+                "opens": { meaning: "makes accessible", pronunciation: "/ˈoʊpənz/", pos: "verb", example: "Opens doors." },
+                "many": { meaning: "a large number", pronunciation: "/ˈmɛni/", pos: "adj.", example: "Many people." },
+                "doors": { meaning: "entryways", pronunciation: "/dɔːrz/", pos: "noun", example: "Open doors." },
+                "he": { meaning: "male person", pronunciation: "/hiː/", pos: "pron.", example: "He runs." },
+                "not only": { meaning: "in addition to", pronunciation: "/nɒt ˈoʊnli/", pos: "conj.", example: "Not only this." },
+                "speaks": { meaning: "talks", pronunciation: "/spiːks/", pos: "verb", example: "Speaks well." },
+                "english": { meaning: "language of England", pronunciation: "/ˈɪŋɡlɪʃ/", pos: "noun", example: "Speak English." },
+                "but": { meaning: "however", pronunciation: "/bʌt/", pos: "conj.", example: "But wait." },
+                "also": { meaning: "in addition", pronunciation: "/ˈɔːlsoʊ/", pos: "adv.", example: "Also good." },
+                "french": { meaning: "language of France", pronunciation: "/frentʃ/", pos: "noun", example: "Learn French." },
+                "spanish": { meaning: "language of Spain", pronunciation: "/ˈspænɪʃ/", pos: "noun", example: "Speak Spanish." },
+                "this": { meaning: "the one here", pronunciation: "/ðɪs/", pos: "det.", example: "This one." },
+                "restaurant": { meaning: "eating place", pronunciation: "/ˈrestərɒnt/", pos: "noun", example: "Nice restaurant." },
+                "is": { meaning: "exists as", pronunciation: "/ɪz/", pos: "verb", example: "She is happy." },
+                "better": { meaning: "more good", pronunciation: "/ˈbetər/", pos: "adj.", example: "Better now." },
+                "than": { meaning: "compared to", pronunciation: "/ðæn/", pos: "conj.", example: "Better than you." },
+                "that": { meaning: "the one there", pronunciation: "/ðæt/", pos: "det.", example: "That car." },
+                "one": { meaning: "single thing", pronunciation: "/wʌn/", pos: "pron.", example: "The red one." },
+                "have": { meaning: "possess", pronunciation: "/hæv/", pos: "verb", example: "I have it." },
+                "never": { meaning: "at no time", pronunciation: "/ˈnevər/", pos: "adv.", example: "Never again." },
+                "seen": { meaning: "perceived (past)", pronunciation: "/siːn/", pos: "verb", example: "Seen this." },
+                "such": { meaning: "of that kind", pronunciation: "/sʌtʃ/", pos: "det.", example: "Such beauty." },
+                "beautiful": { meaning: "very pretty", pronunciation: "/ˈbjuːtɪfəl/", pos: "adj.", example: "Beautiful day." },
+                "sunset": { meaning: "evening sun", pronunciation: "/ˈsʌnset/", pos: "noun", example: "Orange sunset." },
+                "before": { meaning: "earlier than", pronunciation: "/bɪˈfɔːr/", pos: "prep.", example: "Before noon." },
+                "when": { meaning: "at what time", pronunciation: "/wɛn/", pos: "conj.", example: "When ready." },
+                "arrived": { meaning: "reached (past)", pronunciation: "/əˈraɪvd/", pos: "verb", example: "Arrived late." },
+                "everyone": { meaning: "all people", pronunciation: "/ˈevriwʌn/", pos: "pron.", example: "Everyone clapped." },
+                "already": { meaning: "by this time", pronunciation: "/ɔːlˈrɛdi/", pos: "adv.", example: "Already done." },
+                "waiting": { meaning: "staying for", pronunciation: "/ˈweɪtɪŋ/", pos: "verb", example: "Waiting long." },
+                "the curious": { meaning: "the inquisitive person", pronunciation: "/ðə ˈkjʊəriəs/", pos: "phrase", example: "The curious cat." },
+                "wanderer": { meaning: "one who roams", pronunciation: "/ˈwɒndərər/", pos: "noun", example: "A lonely wanderer." },
+                "explored": { meaning: "investigated (past)", pronunciation: "/ɪkˈsplɔːd/", pos: "verb", example: "Explored caves." },
+                "ancient": { meaning: "very old", pronunciation: "/ˈeɪnʃənt/", pos: "adj.", example: "Ancient ruins." },
+                "ruins": { meaning: "remains of buildings", pronunciation: "/ˈruːɪnz/", pos: "noun", example: "Old ruins." },
+                "hidden": { meaning: "concealed", pronunciation: "/ˈhɪdn/", pos: "adj.", example: "Hidden treasure." },
+                "deep": { meaning: "far down", pronunciation: "/diːp/", pos: "adj.", example: "Deep forest." },
+                "within": { meaning: "inside of", pronunciation: "/wɪðˈɪn/", pos: "prep.", example: "Within hours." },
+                "forest": { meaning: "large woods", pronunciation: "/ˈfɒrɪst/", pos: "noun", example: "Dark forest." },
             };
 
-            // 通用回退 (保证所有词有解释)
+            // 通用回退生成器
             function getFallbackExplanation(word, lang) {
-                const img = wordImages[word] || getEmojiForWord(word);
                 if (lang === 'chinese') {
                     return {
-                        meaning: `"${word}" is a Chinese word meaning "${word}" in context. It is used in everyday conversation and writing.`,
+                        meaning: `"${word}" is a Chinese word.`,
                         pronunciation: word,
                         pos: "word",
-                        example: `Here is an example: "${word}" appears naturally in this sentence.`,
-                        image: img
+                        example: `Example: ${word} is used in context.`
                     };
                 } else {
                     return {
-                        meaning: `"${word}" is an English word referring to "${word}" in this context. It is commonly used in both spoken and written English.`,
+                        meaning: `"${word}" is an English word.`,
                         pronunciation: `/${word}/`,
                         pos: "word",
-                        example: `Example usage: The word "${word}" is used in this sentence.`,
-                        image: img
+                        example: `Example: "${word}" appears in this sentence.`
                     };
                 }
-            }
-
-            function getEmojiForWord(word) {
-                const lower = word.toLowerCase();
-                if (lower.includes('run')) return '🏃';
-                if (lower.includes('walk')) return '🚶';
-                if (lower.includes('book')) return '📖';
-                if (lower.includes('house')) return '🏠';
-                if (lower.includes('car')) return '🚗';
-                if (lower.includes('tree')) return '🌳';
-                if (lower.includes('flower')) return '🌸';
-                if (lower.includes('water')) return '💧';
-                if (lower.includes('fire')) return '🔥';
-                if (lower.includes('food')) return '🍽️';
-                if (lower.includes('love')) return '❤️';
-                if (lower.includes('happy')) return '😊';
-                if (lower.includes('sad')) return '😢';
-                return '📝';
             }
 
             let currentLanguage = 'chinese';
@@ -822,10 +733,18 @@
             const recStopBtn = document.getElementById('recStopBtn');
             const recPlayBtn = document.getElementById('recPlayBtn');
 
-            function getCurrentSentences() { return currentLanguage === 'chinese' ? chineseSentences : englishSentences; }
-            function getCurrentDictionary() { return currentLanguage === 'chinese' ? chineseWordDict : englishWordDict; }
-            function getCurrentEntry() { return getCurrentSentences()[currentSlideIndex] || { text: '', cat: '' }; }
-            function getCurrentSentenceText() { return getCurrentEntry().text; }
+            function getCurrentSentences() {
+                return currentLanguage === 'chinese' ? chineseSentences : englishSentences;
+            }
+            function getCurrentDictionary() {
+                return currentLanguage === 'chinese' ? chineseWordDict : englishWordDict;
+            }
+            function getCurrentEntry() {
+                return getCurrentSentences()[currentSlideIndex] || { text: '', cat: '' };
+            }
+            function getCurrentSentenceText() {
+                return getCurrentEntry().text;
+            }
 
             function renderSentence(text) {
                 sentenceDisplay.innerHTML = '';
@@ -857,24 +776,24 @@
                 const cleanWord = word.trim();
                 const dictionary = getCurrentDictionary();
                 let entry = dictionary[cleanWord];
-                if (!entry) entry = getFallbackExplanation(cleanWord, currentLanguage);
-                const imageEmoji = entry.image || wordImages[cleanWord] || getEmojiForWord(cleanWord);
+                if (!entry) {
+                    entry = getFallbackExplanation(cleanWord, currentLanguage);
+                }
                 wordDetailPanel.innerHTML = `
                     <div class="word-detail-header">
-                        <span class="word-detail-word">
-                            <span class="word-image">${imageEmoji}</span> ${cleanWord}
-                        </span>
-                        <button class="btn-pronounce" id="btnPronounceDetail">🔊 Pronounce</button>
+                        <span class="word-detail-word">📝 ${cleanWord}</span>
+                        <button class="btn-pronounce" id="btnPronounceDetail">🔊</button>
                     </div>
                     <div class="word-detail-meaning">${entry.meaning}</div>
                     <div class="word-detail-info">
-                        <span class="info-chip"><strong>Pronunciation</strong> ${entry.pronunciation}</span>
+                        <span class="info-chip"><strong>Pron.</strong> ${entry.pronunciation}</span>
                         <span class="info-chip"><strong>POS</strong> ${entry.pos}</span>
                     </div>
                     <div class="word-detail-example">💡 ${entry.example}</div>
                 `;
                 const btnP = document.getElementById('btnPronounceDetail');
-                if (btnP) btnP.addEventListener('click', (e) => { e.stopPropagation(); pronounceWord(cleanWord); });
+                if (btnP) btnP.addEventListener('click', (e) => { e.stopPropagation();
+                    pronounceWord(cleanWord); });
             }
 
             function pronounceWord(word) {
@@ -901,10 +820,10 @@
                 renderSentence(entry.text);
                 pageIndicator.textContent = `${currentSlideIndex + 1} / 200`;
                 categoryBadge.textContent = '📂 ' + (entry.cat || 'General');
-                wordDetailPanel.innerHTML = `<span style="color:#999999; font-size:0.72rem;">👆 Tap any underlined word to see its details</span>`;
+                wordDetailPanel.innerHTML = `<span style="color:#8a879e; font-size:0.7rem;">👆 Tap a word</span>`;
                 lastTappedWord = null;
-                accuracyText.textContent = 'Ready to record your voice';
-                accuracyDot.style.background = 'var(--green-accent)';
+                accuracyText.textContent = 'Ready';
+                accuracyDot.style.background = 'var(--green-play)';
             }
 
             function switchLanguage(lang) {
@@ -926,24 +845,29 @@
                     mediaRecorder.onstop = () => {
                         recordedAudioURL = URL.createObjectURL(new Blob(audioChunks, { type: 'audio/webm' }));
                         recordingStatus.textContent = 'Stopped';
-                        accuracyText.textContent = '✅ Recording complete';
-                        accuracyDot.style.background = '#c8a45c';
+                        accuracyText.textContent = '✅ Complete';
+                        accuracyDot.style.background = 'var(--accent-gold)';
                         stream.getTracks().forEach(t => t.stop());
                     };
                     mediaRecorder.start();
                     isRecording = true;
                     recordingStatus.textContent = '🔴 Rec';
-                    accuracyText.textContent = 'Recording in progress...';
+                    accuracyText.textContent = 'Recording...';
                     accuracyDot.style.background = '#e0555f';
                 } catch (e) { alert('Mic error: ' + e.message); }
             }
-            function stopRecording() { if (mediaRecorder?.state === 'recording') { mediaRecorder.stop(); isRecording = false; } }
+            function stopRecording() {
+                if (mediaRecorder?.state === 'recording') { mediaRecorder.stop();
+                    isRecording = false; }
+            }
             function playRecording() {
                 if (recordedAudioURL) {
                     const a = new Audio(recordedAudioURL);
                     a.play();
                     recordingStatus.textContent = '▶ Play';
-                    a.onended = () => { recordingStatus.textContent = 'Ready'; accuracyText.textContent = '✅ Done'; accuracyDot.style.background = 'var(--green-accent)'; };
+                    a.onended = () => { recordingStatus.textContent = 'Ready';
+                        accuracyText.textContent = '✅ Done';
+                        accuracyDot.style.background = 'var(--green-play)'; };
                 } else alert('Record first.');
             }
 
@@ -951,15 +875,21 @@
             recStartBtn.addEventListener('click', startRecording);
             recStopBtn.addEventListener('click', stopRecording);
             recPlayBtn.addEventListener('click', playRecording);
-            prevBtn.addEventListener('click', () => { if (currentSlideIndex > 0) { currentSlideIndex--; updateSlide(); } });
-            nextBtn.addEventListener('click', () => { if (currentSlideIndex < 199) { currentSlideIndex++; updateSlide(); } });
-            menuToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); menuPanel.classList.toggle('active'); });
+            prevBtn.addEventListener('click', () => { if (currentSlideIndex > 0) { currentSlideIndex--;
+                updateSlide(); } });
+            nextBtn.addEventListener('click', () => { if (currentSlideIndex < 199) { currentSlideIndex++;
+                updateSlide(); } });
+            menuToggleBtn.addEventListener('click', (e) => { e.stopPropagation();
+                menuPanel.classList.toggle('active'); });
             langChineseBtn.addEventListener('click', () => switchLanguage('chinese'));
             langEnglishBtn.addEventListener('click', () => switchLanguage('english'));
-            document.addEventListener('click', (e) => { if (!menuPanel.contains(e.target) && e.target !== menuToggleBtn) menuPanel.classList.remove('active'); });
+            document.addEventListener('click', (e) => { if (!menuPanel.contains(e.target) && e.target !== menuToggleBtn)
+                menuPanel.classList.remove('active'); });
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft' && currentSlideIndex > 0) { currentSlideIndex--; updateSlide(); }
-                if (e.key === 'ArrowRight' && currentSlideIndex < 199) { currentSlideIndex++; updateSlide(); }
+                if (e.key === 'ArrowLeft' && currentSlideIndex > 0) { currentSlideIndex--;
+                    updateSlide(); }
+                if (e.key === 'ArrowRight' && currentSlideIndex < 199) { currentSlideIndex++;
+                    updateSlide(); }
             });
             updateSlide();
         })();
